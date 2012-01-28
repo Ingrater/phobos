@@ -22,11 +22,14 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.traits;
-import std.algorithm;
 import std.typetuple;
-import std.typecons;
 import core.vararg;
 
+version(NOGCSAFE) {}
+else {
+  import std.typecons;
+  import std.algorithm;
+}
 ///////////////////////////////////////////////////////////////////////////////
 // Functions
 ///////////////////////////////////////////////////////////////////////////////
