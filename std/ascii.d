@@ -24,7 +24,7 @@
   +/
 module std.ascii;
 
-version(unittest) import std.range;
+//version(unittest) import std.range;
 
 
 immutable hexDigits      = "0123456789ABCDEF";           /// 0..9A..F

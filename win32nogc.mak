@@ -120,7 +120,8 @@ SRCS_2 = \
     #std\csv.d std\math.d std\complex.d std\numeric.d std\bigint.d \
     #std\dateparse.d std\date.d std\datetime.d \
     #std\metastrings.d std\bitmanip.d std\typecons.d \
-    #std\uni.d std\base64.d std\md5.d std\ctype.d std\ascii.d \
+    std\uni.d std\ascii.d \
+    #std\base64.d std\md5.d std\ctype.d \
     #std\demangle.d std\uri.d std\mmfile.d std\getopt.d \
     #std\signals.d \
     std\typetuple.d std\traits.d \
