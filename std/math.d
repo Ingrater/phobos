@@ -56,7 +56,11 @@
 module std.math;
 
 import core.stdc.math;
-import std.range, std.traits;
+version(NOGCSAFE) {}
+else {
+  import std.range;
+}
+import std.traits;
 
 version(unittest) {
     import std.typetuple;

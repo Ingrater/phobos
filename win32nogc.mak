@@ -117,7 +117,8 @@ SRCS_12 = \
 	#std\path.d std\outbuffer.d std\utf.d
 
 SRCS_2 = \
-    #std\csv.d std\math.d std\complex.d std\numeric.d std\bigint.d \
+    std\math.d \
+    #std\csv.d std\complex.d std\numeric.d std\bigint.d \
     #std\dateparse.d std\date.d std\datetime.d \
     #std\metastrings.d std\bitmanip.d std\typecons.d \
     std\uni.d std\ascii.d \
@@ -277,7 +278,8 @@ SRC=	unittest.d crc32.d index.d
 
 SRC_STD= \
   #std\zlib.d std\zip.d std\stdint.d std\container.d std\conv.d std\utf.d std\uri.d \
-	#std\math.d std\string.d std\path.d std\date.d std\datetime.d \
+	std\math.d \
+	#std\string.d std\path.d std\date.d std\datetime.d \
 	#std\ctype.d std\csv.d std\file.d std\compiler.d std\system.d \
 	#std\outbuffer.d std\md5.d std\base64.d \
 	#std\dateparse.d std\mmfile.d \
