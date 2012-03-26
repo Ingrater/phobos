@@ -58,9 +58,16 @@ Distributed under the Boost Software License, Version 1.0.
 */
 module std.random;
 
+version(NOGCSAFE) 
+{
+  import std.c.time, std.traits, core.thread, core.time, std.math;
+}
+else
+{
 import std.algorithm, std.c.time, std.conv, std.exception,
        std.math, std.numeric, std.range, std.traits,
        core.thread, core.time;
+}
 
 version(unittest) import std.typetuple;
 
@@ -229,8 +236,16 @@ $(D x0).
     {
         static if (c == 0)
         {
+          version(NOGCSAFE)
+          {
+            assert(x0, "Invalid (zero) seed for "
+                    ~ LinearCongruentialEngine.stringof);
+          }
+          else
+          {
             enforce(x0, "Invalid (zero) seed for "
                     ~ LinearCongruentialEngine.stringof);
+          }
         }
         _x = modulus ? (x0 % modulus) : x0;
         popFront();
@@ -937,9 +952,16 @@ if (isFloatingPoint!(CommonType!(T1, T2)))
     {
         NumberType _b = b;
     }
+    version(NOGCSAFE)
+    {
+      assert(_a <= _b, "std.random.uniform(): invalid bounding box interval");
+    }
+    else
+    {
     enforce(_a <= _b,
             text("std.random.uniform(): invalid bounding interval ",
                     boundaries[0], a, ", ", b, boundaries[1]));
+    }
     NumberType result =
         _a + (_b - _a) * cast(NumberType) (urng.front - urng.min)
         / (urng.max - urng.min);

@@ -128,7 +128,8 @@ SRCS_2 = \
     std\typetuple.d std\traits.d \
     #std\bind.d \
     #std\encoding.d std\xml.d \
-    #std\random.d std\regexp.d \
+    std\random.d \
+    #std\regexp.d \
     #std\contracts.d std\exception.d \
     #std\compiler.d std\cpuid.d \
     #std\process.d std\internal\processinit.d \
@@ -144,7 +145,7 @@ SRCS_3 = \
 	#std\datebase.d \
 	#std\regex.d \
 	#std\stdarg.d \
-	#std\stdint.d \
+	std\stdint.d \
 	#std\json.d \
 	#std\parallelism.d \
 	#std\gregorian.d \
@@ -154,17 +155,17 @@ SRCS_3 = \
   #std\internal\math\gammafunction.d std\internal\math\errorfunction.d \
 	#std\internal\windows\advapi32.d \
 	#crc32.d \
-	#std\c\process.d \
-	#std\c\stdarg.d \
-	#std\c\stddef.d \
-	#std\c\stdlib.d \
-	#std\c\string.d \
-	#std\c\time.d \
-	#std\c\math.d \
+	std\c\process.d \
+	std\c\stdarg.d \
+	std\c\stddef.d \
+	std\c\stdlib.d \
+	std\c\string.d \
+	std\c\time.d \
+	std\c\math.d \
 	#std\c\windows\com.d \
-	#std\c\windows\stat.d \
-	#std\c\windows\windows.d \
-	#std\c\windows\winsock.d \
+	std\c\windows\stat.d \
+	std\c\windows\windows.d \
+	std\c\windows\winsock.d \
 	#std\windows\charset.d \
 	#std\windows\iunknown.d \
 	#std\windows\registry.d \
@@ -277,14 +278,18 @@ DOCS=	$(DOC)\object.html \
 SRC=	unittest.d crc32.d index.d
 
 SRC_STD= \
-  #std\zlib.d std\zip.d std\stdint.d std\container.d std\conv.d std\utf.d std\uri.d \
+  #std\zlib.d std\zip.d \
+  std\stdint.d \
+  #std\container.d std\conv.d std\utf.d std\uri.d \
 	std\math.d \
 	#std\string.d std\path.d std\date.d std\datetime.d \
 	#std\ctype.d std\csv.d std\file.d std\compiler.d std\system.d \
 	#std\outbuffer.d std\md5.d std\base64.d \
 	#std\dateparse.d std\mmfile.d \
 	#std\syserror.d \
-	#std\regexp.d std\random.d std\stream.d std\process.d \
+	#std\regexp.d \
+	std\random.d \
+	#std\stream.d std\process.d \
 	#std\socket.d std\socketstream.d std\loader.d std\stdarg.d std\format.d \
 	#std\stdio.d std\perf.d std\uni.d \
 	#std\cstream.d std\demangle.d \
@@ -303,17 +308,18 @@ SRC_STD_NET=
   #std\net\isemail.d
 
 SRC_STD_C=
-  #std\c\process.d std\c\stdlib.d std\c\time.d std\c\stdio.d \
-	#std\c\math.d std\c\stdarg.d std\c\stddef.d std\c\fenv.d std\c\string.d \
-	#std\c\locale.d std\c\wcharh.d
+  std\c\process.d std\c\stdlib.d std\c\time.d std\c\stdio.d \
+	std\c\math.d std\c\stdarg.d std\c\stddef.d std\c\fenv.d std\c\string.d \
+	std\c\locale.d std\c\wcharh.d
 
 SRC_STD_WIN=
   #std\windows\registry.d \
 	#std\windows\iunknown.d std\windows\syserror.d std\windows\charset.d
 
 SRC_STD_C_WIN=
-  #std\c\windows\windows.d std\c\windows\com.d \
-	#std\c\windows\winsock.d std\c\windows\stat.d
+  std\c\windows\windows.d \
+  #std\c\windows\com.d \
+	std\c\windows\winsock.d std\c\windows\stat.d
 
 SRC_STD_C_LINUX=
   #std\c\linux\linux.d \
