@@ -1003,9 +1003,16 @@ if (isIntegral!(CommonType!(T1, T2)) || isSomeChar!(CommonType!(T1, T2)))
     }
     else
     {
+      version(NOGCSAFE)
+      {
+        assert(min < cast(ResultType) b, "std.random.uniform(): invalid bounding interval");
+      }
+      else
+      {
         enforce(min < cast(ResultType) b,
                 text("std.random.uniform(): invalid bounding interval ",
                         boundaries[0], a, ", ", b, boundaries[1]));
+      }
         auto count = unsigned(b - min);
         static assert(count.min == 0);
     }
