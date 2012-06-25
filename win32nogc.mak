@@ -39,7 +39,9 @@ CFLAGS=-mn -6 -r
 #DFLAGS=-O -release -nofloat -w -d -property -version=NOGCSAFE -I..\druntime\import
 
 #debug
-DFLAGS=-g -nofloat -w -d -property -version=NOGCSAFE -I..\druntime\import
+DFLAGS=-nofloat -w -d -property -version=NOGCSAFE -I..\druntime\import 
+DFLAGS_RELEASE=-g -O -noboundscheck -release
+DFLAGS_DEBUG=-g
 
 #DFLAGS=-unittest -g -d
 #DFLAGS=-unittest -cov -g -d
@@ -73,7 +75,8 @@ DOC=..\..\html\d\phobos
 ## Location of druntime tree
 
 DRUNTIME=..\druntime
-DRUNTIMELIB=$(DRUNTIME)\lib\druntimenogc.lib
+DRUNTIMELIB_DEBUG=$(DRUNTIME)\lib\druntimenogcd.lib
+DRUNTIMELIB_RELEASE=$(DRUNTIME)\lib\druntimenogc.lib
 
 .c.obj:
 	$(CC) -c $(CFLAGS) $*
@@ -87,7 +90,7 @@ DRUNTIMELIB=$(DRUNTIME)\lib\druntimenogc.lib
 .asm.obj:
 	$(CC) -c $*
 
-targets : phobosnogc.lib
+targets : phobosnogc.lib phobosnogcd.lib
 
 test : test.exe
 
@@ -383,18 +386,26 @@ SRC_ZLIB= \
 	etc\c\zlib\linux.mak \
 	etc\c\zlib\osx.mak
 
-phobosnogc.lib : $(OBJS) $(SRCS) \
-	etc\c\zlib\zlib.lib $(DRUNTIMELIB) win32nogc.mak
-	$(DMD) -lib -ofphobosnogc.lib -Xfphobosnogc.json $(DFLAGS) $(SRCS) $(OBJS) \
+phobosnogcd.lib : $(OBJS) $(SRCS) \
+	#etc\c\zlib\zlib.lib \
+	$(DRUNTIMELIB_DEBUG) win32nogc.mak
+	$(DMD) -lib -ofphobosnogcd.lib -Xfphobosnogcd.json $(DFLAGS) $(DFLAGS_DEBUG) $(SRCS) $(OBJS) \
 		#etc\c\zlib\zlib.lib \
-		$(DRUNTIMELIB)
+		$(DRUNTIMELIB_DEBUG)
+		
+phobosnogc.lib : $(OBJS) $(SRCS) \
+	#etc\c\zlib\zlib.lib \
+	$(DRUNTIMELIB_RELEASE) win32nogc.mak
+	$(DMD) -lib -ofphobosnogc.lib -Xfphobosnogc.json $(DFLAGS) $(DFLAGS_RELEASE) $(SRCS) $(OBJS) \
+		#etc\c\zlib\zlib.lib \
+		$(DRUNTIMELIB_RELEASE)
 
-unittest : $(SRCS) phobosnogc.lib
+unittest : $(SRCS) phobosnogcd.lib
 	$(DMD) $(UDFLAGS) -L/co -c -unittest -ofunittest11.obj $(SRCS_11)
 	$(DMD) $(UDFLAGS) -L/co -c -unittest -ofunittest12.obj $(SRCS_12)
 	$(DMD) $(UDFLAGS) -L/co -c -unittest -ofunittest2.obj $(SRCS_2)
 	$(DMD) $(UDFLAGS) -L/co -unittest unittest.d $(SRCS_3) unittest11.obj unittest12.obj unittest2.obj \
-		etc\c\zlib\zlib.lib $(DRUNTIMELIB)
+		etc\c\zlib\zlib.lib $(DRUNTIMELIB_DEBUG)
 	unittest
 
 #unittest : unittest.exe
