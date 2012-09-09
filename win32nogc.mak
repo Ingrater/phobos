@@ -1012,8 +1012,10 @@ clean:
 	del $(OBJS)
 	del $(DOCS)
 	del unittest1.obj unittest.obj unittest.map unittest.exe
-	del phobos.lib
-	del phobos.json
+	del phobosnogc.lib
+	del phobosnogcd.lib
+	del phobosnogc.json
+	del phobosnogcd.json
 
 cleanhtml:
 	del $(DOCS)
