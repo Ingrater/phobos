@@ -58,7 +58,7 @@ CC=dmc
 
 DMD=$(DIR)\bin\dmd
 #DMD=..\dmd
-DMD=dmd
+DMD=C:\digital-mars\dmd2\windows\bin-nostd\dmd.exe
 
 ## Location of the svn repository
 
