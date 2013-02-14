@@ -1094,7 +1094,7 @@ L_largepositive:
             // Set scratchreal = real.max.
             // squaring it will create infinity, and set overflow flag.
             mov word  ptr [RSP+8+8], 0x7FFE;
-            fstp ST(0), ST;
+            fstp ST(0);
             fld real ptr [RSP+8];  // load scratchreal
             fmul ST(0), ST;        // square it, to create havoc!
 L_was_nan:
@@ -1102,7 +1102,7 @@ L_was_nan:
             ret;
 
 L_largenegative:
-            fstp ST(0), ST;
+            fstp ST(0);
             fld1;
             fchs; // return -1. Underflow flag is not set.
             add RSP,24;
@@ -1912,13 +1912,57 @@ real tgamma(real x) @trusted nothrow { return core.stdc.math.tgammal(x); }
  * Returns the value of x rounded upward to the next integer
  * (toward positive infinity).
  */
-real ceil(real x)  @trusted nothrow    { return core.stdc.math.ceill(x); }
+real ceil(real x)  @trusted nothrow    { 
+    version (Win64)
+    {
+        asm
+        {
+            naked ;
+            fld real ptr [RCX] ;
+            fstcw 8[RSP] ;
+            mov AL,9[RSP] ;
+            mov DL,AL ;
+            and AL,0xC3 ;
+            or AL,0x08 ; // round to +infinity
+            mov 9[RSP],AL ;
+            fldcw 8[RSP] ;
+            frndint ;
+            mov 9[RSP],DL ;
+            fldcw 8[RSP] ;
+            ret ;
+        }
+    }
+    else
+        return core.stdc.math.ceill(x);
+}
 
 /**************************************
  * Returns the value of x rounded downward to the next integer
  * (toward negative infinity).
  */
-real floor(real x) @trusted nothrow    { return core.stdc.math.floorl(x); }
+real floor(real x) @trusted nothrow    {
+    version (Win64)
+    {
+        asm
+        {
+            naked ;
+            fld real ptr [RCX] ;
+            fstcw 8[RSP] ;
+            mov AL,9[RSP] ;
+            mov DL,AL ;
+            and AL,0xC3 ;
+            or AL,0x04 ; // round to -infinity
+            mov 9[RSP],AL ;
+            fldcw 8[RSP] ;
+            frndint ;
+            mov 9[RSP],DL ;
+            fldcw 8[RSP] ;
+            ret ;
+        }
+    }
+    else
+        return core.stdc.math.floorl(x);
+}
 
 /******************************************
  * Rounds x to the nearest integer value, using the current rounding
