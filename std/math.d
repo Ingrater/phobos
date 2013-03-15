@@ -53,6 +53,10 @@
  *                        Don Clugston
  * Source: $(PHOBOSSRC std/_math.d)
  */
+
+/* NOTE: This file has been patched from the original DMD distribution to
+   work with the GDC compiler.
+ */
 module std.math;
 
 import core.stdc.math;
@@ -860,6 +864,7 @@ long rndtol(real x) @safe pure nothrow;    /* intrinsic */
  * greater than long.max, the result is
  * indeterminate.
  */
+version(GNU) alias core.stdc.math.roundl rndtonl; else
 extern (C) real rndtonl(real x);
 
 /***************************************
@@ -1290,6 +1295,8 @@ L_was_nan:
             add RSP,24;
             ret;
         }
+    } else version(GNU_Need_exp2) {
+        return core.stdc.math.powl(2, x);
     } else {
         return core.stdc.math.exp2(x);
     }
@@ -1689,7 +1696,9 @@ real log1p(real x) @safe pure nothrow
  */
 real log2(real x) @safe pure nothrow
 {
-    version (INLINE_YL2X)
+    version (GNU_Need_log2)
+        return core.stdc.math.logl(x) / core.stdc.math.logl(2);
+    else version (INLINE_YL2X)
         return yl2x(x, 1);
     else
         return core.stdc.math.log2l(x);
@@ -1913,7 +1922,9 @@ real tgamma(real x) @trusted nothrow { return core.stdc.math.tgammal(x); }
  * (toward positive infinity).
  */
 real ceil(real x)  @trusted nothrow    { 
-    version (Win64)
+    version (GNU)
+      return core.stdc.math.ceill(x);
+	else version (Win64)
     {
         asm
         {
@@ -1941,7 +1952,9 @@ real ceil(real x)  @trusted nothrow    {
  * (toward negative infinity).
  */
 real floor(real x) @trusted nothrow    {
-    version (Win64)
+    version(GNU)
+        return core.stdc.math.ceill(x);
+    else version (Win64)
     {
         asm
         {
@@ -2014,6 +2027,39 @@ long lrint(real x) @trusted pure nothrow
  * If the fractional part of x is exactly 0.5, the return value is rounded to
  * the even integer.
  */
+version (GNU_Need_round)
+{
+    real round(real x) @trusted nothrow
+    {
+        real y = floor(x);
+        real r = x - y;
+        if (r > 0.5)
+            return y + 1;
+        else if (r == 0.5)
+        {
+            r = y - 2.0 * floor(0.5 * y);
+            if (r == 1.0)
+                return y + 1;
+        }
+        return y;
+    }
+    unittest
+    {
+        real r;
+        assert(isNaN(round(real.nan)));
+        r = round(real.infinity);
+        assert(isInfinity(r) && r > 0);
+        r = round(-real.infinity);
+        assert(isInfinity(r) && r < 0);
+        assert(round(3.4) == 3);
+        assert(round(3.5) == 4);
+        assert(round(3.6) == 4);
+        assert(round(-3.4) == -3);
+        assert(round(-3.5) == -4);
+        assert(round(-3.6) == -4);
+    }
+}
+else
 real round(real x) @trusted nothrow { return core.stdc.math.roundl(x); }
 
 /**********************************************
@@ -2045,6 +2091,27 @@ version(Posix)
  *
  * This is also known as "chop" rounding.
  */
+version (GNU_Need_trunc)
+{
+    real trunc(real n) @trusted nothrow
+    {
+        return n >= 0 ? std.math.floor(n) : core.stdc.matheil(n);
+    }
+    unittest
+    {
+        real r;
+        r = trunc(real.infinity);
+        assert(isInfinity(r) && r > 0);
+        r = trunc(-real.infinity);
+        assert(isInfinity(r) && r < 0);
+        assert(isNan(trunc(real.nan)));
+        assert(trunc(3.3) == 3);
+        assert(trunc(3.6) == 3);
+        assert(trunc(-3.3) == -3);
+        assert(trunc(-3.6) == -3);
+    }
+}
+else
 real trunc(real x) @trusted nothrow { return core.stdc.math.truncl(x); }
 
 /****************************************************
@@ -2136,6 +2203,14 @@ private:
             DIVBYZERO_MASK = 0x020,
             INVALID_MASK   = 0xF80 // PowerPC has five types of invalid exceptions.
         }
+    } else version (ARM) {
+        enum : int {
+            INEXACT_MASK   = 0x00001000,
+            UNDERFLOW_MASK = 0x00000800,
+            OVERFLOW_MASK  = 0x00000400,
+            DIVBYZERO_MASK = 0x00000200,
+            INVALID_MASK   = 0x00000100
+        }
     } else version(SPARC) { // SPARC FSR is a 32bit register
              //(64 bits for Sparc 7 & 8, but high 32 bits are uninteresting).
         enum : int {
@@ -2173,6 +2248,8 @@ private:
                return retval;
             */
            assert(0, "Not yet supported");
+        } else version (ARM) {
+            assert(false, "Not yet supported.");
         } else
             assert(0, "Not yet supported");
     }
@@ -2193,6 +2270,7 @@ private:
         }
     }
 public:
+     version (X86_Any) { // TODO: Lift this version condition when we support !x86.
      /// The result cannot be represented exactly, so rounding occured.
      /// (example: x = sin(0.1); )
      @property bool inexact() { return (flags & INEXACT_MASK) != 0; }
@@ -2204,6 +2282,7 @@ public:
      @property bool divByZero() { return (flags & DIVBYZERO_MASK) != 0; }
      /// A machine NaN was generated. (example: x = real.infinity * 0.0; )
      @property bool invalid() { return (flags & INVALID_MASK) != 0; }
+     }
 }
 
 
@@ -2371,6 +2450,19 @@ private:
             return cont;
         }
         else
+        version (ARM)
+        {
+            short cont;
+            asm
+            {
+                "mrc p10, 7, %[cw], cr1, cr0, 0"
+                :
+                [cw] "=r" cont
+                ;
+            }
+            return cont;
+        }
+        else
             assert(0, "Not yet supported");
     }
     // Set the control register
@@ -2382,6 +2474,17 @@ private:
             {
                  fclex;
                  fldcw newState;
+            }
+        }
+        else version (ARM)
+        {
+            asm
+            {
+                "mcr p10, 7, %[cw], cr1, cr0, 0"
+                :
+                :
+                [cw] "r" newState
+                ;
             }
         }
         else

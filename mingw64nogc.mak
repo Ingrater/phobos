@@ -24,14 +24,9 @@
 
 CP=cp
 
-## Directory where dmd has been installed
-
-DIR=\dmd2
-
 ## Flags for dmc C compiler
 
-CFLAGS=-mn -6 -r
-#CFLAGS=-g -mn -6 -r
+CFLAGS=
 
 ## Flags for dmd D compiler
 
@@ -39,9 +34,9 @@ CFLAGS=-mn -6 -r
 #DFLAGS=-O -release -nofloat -w -d -property -version=NOGCSAFE -I..\druntime\import
 
 #debug
-DFLAGS=-m64 -Wall -fdeprecated -fproperty -fversion=NOGCSAFE -I ..\druntime\import
-DFLAGS_RELEASE=-O -noboundscheck -release
-DFLAGS_DEBUG= -release -g -op
+DFLAGS=-m64 -g -Wall -fdeprecated -fproperty -fversion=NOGCSAFE -I ..\druntime\import
+DFLAGS_RELEASE=-frelease -O2
+DFLAGS_DEBUG=-frelease -fbounds-check -fin -fout -fassert
 
 #DFLAGS=-unittest -g -d
 #DFLAGS=-unittest -cov -g -d
@@ -52,19 +47,19 @@ UDFLAGS=-O -nofloat -w -d -property
 
 ## C compiler
 
-CC=dmc
+CC=gcc
+AR=ar
+RANLIB=ranlib
 
 ## D compiler
 
-DMD=$(DIR)\bin\dmd
-#DMD=..\dmd
-DMD=C:\digital-mars\dmd2\windows\bin-nostd\dmd.exe
+GDC=gdc
 
 ## Location of druntime tree
 
 DRUNTIME=..\druntime
-DRUNTIMELIB_DEBUG=$(DRUNTIME)\lib\druntimenogc64d.lib
-DRUNTIMELIB_RELEASE=$(DRUNTIME)\lib\druntimenogc64.lib
+DRUNTIMELIB_DEBUG=$(DRUNTIME)\lib\libdruntimenogc64d_mingw.a
+DRUNTIMELIB_RELEASE=$(DRUNTIME)\lib\libdruntimenogc64_mingw.a
 
 .c.obj:
 	$(CC) -c $(CFLAGS) $*
@@ -73,20 +68,20 @@ DRUNTIMELIB_RELEASE=$(DRUNTIME)\lib\druntimenogc64.lib
 	$(CC) -c $(CFLAGS) $*
 
 .d.obj:
-	$(DMD) -c $(DFLAGS) $*
+	$(GDC) -c $(DFLAGS) $*
 
 .asm.obj:
 	$(CC) -c $*
 
-targets : phobosnogc64.lib phobosnogc64d.lib
+targets : libphobosnogc64_mingw.lib libphobosnogc64d_mingw.lib
 
 test : test.exe
 
 test.obj : test.d
-	$(DMD) -c test -g -unittest
+	$(GDC) -c test -g -unittest
 
 test.exe : test.obj phobosnogc64d.lib
-	$(DMD) test.obj -g -L/map
+	$(GDC) test.obj -g -L/map
 
 OBJS=
   #Czlib.obj Dzlib.obj Ccurl.obj \
@@ -274,25 +269,25 @@ SRC_ZLIB= \
 	etc\c\zlib\linux.mak \
 	etc\c\zlib\osx.mak
 
-phobosnogc64d.lib : $(OBJS) $(SRCS) \
+libphobosnogc64d_mingw.lib : $(OBJS) $(SRCS) \
 	#etc\c\zlib\zlib.lib \
-	$(DRUNTIMELIB_DEBUG) win64nogc.mak
-	$(DMD) -lib -ofphobosnogc64d.lib -Xfphobosnogc64d.json $(DFLAGS) $(DFLAGS_DEBUG) $(SRCS) $(OBJS) \
-		#etc\c\zlib\zlib.lib \
-		$(DRUNTIMELIB_DEBUG)
+	mingw64nogc.mak
+	$(GDC) -c -o libphobosnogc64d_mingw.o $(DFLAGS) $(DFLAGS_DEBUG) $(SRCS)
+	$(AR) -r libphobosnogc64d_mingw.a libphobosnogc64d_mingw.o $(OBJS) $(DRUNTIMELIB_DEBUG)
+	$(RANLIB) libphobosnogc64d_mingw.a
 		
-phobosnogc64.lib : $(OBJS) $(SRCS) \
+libphobosnogc64_mingw.lib : $(OBJS) $(SRCS) \
 	#etc\c\zlib\zlib.lib \
-	$(DRUNTIMELIB_RELEASE) win64nogc.mak
-	$(DMD) -lib -ofphobosnogc64.lib -Xfphobosnogc64.json $(DFLAGS) $(DFLAGS_RELEASE) $(SRCS) $(OBJS) \
-		#etc\c\zlib\zlib.lib \
-		$(DRUNTIMELIB_RELEASE)
+	mingw64nogc.mak
+	$(GDC) -c -o libphobosnogc64_mingw.o $(DFLAGS) $(DFLAGS_RELEASE) $(SRCS)
+	$(AR) -r libphobosnogc64_mingw.a libphobosnogc64_mingw.o $(OBJS) $(DRUNTIMELIB_RELEASE)
+	$(RANLIB) libphobosnogc64_mingw.a
 
 unittest : $(SRCS) phobosnogc64d.lib
-	$(DMD) $(UDFLAGS) -L/co -c -unittest -ofunittest11.obj $(SRCS_11)
-	$(DMD) $(UDFLAGS) -L/co -c -unittest -ofunittest12.obj $(SRCS_12)
-	$(DMD) $(UDFLAGS) -L/co -c -unittest -ofunittest2.obj $(SRCS_2)
-	$(DMD) $(UDFLAGS) -L/co -unittest unittest.d $(SRCS_3) unittest11.obj unittest12.obj unittest2.obj \
+	$(GDC) $(UDFLAGS) -L/co -c -unittest -ofunittest11.obj $(SRCS_11)
+	$(GDC) $(UDFLAGS) -L/co -c -unittest -ofunittest12.obj $(SRCS_12)
+	$(GDC) $(UDFLAGS) -L/co -c -unittest -ofunittest2.obj $(SRCS_2)
+	$(GDC) $(UDFLAGS) -L/co -unittest unittest.d $(SRCS_3) unittest11.obj unittest12.obj unittest2.obj \
 		etc\c\zlib\zlib.lib $(DRUNTIMELIB_DEBUG)
 	unittest
 
@@ -300,11 +295,11 @@ unittest : $(SRCS) phobosnogc64d.lib
 #	unittest
 #
 #unittest.exe : unittest.d phobos.lib
-#	$(DMD) unittest -g
+#	$(GDC) unittest -g
 #	dmc unittest.obj -g
 
 cov : $(SRCS) phobosnogc64.lib
-	$(DMD) -cov -unittest -ofcov.exe unittest.d $(SRCS) phobosnogc64.lib
+	$(GDC) -cov -unittest -ofcov.exe unittest.d $(SRCS) phobosnogc64.lib
 	cov
 
 html : $(DOCS)
@@ -319,256 +314,256 @@ etc\c\zlib\zlib.lib:
 ### std
 
 algorithm.obj : std\algorithm.d
-	$(DMD) -c $(DFLAGS) std\algorithm.d
+	$(GDC) -c $(DFLAGS) std\algorithm.d
 
 array.obj : std\array.d
-	$(DMD) -c $(DFLAGS) std\array.d
+	$(GDC) -c $(DFLAGS) std\array.d
 
 ascii.obj : std\ascii.d
-	$(DMD) -c $(DFLAGS) std\ascii.d
+	$(GDC) -c $(DFLAGS) std\ascii.d
 
 base64.obj : std\base64.d
-	$(DMD) -c $(DFLAGS) -inline std\base64.d
+	$(GDC) -c $(DFLAGS) -inline std\base64.d
 
 bind.obj : std\bind.d
-	$(DMD) -c $(DFLAGS) -inline std\bind.d
+	$(GDC) -c $(DFLAGS) -inline std\bind.d
 
 bitmanip.obj : std\bitmanip.d
-	$(DMD) -c $(DFLAGS) std\bitmanip.d
+	$(GDC) -c $(DFLAGS) std\bitmanip.d
 
 concurrency.obj : std\concurrency.d
-	$(DMD) -c $(DFLAGS) std\concurrency.d
+	$(GDC) -c $(DFLAGS) std\concurrency.d
 
 compiler.obj : std\compiler.d
-	$(DMD) -c $(DFLAGS) std\compiler.d
+	$(GDC) -c $(DFLAGS) std\compiler.d
 
 complex.obj : std\complex.d
-	$(DMD) -c $(DFLAGS) std\complex.d
+	$(GDC) -c $(DFLAGS) std\complex.d
 
 contracts.obj : std\contracts.d
-	$(DMD) -c $(DFLAGS) std\contracts.d
+	$(GDC) -c $(DFLAGS) std\contracts.d
 
 container.obj : std\container.d
-	$(DMD) -c $(DFLAGS) std\container.d
+	$(GDC) -c $(DFLAGS) std\container.d
 
 conv.obj : std\conv.d
-	$(DMD) -c $(DFLAGS) std\conv.d
+	$(GDC) -c $(DFLAGS) std\conv.d
 
 cpuid.obj : std\cpuid.d
-	$(DMD) -c $(DFLAGS) std\cpuid.d -ofcpuid.obj
+	$(GDC) -c $(DFLAGS) std\cpuid.d -ofcpuid.obj
 
 cstream.obj : std\cstream.d
-	$(DMD) -c $(DFLAGS) std\cstream.d
+	$(GDC) -c $(DFLAGS) std\cstream.d
 
 ctype.obj : std\ctype.d
-	$(DMD) -c $(DFLAGS) std\ctype.d
+	$(GDC) -c $(DFLAGS) std\ctype.d
 
 csv.obj : std\csv.d
-	$(DMD) -c $(DFLAGS) std\csv.d
+	$(GDC) -c $(DFLAGS) std\csv.d
 
 date.obj : std\dateparse.d std\date.d
-	$(DMD) -c $(DFLAGS) std\date.d
+	$(GDC) -c $(DFLAGS) std\date.d
 
 dateparse.obj : std\dateparse.d std\date.d
-	$(DMD) -c $(DFLAGS) std\dateparse.d
+	$(GDC) -c $(DFLAGS) std\dateparse.d
 
 datetime.obj : std\datetime.d
-	$(DMD) -c $(DFLAGS) std\datetime.d
+	$(GDC) -c $(DFLAGS) std\datetime.d
 
 demangle.obj : std\demangle.d
-	$(DMD) -c $(DFLAGS) std\demangle.d
+	$(GDC) -c $(DFLAGS) std\demangle.d
 
 exception.obj : std\exception.d
-	$(DMD) -c $(DFLAGS) std\exception.d
+	$(GDC) -c $(DFLAGS) std\exception.d
 
 file.obj : std\file.d
-	$(DMD) -c $(DFLAGS) std\file.d
+	$(GDC) -c $(DFLAGS) std\file.d
 
 __fileinit.obj : std\__fileinit.d
-	$(DMD) -c $(DFLAGS) std\__fileinit.d
+	$(GDC) -c $(DFLAGS) std\__fileinit.d
 
 format.obj : std\format.d
-	$(DMD) -c $(DFLAGS) std\format.d
+	$(GDC) -c $(DFLAGS) std\format.d
 
 functional.obj : std\functional.d
-	$(DMD) -c $(DFLAGS) std\functional.d
+	$(GDC) -c $(DFLAGS) std\functional.d
 
 getopt.obj : std\getopt.d
-	$(DMD) -c $(DFLAGS) std\getopt.d
+	$(GDC) -c $(DFLAGS) std\getopt.d
 
 json.obj : std\json.d
-	$(DMD) -c $(DFLAGS) std\json.d
+	$(GDC) -c $(DFLAGS) std\json.d
 
 loader.obj : std\loader.d
-	$(DMD) -c $(DFLAGS) std\loader.d
+	$(GDC) -c $(DFLAGS) std\loader.d
 
 math.obj : std\math.d
-	$(DMD) -c $(DFLAGS) std\math.d
+	$(GDC) -c $(DFLAGS) std\math.d
 
 mathspecial.obj : std\mathspecial.d
-	$(DMD) -c $(DFLAGS) std\mathspecial.d
+	$(GDC) -c $(DFLAGS) std\mathspecial.d
 
 md5.obj : std\md5.d
-	$(DMD) -c $(DFLAGS) -inline std\md5.d
+	$(GDC) -c $(DFLAGS) -inline std\md5.d
 
 metastrings.obj : std\metastrings.d
-	$(DMD) -c $(DFLAGS) -inline std\metastrings.d
+	$(GDC) -c $(DFLAGS) -inline std\metastrings.d
 
 mmfile.obj : std\mmfile.d
-	$(DMD) -c $(DFLAGS) std\mmfile.d
+	$(GDC) -c $(DFLAGS) std\mmfile.d
 
 numeric.obj : std\numeric.d
-	$(DMD) -c $(DFLAGS) std\numeric.d
+	$(GDC) -c $(DFLAGS) std\numeric.d
 
 outbuffer.obj : std\outbuffer.d
-	$(DMD) -c $(DFLAGS) std\outbuffer.d
+	$(GDC) -c $(DFLAGS) std\outbuffer.d
 
 parallelism.obj : std\parallelism.d
-	$(DMD) -c $(DFLAGS) std\parallelism.d
+	$(GDC) -c $(DFLAGS) std\parallelism.d
 
 path.obj : std\path.d
-	$(DMD) -c $(DFLAGS) std\path.d
+	$(GDC) -c $(DFLAGS) std\path.d
 
 perf.obj : std\perf.d
-	$(DMD) -c $(DFLAGS) std\perf.d
+	$(GDC) -c $(DFLAGS) std\perf.d
 
 process.obj : std\process.d
-	$(DMD) -c $(DFLAGS) std\process.d
+	$(GDC) -c $(DFLAGS) std\process.d
 
 processinit.obj : std\internal\processinit.d
-	$(DMD) -c $(DFLAGS) std\internal\processinit.d
+	$(GDC) -c $(DFLAGS) std\internal\processinit.d
 
 random.obj : std\random.d
-	$(DMD) -c $(DFLAGS) std\random.d
+	$(GDC) -c $(DFLAGS) std\random.d
 
 regexp.obj : std\regexp.d
-	$(DMD) -c $(DFLAGS) std\regexp.d
+	$(GDC) -c $(DFLAGS) std\regexp.d
 
 signals.obj : std\signals.d
-	$(DMD) -c $(DFLAGS) std\signals.d -ofsignals.obj
+	$(GDC) -c $(DFLAGS) std\signals.d -ofsignals.obj
 
 socket.obj : std\socket.d
-	$(DMD) -c $(DFLAGS) std\socket.d -ofsocket.obj
+	$(GDC) -c $(DFLAGS) std\socket.d -ofsocket.obj
 
 socketstream.obj : std\socketstream.d
-	$(DMD) -c $(DFLAGS) std\socketstream.d -ofsocketstream.obj
+	$(GDC) -c $(DFLAGS) std\socketstream.d -ofsocketstream.obj
 
 stdio.obj : std\stdio.d
-	$(DMD) -c $(DFLAGS) std\stdio.d
+	$(GDC) -c $(DFLAGS) std\stdio.d
 
 stream.obj : std\stream.d
-	$(DMD) -c $(DFLAGS) -d std\stream.d
+	$(GDC) -c $(DFLAGS) -d std\stream.d
 
 string.obj : std\string.d
-	$(DMD) -c $(DFLAGS) std\string.d
+	$(GDC) -c $(DFLAGS) std\string.d
 
 oldsyserror.obj : std\syserror.d
-	$(DMD) -c $(DFLAGS) std\syserror.d -ofoldsyserror.obj
+	$(GDC) -c $(DFLAGS) std\syserror.d -ofoldsyserror.obj
 
 system.obj : std\system.d
-	$(DMD) -c $(DFLAGS) std\system.d
+	$(GDC) -c $(DFLAGS) std\system.d
 
 traits.obj : std\traits.d
-	$(DMD) -c $(DFLAGS) std\traits.d -oftraits.obj
+	$(GDC) -c $(DFLAGS) std\traits.d -oftraits.obj
 
 typecons.obj : std\typecons.d
-	$(DMD) -c $(DFLAGS) std\typecons.d -oftypecons.obj
+	$(GDC) -c $(DFLAGS) std\typecons.d -oftypecons.obj
 
 typetuple.obj : std\typetuple.d
-	$(DMD) -c $(DFLAGS) std\typetuple.d -oftypetuple.obj
+	$(GDC) -c $(DFLAGS) std\typetuple.d -oftypetuple.obj
 
 uni.obj : std\uni.d
-	$(DMD) -c $(DFLAGS) std\uni.d
+	$(GDC) -c $(DFLAGS) std\uni.d
 
 uri.obj : std\uri.d
-	$(DMD) -c $(DFLAGS) std\uri.d
+	$(GDC) -c $(DFLAGS) std\uri.d
 
 utf.obj : std\utf.d
-	$(DMD) -c $(DFLAGS) std\utf.d
+	$(GDC) -c $(DFLAGS) std\utf.d
 
 variant.obj : std\variant.d
-	$(DMD) -c $(DFLAGS) std\variant.d
+	$(GDC) -c $(DFLAGS) std\variant.d
 
 xml.obj : std\xml.d
-	$(DMD) -c $(DFLAGS) std\xml.d
+	$(GDC) -c $(DFLAGS) std\xml.d
 
 encoding.obj : std\encoding.d
-	$(DMD) -c $(DFLAGS) std\encoding.d
+	$(GDC) -c $(DFLAGS) std\encoding.d
 
 Dzlib.obj : std\zlib.d
-	$(DMD) -c $(DFLAGS) std\zlib.d -ofDzlib.obj
+	$(GDC) -c $(DFLAGS) std\zlib.d -ofDzlib.obj
 
 zip.obj : std\zip.d
-	$(DMD) -c $(DFLAGS) std\zip.d
+	$(GDC) -c $(DFLAGS) std\zip.d
 
 bigint.obj : std\bigint.d
-	$(DMD) -c $(DFLAGS) std\bigint.d
+	$(GDC) -c $(DFLAGS) std\bigint.d
 
 biguintcore.obj : std\internal\math\biguintcore.d
-	$(DMD) -c $(DFLAGS) std\internal\math\biguintcore.d
+	$(GDC) -c $(DFLAGS) std\internal\math\biguintcore.d
 
 biguintnoasm.obj : std\internal\math\biguintnoasm.d
-	$(DMD) -c $(DFLAGS) std\internal\math\biguintnoasm.d
+	$(GDC) -c $(DFLAGS) std\internal\math\biguintnoasm.d
 
 biguintx86.obj : std\internal\math\biguintx86.d
-	$(DMD) -c $(DFLAGS) std\internal\math\biguintx86.d
+	$(GDC) -c $(DFLAGS) std\internal\math\biguintx86.d
 
 gammafunction.obj : std\internal\math\gammafunction.d
-	$(DMD) -c $(DFLAGS) std\internal\math\gammafunction.d
+	$(GDC) -c $(DFLAGS) std\internal\math\gammafunction.d
 
 errorfunction.obj : std\internal\math\errorfunction.d
-	$(DMD) -c $(DFLAGS) std\internal\math\errorfunction.d
+	$(GDC) -c $(DFLAGS) std\internal\math\errorfunction.d
 
 ### std\net
 
 isemail.obj : std\net\isemail.d
-	$(DMD) -c $(DFLAGS) std\net\isemail.d
+	$(GDC) -c $(DFLAGS) std\net\isemail.d
 
 ### std\windows
 
 charset.obj : std\windows\charset.d
-	$(DMD) -c $(DFLAGS) std\windows\charset.d
+	$(GDC) -c $(DFLAGS) std\windows\charset.d
 
 iunknown.obj : std\windows\iunknown.d
-	$(DMD) -c $(DFLAGS) std\windows\iunknown.d
+	$(GDC) -c $(DFLAGS) std\windows\iunknown.d
 
 registry.obj : std\windows\registry.d
-	$(DMD) -c $(DFLAGS) std\windows\registry.d
+	$(GDC) -c $(DFLAGS) std\windows\registry.d
 
 syserror.obj : std\windows\syserror.d
-	$(DMD) -c $(DFLAGS) std\windows\syserror.d
+	$(GDC) -c $(DFLAGS) std\windows\syserror.d
 
 ### std\c
 
 stdarg.obj : std\c\stdarg.d
-	$(DMD) -c $(DFLAGS) std\c\stdarg.d
+	$(GDC) -c $(DFLAGS) std\c\stdarg.d
 
 c_stdio.obj : std\c\stdio.d
-	$(DMD) -c $(DFLAGS) std\c\stdio.d -ofc_stdio.obj
+	$(GDC) -c $(DFLAGS) std\c\stdio.d -ofc_stdio.obj
 
 ### etc
 
 ### etc\c
 
 Czlib.obj : etc\c\zlib.d
-	$(DMD) -c $(DFLAGS) etc\c\zlib.d -ofCzlib.obj
+	$(GDC) -c $(DFLAGS) etc\c\zlib.d -ofCzlib.obj
 
 Ccurl.obj : etc\c\curl.d
-	$(DMD) -c $(DFLAGS) etc\c\curl.d -ofCcurl.obj
+	$(GDC) -c $(DFLAGS) etc\c\curl.d -ofCcurl.obj
 
 ### std\c\windows
 
 com.obj : std\c\windows\com.d
-	$(DMD) -c $(DFLAGS) std\c\windows\com.d
+	$(GDC) -c $(DFLAGS) std\c\windows\com.d
 
 stat.obj : std\c\windows\stat.d
-	$(DMD) -c $(DFLAGS) std\c\windows\stat.d
+	$(GDC) -c $(DFLAGS) std\c\windows\stat.d
 
 winsock.obj : std\c\windows\winsock.d
-	$(DMD) -c $(DFLAGS) std\c\windows\winsock.d
+	$(GDC) -c $(DFLAGS) std\c\windows\winsock.d
 
 windows.obj : std\c\windows\windows.d
-	$(DMD) -c $(DFLAGS) std\c\windows\windows.d
+	$(GDC) -c $(DFLAGS) std\c\windows\windows.d
 
 ######################################################
 
