@@ -34,7 +34,7 @@ CFLAGS=
 #DFLAGS=-O -release -nofloat -w -d -property -version=NOGCSAFE -I..\druntime\import
 
 #debug
-DFLAGS=-m64 -g -Wall -fdeprecated -fproperty -fversion=NOGCSAFE -I ..\druntime\import
+DFLAGS=-m64 -g -Wall -fdeprecated -fproperty -fversion=NOGCSAFE -I ..\druntime\import -nostdinc
 DFLAGS_RELEASE=-frelease -O2
 DFLAGS_DEBUG=-frelease -fbounds-check -fin -fout -fassert
 
@@ -272,15 +272,17 @@ SRC_ZLIB= \
 libphobosnogc64d_mingw.lib : $(OBJS) $(SRCS) \
 	#etc\c\zlib\zlib.lib \
 	mingw64nogc.mak
-	$(GDC) -c -o libphobosnogc64d_mingw.o $(DFLAGS) $(DFLAGS_DEBUG) $(SRCS)
-	$(AR) -r libphobosnogc64d_mingw.a libphobosnogc64d_mingw.o $(OBJS) $(DRUNTIMELIB_DEBUG)
+	$(GDC) -c -o phobosnogc64d_mingw.o $(DFLAGS) $(DFLAGS_DEBUG) $(SRCS)
+	copy /Y $(DRUNTIMELIB_DEBUG) libphobosnogc64d_mingw.a
+	$(AR) -q libphobosnogc64d_mingw.a phobosnogc64d_mingw.o $(OBJS)
 	$(RANLIB) libphobosnogc64d_mingw.a
 		
 libphobosnogc64_mingw.lib : $(OBJS) $(SRCS) \
 	#etc\c\zlib\zlib.lib \
 	mingw64nogc.mak
-	$(GDC) -c -o libphobosnogc64_mingw.o $(DFLAGS) $(DFLAGS_RELEASE) $(SRCS)
-	$(AR) -r libphobosnogc64_mingw.a libphobosnogc64_mingw.o $(OBJS) $(DRUNTIMELIB_RELEASE)
+	$(GDC) -c -o phobosnogc64_mingw.o $(DFLAGS) $(DFLAGS_RELEASE) $(SRCS)
+	copy /Y $(DRUNTIMELIB_RELEASE) libphobosnogc64_mingw.a
+	$(AR) -q libphobosnogc64_mingw.a phobosnogc64_mingw.o $(OBJS)
 	$(RANLIB) libphobosnogc64_mingw.a
 
 unittest : $(SRCS) phobosnogc64d.lib
