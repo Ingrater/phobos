@@ -1953,7 +1953,7 @@ real ceil(real x)  @trusted nothrow    {
  */
 real floor(real x) @trusted nothrow    {
     version(GNU)
-        return core.stdc.math.ceill(x);
+        return core.stdc.math.floorl(x);
     else version (Win64)
     {
         asm
