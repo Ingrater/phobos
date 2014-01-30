@@ -39,7 +39,7 @@ CFLAGS=-mn -6 -r
 #DFLAGS=-O -release -nofloat -w -d -property -version=NOGCSAFE -I..\druntime\import
 
 #debug
-DFLAGS=-nofloat -w -d -property -version=NOGCSAFE -I..\druntime\import 
+DFLAGS=-nofloat -d -property -version=NOGCSAFE -I..\druntime\import 
 DFLAGS_RELEASE=-g -O -noboundscheck -release
 DFLAGS_DEBUG=-g
 
