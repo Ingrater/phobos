@@ -165,7 +165,7 @@ SRCS_3 = \
 	std\c\string.d \
 	std\c\time.d \
 	std\c\math.d \
-	#std\c\windows\com.d \
+	std\c\windows\com.d \
 	std\c\windows\stat.d \
 	std\c\windows\windows.d \
 	std\c\windows\winsock.d \
@@ -321,7 +321,7 @@ SRC_STD_WIN=
 
 SRC_STD_C_WIN=
   std\c\windows\windows.d \
-  #std\c\windows\com.d \
+  std\c\windows\com.d \
 	std\c\windows\winsock.d std\c\windows\stat.d
 
 SRC_STD_C_LINUX=
