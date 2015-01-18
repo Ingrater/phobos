@@ -3,6 +3,7 @@
     Regular expression pattern parser.
 */
 module std.regex.internal.parser;
+pragma(sharedlibrary, "std");
 
 import std.regex.internal.ir;
 import std.range.primitives, std.uni, std.meta,

@@ -32,6 +32,7 @@ Idioms:
 
 */
 module std.internal.math.biguintcore;
+pragma(sharedlibrary, "std");
 
 version(D_InlineAsm_X86)
 {
@@ -85,16 +86,16 @@ if (isIntegral!T)
     enum maxBigDigits = (T.sizeof+BigDigit.sizeof-1)/BigDigit.sizeof;
 }
 
-static immutable BigDigit[] ZERO = [0];
-static immutable BigDigit[] ONE = [1];
-static immutable BigDigit[] TWO = [2];
-static immutable BigDigit[] TEN = [10];
+export static immutable BigDigit[] ZERO = [0];
+export static immutable BigDigit[] ONE = [1];
+export static immutable BigDigit[] TWO = [2];
+export static immutable BigDigit[] TEN = [10];
 
 
 public:
 
 /// BigUint performs memory management and wraps the low-level calls.
-struct BigUint
+export struct BigUint
 {
 private:
     pure invariant()
@@ -104,7 +105,7 @@ private:
 
     immutable(BigDigit) [] data = ZERO;
 
-    this(immutable(BigDigit) [] x) pure nothrow @nogc @safe
+    this(immutable(BigDigit) [] x) pure nothrow @nogc @safe export
     {
        data = x;
     }
@@ -964,7 +965,7 @@ public:
 }
 
 // Remove leading zeros from x, to restore the BigUint invariant
-inout(BigDigit) [] removeLeadingZeros(inout(BigDigit) [] x) pure nothrow @safe
+inout(BigDigit) [] removeLeadingZeros(inout(BigDigit) [] x) pure nothrow @safe export
 {
     size_t k = x.length;
     while (k>1 && x[k - 1]==0) --k;
@@ -1060,9 +1061,8 @@ pure @system unittest
 }
 
 
-private:
 void twosComplement(const(BigDigit) [] x, BigDigit[] result)
-pure nothrow @safe
+pure nothrow @safe export
 {
     foreach (i; 0 .. x.length)
     {
@@ -1086,7 +1086,7 @@ pure nothrow @safe
 
 // Encode BigInt as BigDigit array (sign and 2's complement)
 BigDigit[] includeSign(const(BigDigit) [] x, size_t minSize, bool sign)
-pure nothrow @safe
+pure nothrow @safe export
 {
     size_t length = (x.length > minSize) ? x.length : minSize;
     BigDigit [] result = new BigDigit[length];
@@ -1138,7 +1138,7 @@ T intpow(T)(T x, ulong n) pure nothrow @safe
 
 
 //  returns the maximum power of x that will fit in a uint.
-int highestPowerBelowUintMax(uint x) pure nothrow @safe
+int highestPowerBelowUintMax(uint x) pure nothrow @safe export
 {
      assert(x>1);
      static immutable ubyte [22] maxpwr = [ 31, 20, 15, 13, 12, 11, 10, 10, 9, 9,
@@ -1153,7 +1153,7 @@ int highestPowerBelowUintMax(uint x) pure nothrow @safe
 }
 
 //  returns the maximum power of x that will fit in a ulong.
-int highestPowerBelowUlongMax(uint x) pure nothrow @safe
+int highestPowerBelowUlongMax(uint x) pure nothrow @safe export
 {
      assert(x>1);
      static immutable ubyte [39] maxpwr = [ 63, 40, 31, 27, 24, 22, 21, 20, 19, 18,
@@ -1202,7 +1202,7 @@ int slowHighestPowerBelowUintMax(uint x) pure nothrow @safe
  *  Sets result = x - y. If the result is negative, negative will be true.
  */
 BigDigit [] sub(const BigDigit [] x, const BigDigit [] y, bool *negative)
-pure nothrow
+pure nothrow export
 {
     if (x.length == y.length)
     {
@@ -1257,7 +1257,7 @@ pure nothrow
 
 
 // return a + b
-BigDigit [] add(const BigDigit [] a, const BigDigit [] b) pure nothrow
+BigDigit [] add(const BigDigit [] a, const BigDigit [] b) pure nothrow export
 {
     const(BigDigit) [] x, y;
     if (a.length < b.length)
@@ -1289,7 +1289,7 @@ BigDigit [] add(const BigDigit [] a, const BigDigit [] b) pure nothrow
 
 /**  return x + y
  */
-BigDigit [] addInt(const BigDigit[] x, ulong y) pure nothrow
+BigDigit [] addInt(const BigDigit[] x, ulong y) pure nothrow export
 {
     uint hi = cast(uint)(y >>> 32);
     uint lo = cast(uint)(y& 0xFFFF_FFFF);
@@ -1316,7 +1316,7 @@ BigDigit [] addInt(const BigDigit[] x, ulong y) pure nothrow
 /** Return x - y.
  *  x must be greater than y.
  */
-BigDigit [] subInt(const BigDigit[] x, ulong y) pure nothrow
+BigDigit [] subInt(const BigDigit[] x, ulong y) pure nothrow export
 {
     uint hi = cast(uint)(y >>> 32);
     uint lo = cast(uint)(y & 0xFFFF_FFFF);
@@ -1341,7 +1341,7 @@ BigDigit [] subInt(const BigDigit[] x, ulong y) pure nothrow
  *
  */
 void mulInternal(BigDigit[] result, const(BigDigit)[] x, const(BigDigit)[] y)
-    pure nothrow
+    pure nothrow export
 {
     import core.memory : GC;
     assert( result.length == x.length + y.length );
@@ -1489,7 +1489,7 @@ void mulInternal(BigDigit[] result, const(BigDigit)[] x, const(BigDigit)[] y)
  *   NOTE: If the highest half-digit of x is zero, the highest digit of result will
  *   also be zero.
  */
-void squareInternal(BigDigit[] result, const BigDigit[] x) pure nothrow
+void squareInternal(BigDigit[] result, const BigDigit[] x) pure nothrow export
 {
   import core.memory : GC;
   // Squaring is potentially half a multiply, plus add the squares of
@@ -1515,7 +1515,7 @@ import core.bitop : bsr;
 
 /// if remainder is null, only calculate quotient.
 void divModInternal(BigDigit [] quotient, BigDigit[] remainder, const BigDigit [] u,
-        const BigDigit [] v) pure nothrow
+        const BigDigit [] v) pure nothrow export
 {
     import core.memory : GC;
     assert(quotient.length == u.length - v.length + 1);

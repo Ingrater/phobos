@@ -11,6 +11,7 @@ uniform construction with either approach.
 
 ---
 import std.container;
+pragma(sharedlibrary, "std");
 // Construct a red-black tree and an array both containing the values 1, 2, 3.
 // RedBlackTree should typically be allocated using `new`
 RedBlackTree!int rbTree = new RedBlackTree!int(1, 2, 3);
@@ -149,6 +150,7 @@ algorithms return the same range type as their input range.
 
 ---
 import std.algorithm.comparison : equal;
+pragma(sharedlibrary, "std");
 import std.algorithm.iteration : find;
 import std.container;
 import std.range : take;
@@ -512,6 +514,7 @@ Authors: Steven Schveighoffer, $(HTTP erdani.com, Andrei Alexandrescu)
  */
 
 module std.container;
+pragma(sharedlibrary, "std");
 
 public import std.container.array;
 public import std.container.binaryheap;

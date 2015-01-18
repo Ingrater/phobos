@@ -3,7 +3,8 @@
 This is a submodule of $(MREF std, algorithm).
 It contains generic _mutation algorithms.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE Cheat Sheet,
 $(TR $(TH Function Name) $(TH Description))
 $(T2 bringToFront,
@@ -76,6 +77,7 @@ Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
 module std.algorithm.mutation;
+pragma(sharedlibrary, "std");
 
 import std.range.primitives;
 import std.traits : isArray, isBlitAssignable, isNarrowString, Unqual, isSomeChar;
@@ -1673,6 +1675,7 @@ enum SwapStrategy
 @safe unittest
 {
     import std.stdio;
+pragma(sharedlibrary, "std");
     import std.algorithm.sorting : partition;
     int[] a = [0, 1, 2, 3];
     assert(remove!(SwapStrategy.stable)(a, 1) == [0, 2, 3]);

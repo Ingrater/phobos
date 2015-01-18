@@ -1,5 +1,6 @@
 ///
 module std.experimental.allocator.building_blocks.affix_allocator;
+pragma(sharedlibrary, "std");
 
 /**
 

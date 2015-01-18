@@ -6,7 +6,8 @@ in this module handle files as a unit, e.g., read or write one _file
 at a time. For opening files and manipulating them via handles refer
 to module $(MREF std, stdio).
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD General) $(TD
@@ -77,6 +78,7 @@ Authors:   $(HTTP digitalmars.com, Walter Bright),
 Source:    $(PHOBOSSRC std/_file.d)
  */
 module std.file;
+pragma(sharedlibrary, "std");
 
 import core.stdc.errno, core.stdc.stdlib, core.stdc.string;
 import core.time : abs, dur, hnsecs, seconds;
@@ -155,7 +157,7 @@ else version(Posix)
 /++
     Exception thrown for file I/O errors.
  +/
-class FileException : Exception
+export class FileException : Exception
 {
     import std.conv : text, to;
 
@@ -379,7 +381,7 @@ version (Posix) private void[] readImpl(const(char)[] name, const(FSChar)* namez
 }
 
 
-version (Windows) private void[] readImpl(const(char)[] name, const(FSChar)* namez, size_t upTo = size_t.max) @safe
+version (Windows) private export void[] readImpl(const(char)[] name, const(FSChar)* namez, size_t upTo = size_t.max) @safe
 {
     import core.memory : GC;
     import std.algorithm.comparison : min;
@@ -1531,7 +1533,8 @@ if (isConvertibleToString!R)
     return exists!(StringTypeOf!R)(name);
 }
 
-private bool existsImpl(const(FSChar)* namez) @trusted nothrow @nogc
+/* Workaround */
+private export bool existsImpl(const(FSChar)* namez) @trusted nothrow @nogc
 {
     version(Windows)
     {
@@ -2971,7 +2974,7 @@ assert(!de2.isFile);
 }
 else version(Windows)
 {
-    struct DirEntry
+    export struct DirEntry
     {
     @safe:
     public:
@@ -3431,7 +3434,7 @@ if (isConvertibleToString!RF || isConvertibleToString!RT)
     assert(__traits(compiles, copy("from.txt", "to.txt")));
 }
 
-private void copyImpl(const(char)[] f, const(char)[] t, const(FSChar)* fromz, const(FSChar)* toz,
+private export void copyImpl(const(char)[] f, const(char)[] t, const(FSChar)* fromz, const(FSChar)* toz,
         PreserveAttributes preserve) @trusted
 {
     version(Windows)
@@ -3697,7 +3700,7 @@ enum SpanMode
     breadth,
 }
 
-private struct DirIteratorImpl
+private export struct DirIteratorImpl
 {
   @safe:
     SpanMode _mode;

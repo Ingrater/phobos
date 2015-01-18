@@ -49,6 +49,7 @@
  */
 
 module std.internal.math.biguintx86;
+pragma(sharedlibrary, "std");
 
 @system:
 pure:

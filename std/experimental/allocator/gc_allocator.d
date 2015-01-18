@@ -1,5 +1,6 @@
 ///
 module std.experimental.allocator.gc_allocator;
+pragma(sharedlibrary, "std");
 import std.experimental.allocator.common;
 
 /**

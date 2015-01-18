@@ -142,6 +142,7 @@ Source:    $(PHOBOSSRC std/_string.d)
 
 */
 module std.string;
+pragma(sharedlibrary, "std");
 
 version (unittest)
 {
@@ -2202,7 +2203,7 @@ if (isSomeChar!Char && isSomeChar!Char2)
  * Returns:
  *     The _representation of the passed string.
  */
-auto representation(Char)(Char[] s) @safe pure nothrow @nogc
+auto representation(Char)(Char[] s) @safe pure nothrow @nogc export
 if (isSomeChar!Char)
 {
     import std.traits : ModifyTypePreservingTQ;
@@ -6897,7 +6898,7 @@ Returns:
 
 See_Also: $(LREF representation)
 */
-auto assumeUTF(T)(T[] arr) pure
+auto assumeUTF(T)(T[] arr) pure export
 if (staticIndexOf!(Unqual!T, ubyte, ushort, uint) != -1)
 {
     import std.traits : ModifyTypePreservingTQ;

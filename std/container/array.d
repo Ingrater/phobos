@@ -14,9 +14,11 @@
  *
  * Authors: $(HTTP erdani.com, Andrei Alexandrescu)
  *
- * $(SCRIPT inhibitQuickIndex = 1;)
+ * $(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
  */
 module std.container.array;
+pragma(sharedlibrary, "std");
 
 import core.exception : RangeError;
 import std.range.primitives;

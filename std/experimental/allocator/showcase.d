@@ -6,6 +6,7 @@ facilities, or import individual heap building blocks and assemble them.
 
 */
 module std.experimental.allocator.showcase;
+pragma(sharedlibrary, "std");
 
 import std.experimental.allocator.building_blocks.fallback_allocator,
     std.experimental.allocator.gc_allocator,

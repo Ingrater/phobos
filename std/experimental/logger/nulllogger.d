@@ -1,5 +1,6 @@
 ///
 module std.experimental.logger.nulllogger;
+pragma(sharedlibrary, "std");
 
 import std.experimental.logger.core;
 

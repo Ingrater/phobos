@@ -19,6 +19,7 @@ Macros:
  *  NAN = $(RED NAN)
  */
 module std.internal.math.gammafunction;
+pragma(sharedlibrary, "std");
 import std.internal.math.errorfunction;
 import std.math;
 

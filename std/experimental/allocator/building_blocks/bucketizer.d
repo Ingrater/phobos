@@ -1,5 +1,6 @@
 ///
 module std.experimental.allocator.building_blocks.bucketizer;
+pragma(sharedlibrary, "std");
 
 /**
 

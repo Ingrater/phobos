@@ -10,6 +10,7 @@
   +/
 deprecated("Import core.sys.windows.stat instead")
 module std.c.windows.stat;
+pragma(sharedlibrary, "std");
 
 version (Windows):
 public import core.sys.windows.stat;

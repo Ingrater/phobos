@@ -4,6 +4,7 @@
     For the moment undocumented, and is subject to change.
 */
 module std.regex.internal.generator;
+pragma(sharedlibrary, "std");
 
 /*
     Useful utility for self-testing, an infinite range of string samples

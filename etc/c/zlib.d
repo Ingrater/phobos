@@ -4,6 +4,7 @@
 /* updated from 1.2.8 to 1.2.11 by Iain Buclaw */
 
 module etc.c.zlib;
+pragma(sharedlibrary, "std");
 
 import core.stdc.config;
 

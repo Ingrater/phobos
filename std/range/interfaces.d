@@ -7,7 +7,8 @@ when runtime polymorphism is required. For this purpose, this submodule
 provides a number of object and $(D interface) definitions that can be used to
 wrap around _range objects created by the $(MREF std, range) templates.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE ,
     $(TR $(TD $(LREF InputRange))
         $(TD Wrapper for input ranges.
@@ -70,6 +71,7 @@ and Jonathan M Davis. Credit for some of the ideas in building this module goes
 to $(HTTP fantascienza.net/leonardo/so/, Leonardo Maffi).
 */
 module std.range.interfaces;
+pragma(sharedlibrary, "std");
 
 import std.meta;
 import std.range.primitives;

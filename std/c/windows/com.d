@@ -6,6 +6,7 @@
   +/
 deprecated("Import core.sys.windows.com instead")
 module std.c.windows.com;
+pragma(sharedlibrary, "std");
 
 version (Windows):
 public import core.sys.windows.com;

@@ -22,6 +22,7 @@ checked) uses type deduction to convert a value `x` of integral type `T` to
 void main()
 {
     import std.experimental.checkedint, std.stdio;
+pragma(sharedlibrary, "std");
     writeln((checked(5) + 7).get); // 12
     writeln((checked(10) * 1000 * 1000 * 1000).get); // Overflow
 }
@@ -106,7 +107,8 @@ intervene.
     $(TR $(TD
 defines an `int`-like
 type that supports a NaN value. For values that are not NaN, comparison works
-properly. Again the composition order is important; $(D Checked!(Checked!(int,
+properly. Again the composition order is important;
+pragma(sharedlibrary, "std"); $(D Checked!(Checked!(int,
 WithNaN), ProperCompare)) does not have good semantics because `ProperCompare`
 intercepts comparisons before the numbers involved are tested for NaN.
     ))
@@ -189,6 +191,7 @@ and `>>>=` is larger than the largest value representable by `T`.)
 
 */
 module std.experimental.checkedint;
+pragma(sharedlibrary, "std");
 import std.traits : isFloatingPoint, isIntegral, isNumeric, isUnsigned, Unqual;
 
 ///

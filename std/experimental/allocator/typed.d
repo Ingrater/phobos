@@ -10,6 +10,7 @@ T2=$(TR <td style="text-align:left">$(D $1)</td> $(TD $(ARGS $+)))
 */
 
 module std.experimental.allocator.typed;
+pragma(sharedlibrary, "std");
 
 import std.experimental.allocator;
 import std.experimental.allocator.common;

@@ -11,7 +11,8 @@ All algorithms are generalized to accept as input not only sets but also
 $(HTTP https://en.wikipedia.org/wiki/Multiset, multisets). Each algorithm
 documents behaviour in the presence of duplicated inputs.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE Cheat Sheet,
 $(TR $(TH Function Name) $(TH Description))
 $(T2 cartesianProduct,
@@ -46,6 +47,7 @@ Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
 module std.algorithm.setops;
+pragma(sharedlibrary, "std");
 
 import std.range.primitives;
 

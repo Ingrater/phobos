@@ -46,7 +46,8 @@ The remainder of this module provides a rich set of _range creation and
 composition templates that let you construct new ranges out of existing ranges:
 
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE ,
     $(TR $(TD $(LREF chain))
         $(TD Concatenates several ranges into a single _range.
@@ -228,6 +229,7 @@ and Jack Stouffer. Credit for some of the ideas in building this module goes
 to $(HTTP fantascienza.net/leonardo/so/, Leonardo Maffi).
  */
 module std.range;
+pragma(sharedlibrary, "std");
 
 public import std.array;
 public import std.range.interfaces;
@@ -237,7 +239,6 @@ public import std.typecons : Flag, Yes, No;
 import std.meta; // allSatisfy, staticMap
 import std.traits; // CommonType, isCallable, isFloatingPoint, isIntegral,
     // isPointer, isSomeFunction, isStaticArray, Unqual
-
 
 /**
 Iterates a bidirectional range backwards. The original range can be

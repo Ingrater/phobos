@@ -23,6 +23,7 @@ See_Also: $(LINK2 https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/odb
 */
 
 module etc.c.odbc.sql;
+pragma(sharedlibrary, "std");
 
 public import etc.c.odbc.sqltypes;
 

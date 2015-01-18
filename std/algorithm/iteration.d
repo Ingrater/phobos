@@ -3,7 +3,8 @@
 This is a submodule of $(MREF std, algorithm).
 It contains generic _iteration algorithms.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE Cheat Sheet,
 $(TR $(TH Function Name) $(TH Description))
 $(T2 cache,
@@ -65,6 +66,7 @@ Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
 module std.algorithm.iteration;
+pragma(sharedlibrary, "std");
 
 // FIXME
 import std.functional; // : unaryFun, binaryFun;

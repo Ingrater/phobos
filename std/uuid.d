@@ -96,6 +96,7 @@ $(TR $(TDNW UUID namespaces)
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.uuid;
+pragma(sharedlibrary, "std");
 
 ///
 @safe unittest
@@ -125,7 +126,7 @@ import std.traits;
 /**
  *
  */
-public struct UUID
+public export struct UUID
 {
     import std.meta : AliasSeq, allSatisfy;
 
@@ -1674,7 +1675,7 @@ enum uuidRegex = "[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}"~
  * This exception is thrown if an error occurs when parsing a UUID
  * from a string.
  */
-public class UUIDParsingException : Exception
+public export class UUIDParsingException : Exception
 {
     /**
      * The reason why parsing the UUID string failed (if known)
@@ -1694,7 +1695,7 @@ public class UUIDParsingException : Exception
     ///The position in the input string where the error occurred.
     size_t position;
 
-    private this(string input, size_t pos, Reason why = Reason.unknown, string msg = "",
+    private export this(string input, size_t pos, Reason why = Reason.unknown, string msg = "",
         Throwable next = null, string file = __FILE__, size_t line = __LINE__) pure @trusted
     {
         import std.array : replace;

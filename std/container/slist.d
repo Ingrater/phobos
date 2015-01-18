@@ -14,9 +14,11 @@ boost.org/LICENSE_1_0.txt)).
 
 Authors: $(HTTP erdani.com, Andrei Alexandrescu)
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 */
 module std.container.slist;
+pragma(sharedlibrary, "std");
 
 ///
 @safe unittest

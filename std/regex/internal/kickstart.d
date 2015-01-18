@@ -3,6 +3,7 @@
     to be verified by full-blown matcher.
 */
 module std.regex.internal.kickstart;
+pragma(sharedlibrary, "std");
 
 package(std.regex):
 

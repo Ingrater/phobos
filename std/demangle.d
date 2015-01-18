@@ -17,6 +17,7 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.demangle;
+pragma(sharedlibrary, "std");
 
 /+
 private class MangleException : Exception
@@ -80,7 +81,7 @@ int main()
 -------------------
  */
 
-string demangle(string name)
+export string demangle(string name)
 {
     import core.demangle : demangle;
     import std.exception : assumeUnique;

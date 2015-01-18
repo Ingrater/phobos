@@ -53,6 +53,7 @@
  * Source:    $(PHOBOSSRC std/_mathspecial.d)
  */
 module std.mathspecial;
+pragma(sharedlibrary, "std");
 import std.internal.math.errorfunction;
 import std.internal.math.gammafunction;
 public import std.math;

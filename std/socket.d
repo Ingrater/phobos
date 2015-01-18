@@ -43,6 +43,7 @@
  */
 
 module std.socket;
+pragma(sharedlibrary, "std");
 
 import core.stdc.stdint, core.stdc.stdlib, core.stdc.string, std.conv, std.string;
 

@@ -3,7 +3,8 @@
 This is a submodule of $(MREF std, algorithm).
 It contains generic _sorting algorithms.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE Cheat Sheet,
 $(TR $(TH Function Name) $(TH Description))
 $(T2 completeSort,
@@ -74,6 +75,7 @@ Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
 module std.algorithm.sorting;
+pragma(sharedlibrary, "std");
 
 import std.algorithm.mutation : SwapStrategy;
 import std.functional; // : unaryFun, binaryFun;

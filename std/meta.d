@@ -12,7 +12,8 @@
  * take a single argument and evaluate to a boolean constant. Such templates
  * are referred to as $(I template predicates).
  *
- * $(SCRIPT inhibitQuickIndex = 1;)
+ * $(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
  * $(DIVC quickindex,
  * $(BOOKTABLE ,
  * $(TR $(TH Category) $(TH Templates))
@@ -72,6 +73,7 @@
  */
 
 module std.meta;
+pragma(sharedlibrary, "std");
 
 /**
  * Creates a sequence of zero or more aliases. This is most commonly

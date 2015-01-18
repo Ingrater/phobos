@@ -57,6 +57,7 @@ $(TR $(TDNW Helpers) $(TD $(MYREF crcHexString) $(MYREF crc32Of) $(MYREF crc64EC
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.digest.crc;
+pragma(sharedlibrary, "std");
 
 public import std.digest;
 

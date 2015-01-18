@@ -1,5 +1,6 @@
 ///
 module std.experimental.allocator.mmap_allocator;
+pragma(sharedlibrary, "std");
 
 // MmapAllocator
 /**

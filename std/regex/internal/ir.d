@@ -6,6 +6,7 @@
     and backend components - generators, matchers and other "filters".
 */
 module std.regex.internal.ir;
+pragma(sharedlibrary, "std");
 
 package(std.regex):
 
@@ -47,7 +48,7 @@ CharMatcher[CodepointSet] matcherCache;
     }
 }
 
-@property ref wordMatcher()()
+@property export ref wordMatcher()()
 {
     static CharMatcher matcher = CharMatcher(wordCharacter);
     return matcher;
@@ -208,7 +209,7 @@ IR pairedIR(IR i)
 }
 
 //encoded IR instruction
-struct Bytecode
+export struct Bytecode
 {
     uint raw;
     //natural constraints
@@ -335,7 +336,7 @@ static assert(Bytecode.sizeof == 4);
 
 
 //index entry structure for name --> number of submatch
-struct NamedGroup
+export struct NamedGroup
 {
     string name;
     uint group;

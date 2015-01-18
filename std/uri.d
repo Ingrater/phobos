@@ -22,6 +22,7 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.uri;
+pragma(sharedlibrary, "std");
 
 //debug=uri;        // uncomment to turn on debugging writefln's
 debug(uri) import std.stdio;

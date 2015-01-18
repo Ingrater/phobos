@@ -6,6 +6,7 @@
     Source:    $(PHOBOSSRC std/datetime/_systime.d)
 +/
 module std.datetime.systime;
+pragma(sharedlibrary, "std");
 
 // Note: reconsider using specific imports below after
 // https://issues.dlang.org/show_bug.cgi?id=17630 has been fixed

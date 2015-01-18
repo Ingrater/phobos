@@ -1,5 +1,6 @@
 ///
 module std.experimental.allocator.building_blocks.kernighan_ritchie;
+pragma(sharedlibrary, "std");
 import std.experimental.allocator.building_blocks.null_allocator;
 
 //debug = KRRegion;

@@ -61,6 +61,7 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.signals;
+pragma(sharedlibrary, "std");
 
 import core.exception : onOutOfMemoryError;
 import core.stdc.stdlib : calloc, realloc, free;
@@ -381,6 +382,7 @@ void linkin() { }
         void watch(string msg, int i)
         {
             //writefln("Observed msg '%s' and value %s", msg, i);
+pragma(sharedlibrary, "std");
             captured_value = i;
             captured_msg   = msg;
         }

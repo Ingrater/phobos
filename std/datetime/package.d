@@ -68,6 +68,7 @@
 
 --------------------
 auto currentTime = Clock.currTime();
+pragma(sharedlibrary, "std");
 auto timeString = currentTime.toISOExtString();
 auto restoredTime = SysTime.fromISOExtString(timeString);
 --------------------
@@ -108,6 +109,7 @@ auto restoredTime = SysTime.fromISOExtString(timeString);
     Source:    $(PHOBOSSRC std/_datetime/package.d)
 +/
 module std.datetime;
+pragma(sharedlibrary, "std");
 
 public import core.time;
 public import std.datetime.date;
@@ -125,6 +127,7 @@ import std.typecons : Flag, Yes, No;
 @safe unittest
 {
     auto currentTime = Clock.currTime();
+pragma(sharedlibrary, "std");
     auto timeString = currentTime.toISOExtString();
     auto restoredTime = SysTime.fromISOExtString(timeString);
 }

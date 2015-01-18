@@ -4,7 +4,8 @@ Functions and types that manipulate built-in arrays and associative arrays.
 
 This module provides all kinds of functions to create, manipulate or convert arrays:
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE ,
 $(TR $(TH Function Name) $(TH Description)
 )
@@ -75,6 +76,7 @@ Authors:   $(HTTP erdani.org, Andrei Alexandrescu) and Jonathan M Davis
 Source: $(PHOBOSSRC std/_array.d)
 */
 module std.array;
+pragma(sharedlibrary, "std");
 
 static import std.algorithm.iteration; // FIXME, remove with alias of splitter
 import std.functional;
@@ -95,7 +97,7 @@ public import std.range.primitives : save, empty, popFront, popBack, front, back
  * Returns:
  *      allocated and initialized array
  */
-ForeachType!Range[] array(Range)(Range r)
+export ForeachType!Range[] array(Range)(Range r)
 if (isIterable!Range && !isNarrowString!Range && !isInfinite!Range)
 {
     if (__ctfe)
@@ -229,7 +231,7 @@ Returns:
     a $(D dchar[]), $(D const(dchar)[]), or $(D immutable(dchar)[]) depending on the constness of
     the input.
 */
-@trusted ElementType!String[] array(String)(scope String str)
+export @trusted ElementType!String[] array(String)(scope String str)
 if (isNarrowString!String)
 {
     import std.utf : toUTF32;
@@ -587,7 +589,7 @@ uninitializedArray is nothrow and weakly pure.
 
 uninitializedArray is @system if the uninitialized element type has pointers.
 +/
-auto uninitializedArray(T, I...)(I sizes) nothrow @system
+export auto uninitializedArray(T, I...)(I sizes) nothrow @system
 if (isDynamicArray!T && allSatisfy!(isIntegral, I) && hasIndirections!(ElementEncodingType!T))
 {
     enum isSize_t(E) = is (E : size_t);
@@ -604,7 +606,7 @@ if (isDynamicArray!T && allSatisfy!(isIntegral, I) && hasIndirections!(ElementEn
 }
 
 /// ditto
-auto uninitializedArray(T, I...)(I sizes) nothrow @trusted
+export auto uninitializedArray(T, I...)(I sizes) nothrow @trusted
 if (isDynamicArray!T && allSatisfy!(isIntegral, I) && !hasIndirections!(ElementEncodingType!T))
 {
     enum isSize_t(E) = is (E : size_t);
@@ -2836,14 +2838,14 @@ efficient. `Appender` maintains its own array metadata locally, so it can avoid
 global locking for each append where $(LREF capacity) is non-zero.
 See_Also: $(LREF appender)
  */
-struct Appender(A)
+export struct Appender(A)
 if (isDynamicArray!A)
 {
     import core.memory : GC;
 
     private alias T = ElementEncodingType!A;
 
-    private struct Data
+    private export struct Data
     {
         size_t capacity;
         Unqual!T[] arr;
@@ -2921,7 +2923,7 @@ if (isDynamicArray!A)
     }
 
     // ensure we can add nelems elements, resizing as necessary
-    private void ensureAddable(size_t nelems) @trusted pure nothrow
+    private export void ensureAddable(size_t nelems) @trusted pure nothrow
     {
         if (!_data)
             _data = new Data;
@@ -3007,7 +3009,7 @@ if (isDynamicArray!A)
     /**
      * Appends `item` to the managed array.
      */
-    void put(U)(U item) if (canPutItem!U)
+    export void put(U)(U item) if (canPutItem!U)
     {
         static if (isSomeChar!T && isSomeChar!U && T.sizeof < U.sizeof)
         {
@@ -3207,7 +3209,7 @@ if (isDynamicArray!A)
 //arg curLen: The current length
 //arg reqLen: The length as requested by the user
 //ret sugLen: A suggested growth.
-private size_t appenderNewCapacity(size_t TSizeOf)(size_t curLen, size_t reqLen) @safe pure nothrow
+private export size_t appenderNewCapacity(size_t TSizeOf)(size_t curLen, size_t reqLen) @safe pure nothrow
 {
     import core.bitop : bsr;
     import std.algorithm.comparison : max;
@@ -3321,13 +3323,13 @@ unittest
     Convenience function that returns an $(LREF Appender) instance,
     optionally initialized with $(D array).
  +/
-Appender!A appender(A)()
+export Appender!A appender(A)()
 if (isDynamicArray!A)
 {
     return Appender!A(null);
 }
 /// ditto
-Appender!(E[]) appender(A : E[], E)(auto ref A array)
+export Appender!(E[]) appender(A : E[], E)(auto ref A array)
 {
     static assert(!isStaticArray!A || __traits(isRef, array),
         "Cannot create Appender from an rvalue static array");
@@ -3744,7 +3746,7 @@ unittest
     with `arrayPtr`. Don't use null for the array pointer, use the other
     version of $(D appender) instead.
  +/
-RefAppender!(E[]) appender(P : E[]*, E)(P arrayPtr)
+export RefAppender!(E[]) appender(P : E[]*, E)(P arrayPtr)
 {
     return RefAppender!(E[])(arrayPtr);
 }

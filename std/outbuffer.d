@@ -11,6 +11,7 @@ Serialize data to $(D ubyte) arrays.
  * $(SCRIPT inhibitQuickIndex = 1;)
  */
 module std.outbuffer;
+pragma(sharedlibrary, "std");
 
 import core.stdc.stdarg; // : va_list;
 

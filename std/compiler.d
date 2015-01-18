@@ -14,6 +14,7 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.compiler;
+pragma(sharedlibrary, "std");
 
 immutable
 {

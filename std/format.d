@@ -54,6 +54,7 @@ $(TR $(TH Function Name) $(TH Description)
    Source: $(PHOBOSSRC std/_format.d)
  */
 module std.format;
+pragma(sharedlibrary, "std");
 
 //debug=format;                // uncomment to turn on debugging printf's
 
@@ -67,7 +68,7 @@ import std.traits;
 /**********************************************************************
  * Signals a mismatch between a format and its corresponding argument.
  */
-class FormatException : Exception
+export class FormatException : Exception
 {
     @safe pure nothrow
     this()
@@ -990,7 +991,7 @@ uint formattedRead(R, Char, S...)(auto ref R r, const(Char)[] fmt, auto ref S ar
     assert(aa2 == ["hello":1, "world":2]);
 }
 
-template FormatSpec(Char)
+export template FormatSpec(Char)
 if (!is(Unqual!Char == Char))
 {
     alias FormatSpec = FormatSpec!(Unqual!Char);
@@ -1000,7 +1001,7 @@ if (!is(Unqual!Char == Char))
  * A General handler for $(D printf) style format specifiers. Used for building more
  * specific formatting functions.
  */
-struct FormatSpec(Char)
+export struct FormatSpec(Char)
 if (is(Unqual!Char == Char))
 {
     import std.algorithm.searching : startsWith;
@@ -1235,7 +1236,7 @@ if (is(Unqual!Char == Char))
         assert(w.data == "a%b%c" && f.trailing == "%");
     }
 
-    private void fillUp()
+    private export void fillUp()
     {
         // Reset content
         if (__ctfe)
@@ -2141,7 +2142,7 @@ if (is(IntegralTypeOf!T) && !is(T == enum) && !hasToString!(T, Char))
     formatIntegral(w, cast(C) val, f, base, Unsigned!U.max);
 }
 
-private void formatIntegral(Writer, T, Char)(ref Writer w, const(T) val, const ref FormatSpec!Char fs,
+private export void formatIntegral(Writer, T, Char)(ref Writer w, const(T) val, const ref FormatSpec!Char fs,
     uint base, ulong mask)
 {
     T arg = val;
@@ -2159,7 +2160,7 @@ private void formatIntegral(Writer, T, Char)(ref Writer w, const(T) val, const r
         formatUnsigned(w, (cast(ulong) arg) & mask, fs, base, negative);
 }
 
-private void formatUnsigned(Writer, T, Char)
+private export void formatUnsigned(Writer, T, Char)
 (ref Writer w, T arg, const ref FormatSpec!Char fs, uint base, bool negative)
 {
     /* Write string:
@@ -3025,7 +3026,7 @@ if (is(DynamicArrayTypeOf!T) && !is(StringTypeOf!T) && !is(T == enum) && !hasToS
 }
 
 // input range formatting
-private void formatRange(Writer, T, Char)(ref Writer w, ref T val, const ref FormatSpec!Char f)
+private export void formatRange(Writer, T, Char)(ref Writer w, ref T val, const ref FormatSpec!Char f)
 if (isInputRange!T)
 {
     import std.conv : text;
@@ -3194,7 +3195,7 @@ if (isInputRange!T)
 }
 
 // character formatting with ecaping
-private void formatChar(Writer)(ref Writer w, in dchar c, in char quote)
+private export void formatChar(Writer)(ref Writer w, in dchar c, in char quote)
 {
     import std.uni : isGraphical;
 
@@ -3485,7 +3486,7 @@ template hasToString(T, Char)
 }
 
 // object formatting with toString
-private void formatObject(Writer, T, Char)(ref Writer w, ref T val, const ref FormatSpec!Char f)
+private export void formatObject(Writer, T, Char)(ref Writer w, ref T val, const ref FormatSpec!Char f)
 if (hasToString!(T, Char))
 {
     static if (is(typeof(val.toString((const(char)[] s){}, f))))
@@ -4097,7 +4098,7 @@ if (isDelegate!T)
 
 //------------------------------------------------------------------------------
 // Fix for issue 1591
-private int getNthInt(string kind, A...)(uint index, A args)
+private export int getNthInt(string kind, A...)(uint index, A args)
 {
     return getNth!(kind, isIntegral,int)(index, args);
 }
@@ -4871,7 +4872,7 @@ void formatReflectTest(T)(ref T val, string fmt, string[] formatted, string fn =
 }
 
 //------------------------------------------------------------------------------
-private void skipData(Range, Char)(ref Range input, const ref FormatSpec!Char spec)
+private export void skipData(Range, Char)(ref Range input, const ref FormatSpec!Char spec)
 {
     import std.ascii : isDigit;
     import std.conv : text;
@@ -5458,7 +5459,7 @@ private TypeInfo primitiveTypeInfo(Mangle m)
     return p ? *p : null;
 }
 
-private bool needToSwapEndianess(Char)(const ref FormatSpec!Char f)
+private export bool needToSwapEndianess(Char)(const ref FormatSpec!Char f)
 {
     import std.system : endian, Endian;
 
@@ -5815,7 +5816,7 @@ package static const checkFormatException(alias fmt, Args...) =
  * Params: fmt  = Format string. For detailed specification, see $(LREF formattedWrite).
  *         args = Variadic list of arguments to _format into returned string.
  */
-typeof(fmt) format(alias fmt, Args...)(Args args)
+export typeof(fmt) format(alias fmt, Args...)(Args args)
 if (isSomeString!(typeof(fmt)))
 {
     alias e = checkFormatException!(fmt, Args);
@@ -5901,7 +5902,7 @@ if (isSomeChar!Char)
  *     A $(LREF FormatException) if the length of `args` is different
  *     than the number of format specifiers in `fmt`.
  */
-char[] sformat(alias fmt, Args...)(char[] buf, Args args)
+export char[] sformat(alias fmt, Args...)(char[] buf, Args args)
 if (isSomeString!(typeof(fmt)))
 {
     alias e = checkFormatException!(fmt, Args);
@@ -5910,7 +5911,7 @@ if (isSomeString!(typeof(fmt)))
 }
 
 /// ditto
-char[] sformat(Char, Args...)(char[] buf, in Char[] fmt, Args args)
+export char[] sformat(Char, Args...)(char[] buf, in Char[] fmt, Args args)
 {
     import core.exception : RangeError;
     import std.utf : encode;
@@ -6004,7 +6005,7 @@ char[] sformat(Char, Args...)(char[] buf, in Char[] fmt, Args args)
  * Returns:
  *      the difference between the starts of the arrays
  */
-@trusted private pure nothrow @nogc
+@trusted private pure nothrow @nogc export
     ptrdiff_t arrayPtrDiff(T)(const T[] array1, const T[] array2)
 {
     return array1.ptr - array2.ptr;

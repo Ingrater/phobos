@@ -13,5 +13,6 @@
   +/
 deprecated("This module no longer contains anything. Just remove the import.")
 module std.c.linux.linuxextern;
+pragma(sharedlibrary, "std");
 
 // No longer needed since "extern" storage class

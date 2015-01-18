@@ -1,5 +1,6 @@
 ///
 module std.experimental.allocator.building_blocks.null_allocator;
+pragma(sharedlibrary, "std");
 
 /**
 $(D NullAllocator) is an emphatically empty implementation of the allocator

@@ -12,6 +12,7 @@ Authors:   $(HTTP digitalmars.com, Walter Bright),
            Alex Rønne Petersen
  */
 module std.stdio;
+pragma(sharedlibrary, "std");
 
 import core.stdc.stddef; // wchar_t
 public import core.stdc.stdio;
@@ -361,7 +362,7 @@ Hello, Jimmy!
 % __
 )
  */
-struct File
+export struct File
 {
     import std.range.primitives : ElementEncodingType;
     import std.traits : isScalarType, isArray;
@@ -2822,7 +2823,7 @@ $(D Range) that locks the file and allows fast writing to it.
         File file_;
 
         // the unshared version of FILE* handle, extracted from the File object
-        @property _iobuf* handle_() @trusted { return cast(_iobuf*) file_._p.handle; }
+        @property _iobuf* handle_() @trusted export { return cast(_iobuf*) file_._p.handle; }
 
         // the file's orientation (byte- or wide-oriented)
         int orientation_;
@@ -3602,7 +3603,7 @@ template isFileHandle(T)
 /**
  * Property used by writeln/etc. so it can infer @safe since stdout is __gshared
  */
-private @property File trustedStdout() @trusted
+private @property File trustedStdout() @trusted export
 {
     return stdout;
 }

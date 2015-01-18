@@ -4,7 +4,8 @@
 
     All functions, with the exception of $(LREF expandTilde) (and in some
     cases $(LREF absolutePath) and $(LREF relativePath)), are pure
-    string manipulation functions; they don't depend on any state outside
+    string manipulation functions;
+pragma(sharedlibrary, "std"); they don't depend on any state outside
     the program, nor do they perform any actual file system actions.
     This has the consequence that the module does not make any distinction
     between a _path that points to a directory and a _path that points to a
@@ -32,7 +33,8 @@
     returned, it is usually a slice of an input string.  If a function
     allocates, this is explicitly mentioned in the documentation.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(DIVC quickindex,
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
@@ -94,6 +96,7 @@ $(TR $(TD Other) $(TD
         $(PHOBOSSRC std/_path.d)
 */
 module std.path;
+pragma(sharedlibrary, "std");
 
 
 // FIXME

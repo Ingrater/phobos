@@ -7,7 +7,8 @@
     see $(REF decode, std,_utf) and $(REF encode, std,_utf) in $(MREF std, utf)
     for this functionality. )
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD Decode) $(TD
@@ -184,6 +185,7 @@ $(TR $(TD Building blocks) $(TD
     $(SECTION Synopsis)
     ---
     import std.uni;
+pragma(sharedlibrary, "std");
     void main()
     {
         // initialize code point sets using script/block or property name
@@ -299,6 +301,7 @@ $(TR $(TD Building blocks) $(TD
         an assigned abstract character (a symbolic meaning).
     )
     $(P $(DEF Code point) Any value in the Unicode codespace;
+pragma(sharedlibrary, "std");
         that is, the range of integers from 0 to 10FFFF (hex).
         Not all code points are assigned to encoded characters.
     )
@@ -464,6 +467,7 @@ $(TR $(TD Building blocks) $(TD
     )
     ---
     auto elemsPerPage = (2 ^^ bits_per_page) / Value.sizeOfInBits;
+pragma(sharedlibrary, "std");
     pages[index[n >> bits_per_page]][n & (elemsPerPage - 1)];
     ---
     $(P Where if $(D elemsPerPage) is a power of 2 the whole process is
@@ -706,6 +710,7 @@ CHARACTERS = $(S_LINK Character, characters)
 CLUSTER = $(S_LINK Grapheme cluster, grapheme cluster)
 +/
 module std.uni;
+pragma(sharedlibrary, "std");
 
 import std.meta; // AliasSeq
 import std.range.primitives; // back, ElementEncodingType, ElementType, empty,
@@ -1791,7 +1796,7 @@ alias sharSwitchLowerBound = sharMethod!switchUniformLowerBound;
         insertInPlace(arr, arr.length, value);
     }
 
-    static void destroy(T)(ref T arr)
+    static void destroy(T)(ref T arr) export
         if (isDynamicArray!T && is(Unqual!T == T))
     {
         debug
@@ -1801,7 +1806,7 @@ alias sharSwitchLowerBound = sharMethod!switchUniformLowerBound;
         arr = null;
     }
 
-    static void destroy(T)(ref T arr)
+    static void destroy(T)(ref T arr) export
         if (isDynamicArray!T && !is(Unqual!T == T))
     {
         arr = null;
@@ -1986,7 +1991,7 @@ public alias CodepointSet = InversionList!GcPolicy;
     to represent [a, b$(RPAREN) intervals of $(CODEPOINTS). As used in $(LREF InversionList).
     Any interval type should pass $(LREF isIntegralPair) trait.
 */
-public struct CodepointInterval
+public export struct CodepointInterval
 {
 pure:
     uint[2] _tuple;
@@ -2064,7 +2069,7 @@ pure:
     alias $(LREF CodepointSet) throughout the whole code base.
     )
 */
-@trusted public struct InversionList(SP=GcPolicy)
+@trusted public export struct InversionList(SP=GcPolicy)
 {
     import std.range : assumeSorted;
 
@@ -2100,7 +2105,7 @@ pure:
     }
 
     //helper function that avoids sanity check to be CTFE-friendly
-    private static fromIntervals(Range)(Range intervals) pure
+    private export static fromIntervals(Range)(Range intervals) pure
     {
         import std.algorithm.iteration : map;
         import std.range : roundRobin;
@@ -2111,7 +2116,7 @@ pure:
         return set;
     }
     //ditto untill sort is CTFE-able
-    private static fromIntervals()(uint[] intervals...) pure
+    private export static fromIntervals()(uint[] intervals...) pure
     in
     {
         import std.conv : text;
@@ -3193,7 +3198,7 @@ private:
         return safeWrite24(ptr, val, idx);
 }
 
-struct CowArray(SP=GcPolicy)
+export struct CowArray(SP=GcPolicy)
 {
     import std.range.primitives : hasLength;
 
@@ -3361,12 +3366,12 @@ struct CowArray(SP=GcPolicy)
 
 private:
     // ref-count is right after the data
-    @property uint refCount() const
+    @property uint refCount() const export
     {
         return data[$-1];
     }
 
-    @property void refCount(uint cnt)
+    @property void refCount(uint cnt) export
     {
         data[$-1] = cnt;
     }
@@ -4578,7 +4583,7 @@ struct clampIdx(size_t idx, size_t bits)
     Use $(LREF utfMatcher) to obtain a concrete matcher
     for UTF-8 or UTF-16 encodings.
 */
-public struct MatcherConcept
+public export struct MatcherConcept
 {
     /**
         $(P Perform a semantic equivalent 2 operations:
@@ -5765,8 +5770,7 @@ template idxTypes(Key, size_t fullBits, Prefix...)
 }
 
 //============================================================================
-
-@safe pure int comparePropertyName(Char1, Char2)(const(Char1)[] a, const(Char2)[] b)
+@safe pure export int comparePropertyName(Char1, Char2)(const(Char1)[] a, const(Char2)[] b)
 if (is(Char1 : dchar) && is(Char2 : dchar))
 {
     import std.algorithm.comparison : cmp;
@@ -5876,7 +5880,7 @@ if (isInputRange!Range && isIntegralPair!(ElementType!Range))
     return DecompressedIntervals(data);
 }
 
-@safe struct DecompressedIntervals
+@safe export struct DecompressedIntervals
 {
 pure:
     const(ubyte)[] _stream;
@@ -6685,7 +6689,7 @@ auto caseEnclose(CodepointSet set)
     'White_Space', 'white-SpAce' and 'whitespace' are all considered equal
     and yield the same set of white space $(CHARACTERS).
 */
-@safe public struct unicode
+@safe public export struct unicode
 {
     import std.exception : enforce;
     /**
@@ -7385,7 +7389,7 @@ if (isInputRange!Range && is(Unqual!(ElementType!Range) == dchar))
 
     See_Also: $(LREF decodeGrapheme), $(LREF graphemeStride)
 +/
-@trusted struct Grapheme
+@trusted export struct Grapheme
 {
     import std.exception : enforce;
     import std.traits : isDynamicArray;
@@ -7546,6 +7550,7 @@ public:
     @property bool valid()() /*const*/
     {
         auto r = this[];
+pragma(sharedlibrary, "std");
         genericDecodeGrapheme!false(r);
         return r.length == 0;
     }
@@ -8024,13 +8029,13 @@ if (isForwardRange!S1 && isSomeChar!(ElementEncodingType!S1)
     Return a range of all $(CODEPOINTS) that casefold to
     and from this $(D ch).
 */
-package auto simpleCaseFoldings(dchar ch) @safe
+package export auto simpleCaseFoldings(dchar ch) @safe
 {
     import std.internal.unicode_tables : simpleCaseTable; // generated file
     alias sTable = simpleCaseTable;
     static struct Range
     {
-    @safe pure nothrow:
+    @safe pure nothrow export:
         uint idx; //if == uint.max, then read c.
         union
         {
@@ -8755,7 +8760,7 @@ version(std_uni_bootstrap)
 {
     // old version used for bootstrapping of gen_uni.d that generates
     // up to date optimal versions of all of isXXX functions
-    @safe pure nothrow @nogc public bool isWhite(dchar c)
+    @safe pure nothrow @nogc public export bool isWhite(dchar c)
     {
         import std.ascii : isWhite;
         return isWhite(c) ||
@@ -8795,7 +8800,7 @@ public:
     carriage return, and linefeed characters), Zs, Zl, Zp, and NEL(U+0085))
 +/
 @safe pure nothrow @nogc
-public bool isWhite(dchar c)
+export bool isWhite(dchar c)
 {
     import std.internal.unicode_tables : isWhiteGen; // generated file
     return isWhiteGen(c); // call pregenerated binary search
@@ -10190,7 +10195,7 @@ bool isSpace(dchar c)
 
 +/
 @safe pure nothrow @nogc
-bool isGraphical(dchar c)
+export bool isGraphical(dchar c)
 {
     return graphicalTrie[c];
 }
@@ -10314,8 +10319,7 @@ bool isNonCharacter(dchar c)
 private:
 // load static data from pre-generated tables into usable datastructures
 
-
-@safe auto asSet(const (ubyte)[] compressed) pure
+export @safe auto asSet(const (ubyte)[] compressed) pure
 {
     return CodepointSet.fromIntervals(decompressIntervals(compressed));
 }

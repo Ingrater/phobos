@@ -14,6 +14,7 @@ Macros:
 COREREF = $(HTTP dlang.org/phobos/core_$1.html#$2, $(D core.$1.$2))
 */
 module std.internal.cstring;
+pragma(sharedlibrary, "std");
 
 ///
 @safe unittest

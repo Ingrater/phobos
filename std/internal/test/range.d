@@ -4,6 +4,7 @@ Contains tests related to member privacy that cannot be verified inside
 std.range itself.
 */
 module std.internal.test.range;
+pragma(sharedlibrary, "std");
 
 // Note: currently can't be @safe because RefCounted, which is used by chunks,
 // isn't.

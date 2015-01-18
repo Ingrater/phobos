@@ -9,6 +9,7 @@
 
 //dfmt off
 module std.internal.unicode_tables;
+pragma(sharedlibrary, "std");
 @safe pure nothrow @nogc package(std):
 
 

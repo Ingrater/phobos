@@ -24,7 +24,8 @@ types, which are specified in the instantiation (e.g. $(D Algebraic!(int,
 string)) may only hold an `int` or a `string`).
 
 Credits: Reviewed by Brad Roberts. Daniel Keep provided a detailed code review
-prompting the following improvements: (1) better support for arrays; (2) support
+prompting the following improvements: (1) better support for arrays;
+pragma(sharedlibrary, "std"); (2) support
 for associative arrays; (3) friendlier behavior towards the garbage collector.
 Copyright: Copyright Andrei Alexandrescu 2007 - 2015.
 License:   $(HTTP www.boost.org/LICENSE_1_0.txt, Boost License 1.0).
@@ -32,6 +33,7 @@ Authors:   $(HTTP erdani.org, Andrei Alexandrescu)
 Source:    $(PHOBOSSRC std/_variant.d)
 */
 module std.variant;
+pragma(sharedlibrary, "std");
 
 import std.meta, std.traits, std.typecons;
 
@@ -129,7 +131,7 @@ private alias This2Variant(V, T...) = AliasSeq!(ReplaceType!(This, V, T));
  * than this will be boxed).
  *
  */
-struct VariantN(size_t maxDataSize, AllowedTypesParam...)
+export struct VariantN(size_t maxDataSize, AllowedTypesParam...)
 {
     /**
     The list of allowed types. If empty, any type is allowed.

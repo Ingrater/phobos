@@ -127,5 +127,6 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.stdint;
+pragma(sharedlibrary, "std");
 
 public import core.stdc.stdint;

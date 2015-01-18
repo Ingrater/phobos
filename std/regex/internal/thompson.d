@@ -7,6 +7,7 @@
         - merging of equivalent threads, that gives matching process linear time complexity
 */
 module std.regex.internal.thompson;
+pragma(sharedlibrary, "std");
 
 package(std.regex):
 

@@ -23,6 +23,7 @@
 
     ----------------------------------------------------------------------------
     import std.datetime;
+pragma(sharedlibrary, "std");
     import std.datetime.stopwatch : benchmark, StopWatch;
     ----------------------------------------------------------------------------
 
@@ -34,6 +35,7 @@
     Source:    $(PHOBOSSRC std/datetime/_stopwatch.d)
 +/
 module std.datetime.stopwatch;
+pragma(sharedlibrary, "std");
 
 public import core.time;
 import std.typecons : Flag;

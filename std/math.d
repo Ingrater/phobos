@@ -126,6 +126,7 @@ $(TR $(TDNW Hardware Control) $(TD
  * Source: $(PHOBOSSRC std/_math.d)
  */
 module std.math;
+pragma(sharedlibrary, "std");
 
 version (Win64)
 {

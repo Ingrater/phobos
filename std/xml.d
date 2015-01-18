@@ -19,6 +19,7 @@ Example: This example creates a DOM (Document Object Model) tree
     from an XML file.
 ------------------------------------------------------------------------------
 import std.xml;
+pragma(sharedlibrary, "std");
 import std.stdio;
 import std.string;
 import std.file;
@@ -124,6 +125,7 @@ Distributed under the Boost Software License, Version 1.0.
          http://www.boost.org/LICENSE_1_0.txt)
 */
 module std.xml;
+pragma(sharedlibrary, "std");
 
 enum cdata = "<![CDATA[";
 

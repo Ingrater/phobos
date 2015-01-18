@@ -4,6 +4,7 @@ Provides a struct with UDA's defined in an external module.
 Useful for validating behavior with member privacy.
 */
 module std.internal.test.uda;
+pragma(sharedlibrary, "std");
 
 enum Attr;
 

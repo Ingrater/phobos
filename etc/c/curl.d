@@ -34,6 +34,7 @@
  ***************************************************************************/
 
 module etc.c.curl;
+pragma(sharedlibrary, "std");
 
 import core.stdc.config;
 import core.stdc.time;

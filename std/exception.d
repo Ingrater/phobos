@@ -4,7 +4,8 @@
     This module defines functions related to exceptions and general error
     handling. It also defines functions intended to aid in unit testing.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD Assumptions) $(TD
@@ -70,6 +71,7 @@ $(TR $(TD Other) $(TD
 
  +/
 module std.exception;
+pragma(sharedlibrary, "std");
 
 import std.range.primitives;
 import std.traits;
@@ -381,7 +383,7 @@ void assertThrown(T : Throwable = Exception, E)
     enforce(line.length, "Expected a non-empty line.");
     --------------------
  +/
-T enforce(E : Throwable = Exception, T)(T value, lazy const(char)[] msg = null,
+export T enforce(E : Throwable = Exception, T)(T value, lazy const(char)[] msg = null,
 string file = __FILE__, size_t line = __LINE__)
 if (is(typeof({ if (!value) {} })))
 {
@@ -404,7 +406,7 @@ if (is(typeof({ if (!value) {} })))
     The safety and purity of this function are inferred from $(D Dg)'s safety
     and purity.
  +/
-T enforce(T, Dg, string file = __FILE__, size_t line = __LINE__)
+export T enforce(T, Dg, string file = __FILE__, size_t line = __LINE__)
     (T value, scope Dg dg)
 if (isSomeFunction!Dg && is(typeof( dg() )) &&
     is(typeof({ if (!value) {} })))
@@ -551,7 +553,7 @@ private void bailOut(E : Throwable = Exception)(string file, size_t line, in cha
     enforce(line.length, new IOException); // expect a non-empty line
     --------------------
  +/
-T enforce(T)(T value, lazy Throwable ex)
+export T enforce(T)(T value, lazy Throwable ex)
 {
     if (!value) throw ex();
     return value;
@@ -583,7 +585,7 @@ T enforce(T)(T value, lazy Throwable ex)
     enforce(line.length); // expect a non-empty line
     --------------------
  +/
-T errnoEnforce(T, string file = __FILE__, size_t line = __LINE__)
+export T errnoEnforce(T, string file = __FILE__, size_t line = __LINE__)
     (T value, lazy string msg = null)
 {
     if (!value) throw new ErrnoException(msg, file, line);
@@ -606,7 +608,7 @@ T errnoEnforce(T, string file = __FILE__, size_t line = __LINE__)
     enforceEx!DataCorruptionException(line.length);
     --------------------
  +/
-template enforceEx(E : Throwable)
+export template enforceEx(E : Throwable)
 if (is(typeof(new E("", __FILE__, __LINE__))))
 {
     /++ Ditto +/
@@ -618,7 +620,7 @@ if (is(typeof(new E("", __FILE__, __LINE__))))
 }
 
 /++ Ditto +/
-template enforceEx(E : Throwable)
+export template enforceEx(E : Throwable)
 if (is(typeof(new E(__FILE__, __LINE__))) && !is(typeof(new E("", __FILE__, __LINE__))))
 {
     /++ Ditto +/
@@ -1508,7 +1510,7 @@ package string errnoString(int errno) nothrow @trusted
 /*********************
  * Thrown if errors that set $(D errno) occur.
  */
-class ErrnoException : Exception
+export class ErrnoException : Exception
 {
     final @property uint errno() { return _errno; } /// Operating system error code.
     private uint _errno;

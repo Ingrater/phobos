@@ -1,4 +1,5 @@
 module std.experimental.allocator.building_blocks.ascending_page_allocator;
+pragma(sharedlibrary, "std");
 import std.experimental.allocator.common;
 
 /**

@@ -58,6 +58,7 @@ $(TR $(TD Enums) $(TD
     Source:    $(PHOBOSSRC std/_ascii.d)
   +/
 module std.ascii;
+pragma(sharedlibrary, "std");
 
 version (unittest)
 {
@@ -123,7 +124,7 @@ else
     Params: c = The character to test.
     Returns: Whether $(D c) is a letter or a number (0 .. 9, a .. z, A .. Z).
   +/
-bool isAlphaNum(dchar c) @safe pure nothrow @nogc
+bool isAlphaNum(dchar c) @safe pure nothrow @nogc export
 {
     return c <= 'z' && c >= '0' && (c <= '9' || c >= 'a' || (c >= 'A' && c <= 'Z'));
 }
@@ -153,7 +154,7 @@ bool isAlphaNum(dchar c) @safe pure nothrow @nogc
     Params: c = The character to test.
     Returns: Whether $(D c) is an ASCII letter (A .. Z, a .. z).
   +/
-bool isAlpha(dchar c) @safe pure nothrow @nogc
+bool isAlpha(dchar c) @safe pure nothrow @nogc export
 {
     // Optimizer can turn this into a bitmask operation on 64 bit code
     return (c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z');
@@ -184,7 +185,7 @@ bool isAlpha(dchar c) @safe pure nothrow @nogc
     Params: c = The character to test.
     Returns: Whether $(D c) is a lowercase ASCII letter (a .. z).
   +/
-bool isLower(dchar c) @safe pure nothrow @nogc
+bool isLower(dchar c) @safe pure nothrow @nogc export
 {
     return c >= 'a' && c <= 'z';
 }
@@ -215,7 +216,7 @@ bool isLower(dchar c) @safe pure nothrow @nogc
     Params: c = The character to test.
     Returns: Whether $(D c) is an uppercase ASCII letter (A .. Z).
   +/
-bool isUpper(dchar c) @safe pure nothrow @nogc
+bool isUpper(dchar c) @safe pure nothrow @nogc export
 {
     return c <= 'Z' && 'A' <= c;
 }
@@ -246,7 +247,7 @@ bool isUpper(dchar c) @safe pure nothrow @nogc
     Params: c = The character to test.
     Returns: Whether $(D c) is a digit (0 .. 9).
   +/
-bool isDigit(dchar c) @safe pure nothrow @nogc
+bool isDigit(dchar c) @safe pure nothrow @nogc export
 {
     return '0' <= c && c <= '9';
 }
@@ -278,7 +279,7 @@ bool isDigit(dchar c) @safe pure nothrow @nogc
     Params: c = The character to test.
     Returns: Whether $(D c) is a digit in base 8 (0 .. 7).
   +/
-bool isOctalDigit(dchar c) @safe pure nothrow @nogc
+bool isOctalDigit(dchar c) @safe pure nothrow @nogc export
 {
     return c >= '0' && c <= '7';
 }
@@ -307,7 +308,7 @@ bool isOctalDigit(dchar c) @safe pure nothrow @nogc
     Params: c = The character to test.
     Returns: Whether $(D c) is a digit in base 16 (0 .. 9, A .. F, a .. f).
   +/
-bool isHexDigit(dchar c) @safe pure nothrow @nogc
+bool isHexDigit(dchar c) @safe pure nothrow @nogc export
 {
     return c <= 'f' && c >= '0' && (c <= '9' || c >= 'a' || (c >= 'A' && c <= 'F'));
 }
@@ -339,7 +340,7 @@ bool isHexDigit(dchar c) @safe pure nothrow @nogc
     space, tab, vertical tab, form feed, carriage return, and linefeed
     characters.
   +/
-bool isWhite(dchar c) @safe pure nothrow @nogc
+bool isWhite(dchar c) @safe pure nothrow @nogc export
 {
     return c == ' ' || (c >= 0x09 && c <= 0x0D);
 }
@@ -374,7 +375,7 @@ bool isWhite(dchar c) @safe pure nothrow @nogc
     Params: c = The character to test.
     Returns: Whether $(D c) is a control character.
   +/
-bool isControl(dchar c) @safe pure nothrow @nogc
+bool isControl(dchar c) @safe pure nothrow @nogc export
 {
     return c < 0x20 || c == 0x7F;
 }
@@ -413,7 +414,7 @@ bool isControl(dchar c) @safe pure nothrow @nogc
     all ASCII characters which are not control characters, letters, digits, or
     whitespace.
   +/
-bool isPunctuation(dchar c) @safe pure nothrow @nogc
+bool isPunctuation(dchar c) @safe pure nothrow @nogc export
 {
     return c <= '~' && c >= '!' && !isAlphaNum(c);
 }
@@ -457,7 +458,7 @@ bool isPunctuation(dchar c) @safe pure nothrow @nogc
     Returns: Whether or not $(D c) is a printable character other than the
     space character.
   +/
-bool isGraphical(dchar c) @safe pure nothrow @nogc
+bool isGraphical(dchar c) @safe pure nothrow @nogc export
 {
     return '!' <= c && c <= '~';
 }
@@ -493,7 +494,7 @@ bool isGraphical(dchar c) @safe pure nothrow @nogc
     Returns: Whether or not $(D c) is a printable character - including the
     space character.
   +/
-bool isPrintable(dchar c) @safe pure nothrow @nogc
+bool isPrintable(dchar c) @safe pure nothrow @nogc export
 {
     return c >= ' ' && c <= '~';
 }
@@ -529,7 +530,7 @@ bool isPrintable(dchar c) @safe pure nothrow @nogc
     range 0 .. 0x7F.
   +/
 pragma(inline, true)
-bool isASCII(dchar c) @safe pure nothrow @nogc
+bool isASCII(dchar c) @safe pure nothrow @nogc export
 {
     return c <= 0x7F;
 }
@@ -561,7 +562,7 @@ bool isASCII(dchar c) @safe pure nothrow @nogc
     Returns: The corresponding lowercase letter, if $(D c) is an uppercase
     ASCII character, otherwise $(D c) itself.
   +/
-auto toLower(C)(C c)
+export auto toLower(C)(C c)
 if (is(C : dchar))
 {
     import std.traits : isAggregateType, OriginalType, Unqual;
@@ -623,7 +624,7 @@ if (is(C : dchar))
     Returns: The corresponding uppercase letter, if $(D c) is a lowercase ASCII
     character, otherwise $(D c) itself.
   +/
-auto toUpper(C)(C c)
+export auto toUpper(C)(C c)
 if (is(C : dchar))
 {
     import std.traits : isAggregateType, OriginalType, Unqual;

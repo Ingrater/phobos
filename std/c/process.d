@@ -5,12 +5,14 @@
  *       core.sys.posix.* modules instead. This module will be removed in June
  *       2017.)
  *
- * C's &lt;process.h&gt;
+ * C's &lt;
+pragma(sharedlibrary, "std");process.h&gt;
  * Authors: Walter Bright, Digital Mars, www.digitalmars.com
  * License: Public Domain
  */
 deprecated("Import core.stdc.stdlib or the appropriate core.sys.posix.* modules instead")
 module std.c.process;
+pragma(sharedlibrary, "std");
 
 import core.stdc.stddef;
 public import core.stdc.stdlib : exit, abort, system;

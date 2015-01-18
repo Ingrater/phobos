@@ -7,9 +7,11 @@
  * Authors:
  * Source:    $(PHOBOSSRC std/_typetuple.d)
  *
- * $(SCRIPT inhibitQuickIndex = 1;)
+ * $(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
  */
 module std.typetuple;
+pragma(sharedlibrary, "std");
 
 public import std.meta;
 

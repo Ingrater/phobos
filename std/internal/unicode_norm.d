@@ -1,4 +1,5 @@
 module std.internal.unicode_norm;
+pragma(sharedlibrary, "std");
 import std.internal.unicode_tables;
 
 package(std):

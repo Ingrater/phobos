@@ -58,6 +58,7 @@ $(TR $(TD Miscellaneous) $(TD
     Source:    $(PHOBOSSRC std/_utf.d)
    +/
 module std.utf;
+pragma(sharedlibrary, "std");
 
 import std.exception;  // basicExceptionCtors
 import std.meta;       // AliasSeq
@@ -69,7 +70,7 @@ import std.typecons;   // Flag, Yes, No
 /++
     Exception thrown on errors in std.utf functions.
   +/
-class UTFException : Exception
+export class UTFException : Exception
 {
     import core.internal.string : unsignedToTempString, UnsignedStringBuf;
 
@@ -247,7 +248,7 @@ if (isSomeChar!Char)
     as they are permitted for internal use by an application, but they are
     not allowed for interchange by the Unicode standard.
   +/
-bool isValidDchar(dchar c) pure nothrow @safe @nogc
+bool isValidDchar(dchar c) pure nothrow @safe @nogc export
 {
     return c < 0xD800 || (c > 0xDFFF && c <= 0x10FFFF);
 }
@@ -328,7 +329,7 @@ if (is(S : const char[]) ||
         return strideImpl(c, 0);
 }
 
-private uint strideImpl(char c, size_t index) @trusted pure
+private export uint strideImpl(char c, size_t index) @trusted pure
 in { assert(c & 0x80); }
 do
 {
@@ -1323,7 +1324,7 @@ if (isSomeChar!(ElementEncodingType!S))
  * Returns:
  *      decoded character
  */
-private dchar decodeImpl(bool canIndex, UseReplacementDchar useReplacementDchar = No.useReplacementDchar, S)(
+private export dchar decodeImpl(bool canIndex, UseReplacementDchar useReplacementDchar = No.useReplacementDchar, S)(
     auto ref S str, ref size_t index)
 if (
     is(S : const char[]) || (isInputRange!S && is(Unqual!(ElementEncodingType!S) == char)))
@@ -2710,7 +2711,7 @@ if (isSomeString!S)
  * See_Also:
  *     For a lazy, non-allocating version of these functions, see $(LREF byUTF).
  */
-string toUTF8(S)(S s)
+export string toUTF8(S)(S s)
 if (isInputRange!S && !isInfinite!S && isSomeChar!(ElementEncodingType!S))
 {
     return toUTFImpl!string(s);
@@ -2751,7 +2752,7 @@ if (isInputRange!S && !isInfinite!S && isSomeChar!(ElementEncodingType!S))
  * See_Also:
  *     For a lazy, non-allocating version of these functions, see $(LREF byUTF).
  */
-wstring toUTF16(S)(S s)
+export wstring toUTF16(S)(S s)
 if (isInputRange!S && !isInfinite!S && isSomeChar!(ElementEncodingType!S))
 {
     return toUTFImpl!wstring(s);
@@ -2794,7 +2795,7 @@ if (isInputRange!S && !isInfinite!S && isSomeChar!(ElementEncodingType!S))
  * See_Also:
  *     For a lazy, non-allocating version of these functions, see $(LREF byUTF).
  */
-dstring toUTF32(S)(S s)
+export dstring toUTF32(S)(S s)
 if (isInputRange!S && !isInfinite!S && isSomeChar!(ElementEncodingType!S))
 {
     return toUTFImpl!dstring(s);

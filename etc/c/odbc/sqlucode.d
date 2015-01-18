@@ -18,6 +18,7 @@ sqlucode.d - This is the the unicode include for ODBC v3.0+ Core functions.
 +/
 
 module etc.c.odbc.sqlucode;
+pragma(sharedlibrary, "std");
 
 import etc.c.odbc.sqlext;
 import etc.c.odbc.sqltypes;

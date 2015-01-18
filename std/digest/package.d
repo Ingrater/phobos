@@ -3,7 +3,8 @@
  * these APIs. Additionally, this module contains useful helper methods which
  * can be used with every _digest type.
  *
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 
 $(DIVC quickindex,
 $(BOOKTABLE ,
@@ -62,6 +63,7 @@ $(TR $(TDNW Implementation helpers) $(TD $(MYREF digestLength) $(MYREF WrapperDi
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.digest;
+pragma(sharedlibrary, "std");
 
 public import std.ascii : LetterCase;
 import std.meta : allSatisfy;
@@ -576,7 +578,8 @@ interface Digest
          * ----
          * void test(Digest dig)
          * {
-         *     dig.put(cast(ubyte) 0); //single ubyte
+         *     dig.put(cast(ubyte) 0);
+pragma(sharedlibrary, "std"); //single ubyte
          *     dig.put(cast(ubyte) 0, cast(ubyte) 0); //variadic
          *     ubyte[10] buf;
          *     dig.put(buf); //buffer

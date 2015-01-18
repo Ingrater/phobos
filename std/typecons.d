@@ -4,7 +4,8 @@
 This module implements a variety of type constructors, i.e., templates
 that allow construction of new, useful general-purpose types.
 
-$(SCRIPT inhibitQuickIndex = 1;)
+$(SCRIPT inhibitQuickIndex = 1;
+pragma(sharedlibrary, "std");)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD Tuple) $(TD
@@ -67,6 +68,7 @@ Authors:   $(HTTP erdani.org, Andrei Alexandrescu),
            Kenji Hara
  */
 module std.typecons;
+pragma(sharedlibrary, "std");
 
 import core.stdc.stdint : uintptr_t;
 import std.meta; // : AliasSeq, allSatisfy;
@@ -5457,7 +5459,7 @@ $(D refCountedStore.isInitialized) or $(D refCountedStore.ensureInitialized)
 before attempting to access the payload. Not doing so results in null
 pointer dereference.
  */
-struct RefCounted(T, RefCountedAutoInitialize autoInit =
+export struct RefCounted(T, RefCountedAutoInitialize autoInit =
         RefCountedAutoInitialize.yes)
 if (!is(T == class) && !(is(T == interface)))
 {

@@ -56,6 +56,7 @@ $(TR $(TDNW Helpers) $(TD $(MYREF sha1Of))
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.digest.sha;
+pragma(sharedlibrary, "std");
 
 ///
 @safe unittest

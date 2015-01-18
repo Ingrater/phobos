@@ -39,6 +39,7 @@ Copyright:  Copyright (c) 2009-2011, David Simcha.
 License:    $(HTTP boost.org/LICENSE_1_0.txt, Boost License 1.0)
 */
 module std.parallelism;
+pragma(sharedlibrary, "std");
 
 ///
 @system unittest
@@ -1061,7 +1062,7 @@ Occasionally it is useful to explicitly instantiate a $(D TaskPool):
     primitive (for example a mutex), and you want to parallelize the code that
     needs to run before these threads can be resumed.
  */
-final class TaskPool
+export final class TaskPool
 {
 private:
 
@@ -2461,6 +2462,7 @@ public:
         // Parallel reduce:                     72 milliseconds
         // Using std.algorithm.reduce instead:  181 milliseconds
         auto nums = iota(10_000_000.0f);
+pragma(sharedlibrary, "std");
         auto sumSquares = taskPool.reduce!"a + b"(
             0.0, std.algorithm.map!"a * a"(nums)
         );
@@ -3342,7 +3344,7 @@ threads.  The worker threads in this pool are daemon threads, meaning that it
 is not necessary to call $(D TaskPool.stop) or $(D TaskPool.finish) before
 terminating the main thread.
 */
-@property TaskPool taskPool() @trusted
+@property TaskPool taskPool() @trusted export
 {
     import std.concurrency : initOnce;
     __gshared TaskPool pool;
@@ -3419,7 +3421,7 @@ private template randLen(R)
     enum randLen = isRandomAccessRange!R && hasLength!R;
 }
 
-private void submitAndExecute(
+private export void submitAndExecute(
     TaskPool pool,
     scope void delegate() doIt
 )
@@ -3530,7 +3532,7 @@ private void submitAndExecute(
     if (firstException) throw firstException;
 }
 
-void foreachErr()
+export void foreachErr()
 {
     throw new ParallelForeachError();
 }
