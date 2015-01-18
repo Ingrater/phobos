@@ -83,7 +83,7 @@ Macros:
     OBJECTREF=$(D $(LINK2 object.html#$0,$0))
     LREF=$(D $(LINK2 #.$0,$0))
 */
-module std.process;
+export module std.process;
 
 version (Posix)
 {
@@ -2457,7 +2457,7 @@ auto execute(in char[][] args,
              Config config = Config.none,
              size_t maxOutput = size_t.max,
              in char[] workDir = null)
-    @trusted //TODO: @safe
+    @trusted export //TODO: @safe
 {
     return executeImpl!pipeProcess(args, env, config, maxOutput, workDir);
 }
@@ -2468,7 +2468,7 @@ auto execute(in char[] program,
              Config config = Config.none,
              size_t maxOutput = size_t.max,
              in char[] workDir = null)
-    @trusted //TODO: @safe
+    @trusted export //TODO: @safe
 {
     return executeImpl!pipeProcess(program, env, config, maxOutput, workDir);
 }
@@ -2480,7 +2480,7 @@ auto executeShell(in char[] command,
                   size_t maxOutput = size_t.max,
                   in char[] workDir = null,
                   string shellPath = nativeShell)
-    @trusted //TODO: @safe
+    @trusted export //TODO: @safe
 {
     return executeImpl!pipeShell(command,
                                  env,
@@ -2589,7 +2589,7 @@ private auto executeImpl(alias pipeFunc, Cmd, ExtraPipeFuncArgs...)(
 }
 
 /// An exception that signals a problem with starting or waiting for a process.
-class ProcessException : Exception
+export class ProcessException : Exception
 {
     import std.exception : basicExceptionCtors;
     mixin basicExceptionCtors;
@@ -2640,7 +2640,7 @@ On POSIX, $(D userShell) returns the contents of the SHELL environment
 variable, if it exists and is non-empty.  Otherwise, it returns the result of
 $(LREF nativeShell).
 */
-@property string userShell() @safe
+@property string userShell() @safe export
 {
     version (Windows)      return environment.get("COMSPEC", nativeShell);
     else version (Posix)   return environment.get("SHELL", nativeShell);
@@ -2652,7 +2652,7 @@ The platform-specific native shell path.
 This function returns $(D "cmd.exe") on Windows, $(D "/bin/sh") on POSIX, and
 $(D "/system/bin/sh") on Android.
 */
-@property string nativeShell() @safe @nogc pure nothrow
+@property string nativeShell() @safe @nogc pure nothrow export
 {
     version (Windows)      return "cmd.exe";
     else version (Android) return "/system/bin/sh";
@@ -2674,7 +2674,7 @@ version (Windows) private immutable string shellSwitch = "/C";
  * writefln("Current process ID: %d", thisProcessID);
  * ---
  */
-@property int thisProcessID() @trusted nothrow //TODO: @safe
+@property int thisProcessID() @trusted nothrow export //TODO: @safe
 {
     version (Windows)    return GetCurrentProcessId();
     else version (Posix) return core.sys.posix.unistd.getpid();
@@ -2693,7 +2693,7 @@ version (Windows) private immutable string shellSwitch = "/C";
  * writefln("Current thread ID: %s", thisThreadID);
  * ---
  */
-@property ThreadID thisThreadID() @trusted nothrow //TODO: @safe
+@property ThreadID thisThreadID() @trusted nothrow export //TODO: @safe
 {
     version (Windows)
         return GetCurrentThreadId();
@@ -2833,7 +2833,7 @@ Throws:
 $(OBJECTREF Exception) if any part of the command line contains unescapable
 characters (NUL on all platforms, as well as CR and LF on Windows).
 */
-string escapeShellCommand(in char[][] args...) @safe pure
+string escapeShellCommand(in char[][] args...) @safe pure export
 {
     if (args.empty)
         return null;
@@ -2979,7 +2979,7 @@ Quotes a command-line argument in a manner conforming to the behavior of
 $(LINK2 http://msdn.microsoft.com/en-us/library/windows/desktop/bb776391(v=vs.85).aspx,
 CommandLineToArgvW).
 */
-string escapeWindowsArgument(in char[] arg) @trusted pure nothrow
+string escapeWindowsArgument(in char[] arg) @trusted pure nothrow export
 {
     // Rationale for leaving this function as public:
     // this algorithm of escaping paths is also used in other software,
@@ -3165,7 +3165,7 @@ if (is(typeof(allocator(size_t.init)[0] = char.init)))
 Escapes a filename to be used for shell redirection with $(LREF spawnShell),
 $(LREF pipeShell) or $(LREF executeShell).
 */
-string escapeShellFileName(in char[] fileName) @trusted pure nothrow
+string escapeShellFileName(in char[] fileName) @trusted pure nothrow export
 {
     // The unittest for this function requires special
     // preparation - see below.
@@ -3312,7 +3312,7 @@ interface.
 This class contains only static methods, and cannot be instantiated.
 See below for examples of use.
 */
-abstract final class environment
+export abstract final class environment
 {
 static:
     /**

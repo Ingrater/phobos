@@ -111,7 +111,7 @@ Authors: $(HTTP erdani.com, Andrei Alexandrescu), David Simcha,
 and Jonathan M Davis. Credit for some of the ideas in building this module goes
 to $(HTTP fantascienza.net/leonardo/so/, Leonardo Maffi).
 */
-module std.range.primitives;
+export module std.range.primitives;
 
 import std.traits;
 
@@ -350,7 +350,7 @@ Tip: $(D put) should $(I not) be used "UFCS-style", e.g. $(D r.put(e)).
 Doing this may call $(D R.put) directly, by-passing any transformation
 feature provided by $(D Range.put). $(D put(r, e)) is prefered.
  +/
-void put(R, E)(ref R r, E e)
+export void put(R, E)(ref R r, E e)
 {
     //First level: simply straight up put.
     static if (is(typeof(doPut(r, e))))
@@ -1579,7 +1579,7 @@ upTo) steps have been taken and returns $(D upTo).
 Infinite ranges are compatible, provided the parameter $(D upTo) is
 specified, in which case the implementation simply returns upTo.
  */
-auto walkLength(Range)(Range range)
+auto walkLength(Range)(Range range) export
 if (isInputRange!Range && !isInfinite!Range)
 {
     static if (hasLength!Range)
@@ -1593,7 +1593,7 @@ if (isInputRange!Range && !isInfinite!Range)
     }
 }
 /// ditto
-auto walkLength(Range)(Range range, const size_t upTo)
+auto walkLength(Range)(Range range, const size_t upTo) export
 if (isInputRange!Range)
 {
     static if (hasLength!Range)
@@ -1652,7 +1652,7 @@ if (isInputRange!Range)
 
     See_Also: $(REF drop, std, range), $(REF dropBack, std, range)
 */
-size_t popFrontN(Range)(ref Range r, size_t n)
+size_t popFrontN(Range)(ref Range r, size_t n) export
 if (isInputRange!Range)
 {
     static if (hasLength!Range)
@@ -1688,7 +1688,7 @@ if (isInputRange!Range)
 }
 
 /// ditto
-size_t popBackN(Range)(ref Range r, size_t n)
+size_t popBackN(Range)(ref Range r, size_t n) export
 if (isBidirectionalRange!Range)
 {
     static if (hasLength!Range)
@@ -1785,7 +1785,7 @@ if (isBidirectionalRange!Range)
 
     See_Also: $(REF dropExactly, std, range), $(REF dropBackExactly, std, range)
 */
-void popFrontExactly(Range)(ref Range r, size_t n)
+void popFrontExactly(Range)(ref Range r, size_t n) export
 if (isInputRange!Range)
 {
     static if (hasLength!Range)
@@ -1801,7 +1801,7 @@ if (isInputRange!Range)
 }
 
 /// ditto
-void popBackExactly(Range)(ref Range r, size_t n)
+void popBackExactly(Range)(ref Range r, size_t n) export
 if (isBidirectionalRange!Range)
 {
     static if (hasLength!Range)
@@ -1846,7 +1846,7 @@ if (isBidirectionalRange!Range)
    destroyable state that does not allocate any resources (usually equal
    to its $(D .init) value).
 */
-ElementType!R moveFront(R)(R r)
+ElementType!R moveFront(R)(R r) export
 {
     static if (is(typeof(&r.moveFront)))
     {
@@ -1904,7 +1904,7 @@ ElementType!R moveFront(R)(R r)
    destroyable state that does not allocate any resources (usually equal
    to its $(D .init) value).
 */
-ElementType!R moveBack(R)(R r)
+ElementType!R moveBack(R)(R r) export
 {
     static if (is(typeof(&r.moveBack)))
     {
@@ -1950,7 +1950,7 @@ ElementType!R moveBack(R)(R r)
    r[i]) in a destroyable state that does not allocate any resources
    (usually equal to its $(D .init) value).
 */
-ElementType!R moveAt(R)(R r, size_t i)
+ElementType!R moveAt(R)(R r, size_t i) export
 {
     static if (is(typeof(&r.moveAt)))
     {
@@ -2009,7 +2009,7 @@ obey $(LREF hasLength) property and for narrow strings. Due to the
 fact that nonmember functions can be called with the first argument
 using the dot notation, $(D a.empty) is equivalent to $(D empty(a)).
  */
-@property bool empty(T)(auto ref scope const(T) a)
+@property export bool empty(T)(auto ref scope const(T) a)
 if (is(typeof(a.length) : size_t) || isNarrowString!T)
 {
     return !a.length;
@@ -2035,7 +2035,7 @@ the first argument using the dot notation, $(D array.save) is
 equivalent to $(D save(array)). The function does not duplicate the
 content of the array, it simply returns its argument.
  */
-@property T[] save(T)(T[] a) @safe pure nothrow @nogc
+@property T[] save(T)(T[] a) @safe pure nothrow @nogc export
 {
     return a;
 }
@@ -2056,7 +2056,7 @@ equivalent to $(D popFront(array)). For $(GLOSSARY narrow strings),
 $(D popFront) automatically advances to the next $(GLOSSARY code
 point).
 */
-void popFront(T)(ref T[] a) @safe pure nothrow @nogc
+void popFront(T)(ref T[] a) @safe pure nothrow @nogc export
 if (!isNarrowString!(T[]) && !is(T[] == void[]))
 {
     assert(a.length, "Attempting to popFront() past the end of an array of " ~ T.stringof);
@@ -2079,7 +2079,7 @@ version(unittest)
 }
 
 /// ditto
-void popFront(C)(ref C[] str) @trusted pure nothrow
+void popFront(C)(ref C[] str) @trusted pure nothrow export
 if (isNarrowString!(C[]))
 {
     import std.algorithm.comparison : min;
@@ -2177,7 +2177,7 @@ the first argument using the dot notation, $(D array.popBack) is
 equivalent to $(D popBack(array)). For $(GLOSSARY narrow strings), $(D
 popFront) automatically eliminates the last $(GLOSSARY code point).
 */
-void popBack(T)(ref T[] a) @safe pure nothrow @nogc
+void popBack(T)(ref T[] a) @safe pure nothrow @nogc export
 if (!isNarrowString!(T[]) && !is(T[] == void[]))
 {
     assert(a.length);
@@ -2200,7 +2200,7 @@ version(unittest)
 }
 
 /// ditto
-void popBack(T)(ref T[] a) @safe pure
+void popBack(T)(ref T[] a) @safe pure export
 if (isNarrowString!(T[]))
 {
     import std.utf : strideBack;
@@ -2244,7 +2244,7 @@ equivalent to $(D front(array)). For $(GLOSSARY narrow strings), $(D
 front) automatically returns the first $(GLOSSARY code point) as _a $(D
 dchar).
 */
-@property ref T front(T)(T[] a) @safe pure nothrow @nogc
+@property ref T front(T)(T[] a) @safe pure nothrow @nogc export
 if (!isNarrowString!(T[]) && !is(T[] == void[]))
 {
     assert(a.length, "Attempting to fetch the front of an empty array of " ~ T.stringof);
@@ -2273,7 +2273,7 @@ if (!isNarrowString!(T[]) && !is(T[] == void[]))
 }
 
 /// ditto
-@property dchar front(T)(T[] a) @safe pure
+@property dchar front(T)(T[] a) @safe pure export
 if (isNarrowString!(T[]))
 {
     import std.utf : decode;
@@ -2290,7 +2290,7 @@ equivalent to $(D back(array)). For $(GLOSSARY narrow strings), $(D
 back) automatically returns the last $(GLOSSARY code point) as _a $(D
 dchar).
 */
-@property ref T back(T)(T[] a) @safe pure nothrow @nogc
+@property ref T back(T)(T[] a) @safe pure nothrow @nogc export
 if (!isNarrowString!(T[]) && !is(T[] == void[]))
 {
     assert(a.length, "Attempting to fetch the back of an empty array of " ~ T.stringof);
@@ -2317,7 +2317,7 @@ if (!isNarrowString!(T[]) && !is(T[] == void[]))
 
 /// ditto
 // Specialization for strings
-@property dchar back(T)(T[] a) @safe pure
+@property dchar back(T)(T[] a) @safe pure export
 if (isNarrowString!(T[]))
 {
     import std.utf : decode, strideBack;

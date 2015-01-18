@@ -23,7 +23,7 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 
-module std.bigint;
+export module std.bigint;
 
 import std.conv : ConvException;
 
@@ -43,7 +43,7 @@ import std.traits;
  * allocation. (But note that for most bigint operations, heap allocation is
  * inevitable anyway.)
  */
-struct BigInt
+export struct BigInt
 {
 private:
     BigUint data;     // BigInt adds signed arithmetic to BigUint.
@@ -1020,22 +1020,22 @@ public:
     }
 
 private:
-    void negate() @safe pure nothrow @nogc
+    void negate() @safe pure nothrow @nogc export
     {
         if (!data.isZero())
             sign = !sign;
     }
-    bool isZero() pure const nothrow @nogc @safe
+    bool isZero() pure const nothrow @nogc @safe export
     {
         return data.isZero();
     }
-    bool isNegative() pure const nothrow @nogc @safe
+    bool isNegative() pure const nothrow @nogc @safe export
     {
         return sign;
     }
 
     // Generate a runtime error if division by zero occurs
-    void checkDivByZero() pure const nothrow @safe
+    void checkDivByZero() pure const nothrow @safe export
     {
         if (isZero())
             throw new Error("BigInt division by zero");

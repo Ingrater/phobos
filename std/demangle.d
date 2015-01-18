@@ -80,7 +80,7 @@ int main()
 -------------------
  */
 
-string demangle(string name)
+export string demangle(string name)
 {
     import core.demangle : demangle;
     import std.exception : assumeUnique;

@@ -64,7 +64,7 @@ Source: $(PHOBOSSRC std/algorithm/_iteration.d)
 Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
-module std.algorithm.iteration;
+export module std.algorithm.iteration;
 
 // FIXME
 import std.functional; // : unaryFun, binaryFun;

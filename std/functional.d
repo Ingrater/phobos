@@ -183,7 +183,7 @@ If $(D fun) is not a string, $(D binaryFun) aliases itself away to
 $(D fun).
 */
 
-template binaryFun(alias fun, string parm1Name = "a",
+export template binaryFun(alias fun, string parm1Name = "a",
         string parm2Name = "b")
 {
     static if (is(typeof(fun) : string))
@@ -417,7 +417,7 @@ private uint _ctfeMatchBinary(string fun, string name1, string name2)
 }
 
 //undocumented
-template safeOp(string S)
+export template safeOp(string S)
 if (S=="<"||S==">"||S=="<="||S==">="||S=="=="||S=="!=")
 {
     import std.traits : isIntegral;

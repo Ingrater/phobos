@@ -13,7 +13,7 @@ Authors: Denis Shelomovskij
 Macros:
 COREREF = $(HTTP dlang.org/phobos/core_$1.html#$2, $(D core.$1.$2))
 */
-module std.internal.cstring;
+export module std.internal.cstring;
 
 ///
 @safe unittest

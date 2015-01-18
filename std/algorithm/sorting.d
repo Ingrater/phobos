@@ -73,7 +73,7 @@ Source: $(PHOBOSSRC std/algorithm/_sorting.d)
 Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
-module std.algorithm.sorting;
+export module std.algorithm.sorting;
 
 import std.algorithm.mutation : SwapStrategy;
 import std.functional; // : unaryFun, binaryFun;

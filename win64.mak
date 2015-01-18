@@ -40,7 +40,11 @@ CFLAGS=/O2 /nologo /I"$(VCDIR)\INCLUDE" /I"$(SDKDIR)\Include"
 ## Location of druntime tree
 
 DRUNTIME=..\druntime
-DRUNTIMELIB=$(DRUNTIME)\lib\druntime$(MODEL).lib
+DRUNTIME_BASE=druntime$(MODEL)
+DRUNTIMELIB=$(DRUNTIME)\lib\$(DRUNTIME_BASE).lib
+DRUNTIME_SHARED_OBJ=$(DRUNTIME)\lib\$(DRUNTIME_BASE)s.obj
+DRUNTIME_SHARED_C_LIB=$(DRUNTIME)\lib\$(DRUNTIME_BASE)s_c.lib
+DRUNTIME_SHARED_DLLINIT=$(DRUNTIME)\lib\dllinit$(MODEL).lib
 
 ## Flags for dmd D compiler
 
@@ -83,8 +87,10 @@ ZLIB=etc\c\zlib\zlib$(MODEL).lib
 	$(CC) -c $*
 
 LIB=phobos$(MODEL).lib
+LIB_SHARED=phobos$(MODEL)s.lib
+DLL=phobos$(MODEL)s.dll
 
-targets : $(LIB)
+targets : $(LIB) $(LIB_SHARED)
 
 test : test.exe
 
@@ -422,6 +428,13 @@ $(LIB) : $(SRC_TO_COMPILE) \
 	$(DMD) -lib -of$(LIB) -Xfphobos.json $(DFLAGS) $(SRC_TO_COMPILE) \
 		$(ZLIB) $(DRUNTIMELIB)
 
+$(LIB_SHARED) : $(SRC_TO_COMPILE) \
+	$(ZLIB) $(DRUNTIME_SHARED_OBJ) $(DRUNTIME_SHARED_C_LIB) $(DRUNTIME_SHARED_DLLINIT) win32.mak win64.mak
+	$(DMD) -shared -of$(DLL) $(DFLAGS) $(SRC_TO_COMPILE) \
+		$(ZLIB) -L/IMPLIB:imp_$(LIB_SHARED) -L/IGNORE:4049 \
+		-L/IGNORE:4217 $(DRUNTIME_SHARED_OBJ) $(DRUNTIME_SHARED_C_LIB) $(DRUNTIME_SHARED_DLLINIT)
+	$(AR) /OUT:$(LIB_SHARED) imp_$(LIB_SHARED) $(DRUNTIME_SHARED_DLLINIT)
+
 UNITTEST_OBJS= \
 		unittest1.obj \
 		unittest2.obj \
@@ -528,6 +541,8 @@ clean:
 	del $(DOCS)
 	del $(UNITTEST_OBJS) unittest.obj unittest.exe
 	del $(LIB)
+	del $(LIB_SHARED)
+	del $(DLL)
 	del phobos.json
 
 install: phobos.zip

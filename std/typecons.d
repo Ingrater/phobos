@@ -5457,7 +5457,7 @@ $(D refCountedStore.isInitialized) or $(D refCountedStore.ensureInitialized)
 before attempting to access the payload. Not doing so results in null
 pointer dereference.
  */
-struct RefCounted(T, RefCountedAutoInitialize autoInit =
+export struct RefCounted(T, RefCountedAutoInitialize autoInit =
         RefCountedAutoInitialize.yes)
 if (!is(T == class) && !(is(T == interface)))
 {

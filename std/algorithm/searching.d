@@ -103,7 +103,7 @@ Source: $(PHOBOSSRC std/algorithm/_searching.d)
 Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
-module std.algorithm.searching;
+export module std.algorithm.searching;
 
 // FIXME
 import std.functional; // : unaryFun, binaryFun;
