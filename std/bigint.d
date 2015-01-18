@@ -29,6 +29,8 @@ private import std.internal.math.biguintcore;
 private import std.format : FormatSpec, FormatException;
 private import std.traits;
 
+export:
+
 /** A struct representing an arbitrary precision integer.
  *
  * All arithmetic operations are supported, except unsigned shift right (>>>).
@@ -808,7 +810,8 @@ public:
         assert(aa[BigInt(456)] == "def");
     }
 
-private:
+/* Workaround*/
+protected:
     void negate() @safe pure nothrow @nogc
     {
         if (!data.isZero())

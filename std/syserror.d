@@ -10,6 +10,8 @@
 
 module std.syserror;
 
+export:
+
 // Deprecated - instead use std.windows.syserror.sysErrorString()
 
 deprecated("Please use std.windows.syserror.sysErrorString instead")

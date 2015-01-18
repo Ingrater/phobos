@@ -10,6 +10,8 @@ module std.typetuple;
 
 public import std.meta;
 
+export:
+
 /**
  * Alternate name for $(LREF AliasSeq) for legacy compatibility.
  */

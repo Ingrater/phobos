@@ -82,6 +82,8 @@ version (DigitalMarsC)
     }
 }
 
+export:
+
 /**********************************************************************
  * Signals a mismatch between a format and its corresponding argument.
  */
@@ -877,7 +879,8 @@ struct FormatSpec(Char)
         assert(w.data == "a%b%c" && f.trailing == "%");
     }
 
-    private void fillUp()
+    /* Workaround */
+    protected void fillUp()
     {
         // Reset content
         if (__ctfe)
@@ -1489,7 +1492,8 @@ unittest
     assert(w.data == "1337");
 }
 
-private void formatIntegral(Writer, T, Char)(Writer w, const(T) val, const ref FormatSpec!Char fs, uint base, ulong mask)
+/* Workaround */
+export void formatIntegral(Writer, T, Char)(Writer w, const(T) val, const ref FormatSpec!Char fs, uint base, ulong mask)
 {
     T arg = val;
 
@@ -1506,7 +1510,8 @@ private void formatIntegral(Writer, T, Char)(Writer w, const(T) val, const ref F
         formatUnsigned(w, (cast(ulong) arg) & mask, fs, base, negative);
 }
 
-private void formatUnsigned(Writer, T, Char)(Writer w, T arg, const ref FormatSpec!Char fs, uint base, bool negative)
+/* Workaround */
+export void formatUnsigned(Writer, T, Char)(Writer w, T arg, const ref FormatSpec!Char fs, uint base, bool negative)
 {
     /* Write string:
      *    leftpad prefix1 prefix2 zerofill digits rightpad
@@ -2330,7 +2335,8 @@ unittest
 }
 
 // input range formatting
-private void formatRange(Writer, T, Char)(ref Writer w, ref T val, ref FormatSpec!Char f)
+/* Workaround */
+export void formatRange(Writer, T, Char)(ref Writer w, ref T val, ref FormatSpec!Char f)
 if (isInputRange!T)
 {
     import std.conv : text;
@@ -2494,7 +2500,8 @@ if (isInputRange!T)
 }
 
 // character formatting with ecaping
-private void formatChar(Writer)(Writer w, in dchar c, in char quote)
+/* Workaround */
+export void formatChar(Writer)(Writer w, in dchar c, in char quote)
 {
     import std.uni : isGraphical;
 
@@ -2797,7 +2804,8 @@ template hasToString(T, Char)
 }
 
 // object formatting with toString
-private void formatObject(Writer, T, Char)(ref Writer w, ref T val, ref FormatSpec!Char f)
+/* Workaround */
+export void formatObject(Writer, T, Char)(ref Writer w, ref T val, ref FormatSpec!Char f)
 if (hasToString!(T, Char))
 {
     static if (is(typeof(val.toString((const(char)[] s){}, f))))
@@ -3474,12 +3482,14 @@ unittest
   'D'. The untyped signature is for the sake of taking this function's
   address.
  */
-private void formatGeneric(Writer, D, Char)(Writer w, const(void)* arg, ref FormatSpec!Char f)
+ /* Workaround */
+export void formatGeneric(Writer, D, Char)(Writer w, const(void)* arg, ref FormatSpec!Char f)
 {
     formatValue(w, *cast(D*) arg, f);
 }
 
-private void formatNth(Writer, Char, A...)(Writer w, ref FormatSpec!Char f, size_t index, A args)
+/* Workaround */
+export void formatNth(Writer, Char, A...)(Writer w, ref FormatSpec!Char f, size_t index, A args)
 {
     import std.conv : to;
     static string gencode(size_t count)()
@@ -4387,7 +4397,8 @@ unittest
 }
 
 //------------------------------------------------------------------------------
-private void skipData(Range, Char)(ref Range input, ref FormatSpec!Char spec)
+/* Workaround */
+export void skipData(Range, Char)(ref Range input, ref FormatSpec!Char spec)
 {
     import std.ascii : isDigit;
     import std.conv : text;

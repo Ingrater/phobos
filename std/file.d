@@ -41,6 +41,8 @@ else version (Posix)
 }
 else
     static assert(false, "Module " ~ .stringof ~ " not implemented for this OS.");
+    
+export:
 
 // Character type used for operating system filesystem APIs
 version (Windows)
@@ -98,6 +100,7 @@ version (Windows)
 }
 // }}}
 
+export:
 
 /++
     Exception thrown for file I/O errors.
@@ -3043,7 +3046,7 @@ enum SpanMode
     breadth,
 }
 
-private struct DirIteratorImpl
+export struct DirIteratorImpl
 {
     import std.array : Appender, appender;
     SpanMode _mode;

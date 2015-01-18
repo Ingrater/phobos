@@ -26,6 +26,8 @@ private import std.string;
 
 import std.internal.cstring;
 
+export:
+
 /******************************************
  * Converts the UTF-8 string s into a null-terminated string in a Windows
  * 8-bit character set.

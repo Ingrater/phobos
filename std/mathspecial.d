@@ -67,6 +67,7 @@ pure:
 nothrow:
 @safe:
 @nogc:
+export:
 
 /** The Gamma function, $(GAMMA)(x)
  *

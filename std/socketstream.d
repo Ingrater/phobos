@@ -42,6 +42,8 @@ module std.socketstream;
 private import std.stream;
 private import std.socket;
 
+export:
+
 /**************
  * $(D SocketStream) is a stream for a blocking,
  * connected $(D Socket).

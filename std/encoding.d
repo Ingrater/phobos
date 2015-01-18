@@ -54,6 +54,8 @@ module std.encoding;
 import std.traits;
 import std.range.primitives;
 
+export:
+
 unittest
 {
     static ubyte[][] validStrings =

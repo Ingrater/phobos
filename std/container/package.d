@@ -427,6 +427,7 @@ public import std.container.slist;
 
 import std.typetuple;
 
+export:
 
 /* The following documentation and type $(D TotalContainer) are
 intended for developers only.

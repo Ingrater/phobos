@@ -50,6 +50,8 @@ module std.digest.ripemd;
 
 public import std.digest.digest;
 
+export:
+
 ///
 unittest
 {

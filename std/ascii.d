@@ -33,6 +33,8 @@ version (unittest)
     import std.typetuple; // : TypeTuple;
 }
 
+export:
+
 
 immutable fullHexDigits  = "0123456789ABCDEFabcdef";     /// 0..9A..Fa..f
 immutable hexDigits      = fullHexDigits[0..16];         /// 0..9A..F

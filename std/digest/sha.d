@@ -59,6 +59,8 @@ $(TR $(TDNW Helpers) $(TD $(MYREF sha1Of))
  */
 module std.digest.sha;
 
+export:
+
 ///
 unittest
 {

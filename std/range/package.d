@@ -179,6 +179,7 @@ public import std.typecons : Flag, Yes, No;
 import std.traits;
 import std.typetuple;
 
+export:
 
 /**
 Iterates a bidirectional range backwards. The original range can be

@@ -36,6 +36,8 @@ version(unittest)
     import std.stdio;
 }
 
+export:
+
 
 private string myToStringx(ulong n)
 {

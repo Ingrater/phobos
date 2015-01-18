@@ -63,6 +63,7 @@
  */
 module std.concurrency;
 
+export:
 
 public
 {

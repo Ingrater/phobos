@@ -1679,7 +1679,7 @@ unittest
 
 
 // Simple storage manipulation policy
-@trusted public struct GcPolicy
+@trusted export struct GcPolicy
 {
     static T[] dup(T)(const T[] arr)
     {
@@ -1865,7 +1865,7 @@ public alias CodepointSet = InversionList!GcPolicy;
     to represent [a, b$(RPAREN) intervals of $(CODEPOINTS). As used in $(LREF InversionList).
     Any interval type should pass $(LREF isIntegralPair) trait.
 */
-public struct CodepointInterval
+export struct CodepointInterval
 {
 pure:
     uint[2] _tuple;
@@ -1960,7 +1960,7 @@ pure:
     alias $(LREF CodepointSet) throughout the whole code base.
     )
 */
-@trusted public struct InversionList(SP=GcPolicy)
+@trusted export struct InversionList(SP=GcPolicy)
 {
     import std.range : assumeSorted;
 
@@ -1998,7 +1998,8 @@ public:
     }
 
     //helper function that avoids sanity check to be CTFE-friendly
-    private static fromIntervals(Range)(Range intervals) pure
+    /* Workaround */
+    protected static fromIntervals(Range)(Range intervals) pure
     {
         import std.algorithm : map;
         import std.range : roundRobin;
@@ -2009,7 +2010,8 @@ public:
         return set;
     }
     //ditto untill sort is CTFE-able
-    private static fromIntervals()(uint[] intervals...) pure
+    /* Workaround */
+    protected static fromIntervals()(uint[] intervals...) pure
     in
     {
         import std.conv : text;
@@ -2264,7 +2266,7 @@ public:
     @property auto byCodepoint()
     {
         @trusted static struct CodepointRange
-        {
+        {            
             this(This set)
             {
                 r = set.byInterval;
@@ -2650,8 +2652,8 @@ public:
     {
         return data.length == 0;
     }
-
-private:
+/* Workaround */
+protected:
     alias This = typeof(this);
     alias Marker = size_t;
 
@@ -3112,6 +3114,7 @@ void write24(ubyte* ptr, uint val, size_t idx) @safe pure nothrow @nogc
     else
         return safeWrite24(ptr, val, idx);
 }
+/* WORKAROUND */ export
 @trusted struct CowArray(SP=GcPolicy)
 {
     static auto reuse(uint[] arr)
@@ -4024,7 +4027,7 @@ public:
     )
 
 */
-@trusted public struct Trie(Value, Key, Args...)
+@trusted export struct Trie(Value, Key, Args...)
     if(isValidPrefixForTrie!(Key, Args)
         || (isValidPrefixForTrie!(Key, Args[1..$])
             && is(typeof(Args[0]) : size_t)))
@@ -4525,7 +4528,7 @@ struct clampIdx(size_t idx, size_t bits)
     Use $(LREF utfMatcher) to obtain a concrete matcher
     for UTF-8 or UTF-16 encodings.
 */
-public struct MatcherConcept
+export struct MatcherConcept
 {
     /**
         $(P Perform a semantic equivalent 2 operations:
@@ -5733,7 +5736,7 @@ template idxTypes(Key, size_t fullBits, Prefix...)
 }
 
 //============================================================================
-
+/* Workaround */ export
 @safe pure int comparePropertyName(Char1, Char2)(const(Char1)[] a, const(Char2)[] b) if (is(Char1 : dchar) && is(Char2 : dchar))
 {
     import std.ascii : toLower;
@@ -5839,6 +5842,7 @@ package ubyte[] compressIntervals(Range)(Range intervals)
     return DecompressedIntervals(data);
 }
 
+/* Workaround */ export
 @safe struct DecompressedIntervals
 {
 pure:
@@ -6077,7 +6081,7 @@ template SetSearcher(alias table, string kind)
     'White_Space', 'white-SpAce' and 'whitespace' are all considered equal
     and yield the same set of white space $(CHARACTERS).
 */
-@safe public struct unicode
+@safe export struct unicode
 {
     /**
         Performs the lookup of set of $(CODEPOINTS)
@@ -6422,7 +6426,7 @@ template genericDecodeGrapheme(bool getValue)
 
 }
 
-public: // Public API continues
+export: // Public API continues
 
 /++
     Computes the length of grapheme cluster starting at $(D index).
@@ -7276,12 +7280,13 @@ unittest
     Return a range of all $(CODEPOINTS) that casefold to
     and from this $(D ch).
 */
-package auto simpleCaseFoldings(dchar ch)
+/* Workaround */
+export auto simpleCaseFoldings(dchar ch)
 {
     alias sTable = simpleCaseTable;
     static struct Range
     {
-    pure nothrow:
+    pure nothrow export:
         uint idx; //if == uint.max, then read c.
         union
         {
@@ -8010,7 +8015,7 @@ version(std_uni_bootstrap)
 {
     // old version used for bootstrapping of gen_uni.d that generates
     // up to date optimal versions of all of isXXX functions
-    @safe pure nothrow @nogc public bool isWhite(dchar c)
+    @safe pure nothrow @nogc export bool isWhite(dchar c)
     {
         import std.ascii : isWhite;
         return isWhite(c) ||
@@ -8040,7 +8045,7 @@ else
     dchar toUpperTab(size_t idx) { return toUpperTable[idx]; }
 }
 
-public:
+export:
 
 /++
     Whether or not $(D c) is a Unicode whitespace $(CHARACTER).
@@ -8048,7 +8053,7 @@ public:
     carriage return, and linefeed characters), Zs, Zl, Zp, and NEL(U+0085))
 +/
 @safe pure nothrow @nogc
-public bool isWhite(dchar c)
+export bool isWhite(dchar c)
 {
     return isWhiteGen(c); // call pregenerated binary search
 }
@@ -9289,7 +9294,7 @@ unittest
 
 +/
 @safe pure nothrow @nogc
-bool isGraphical(dchar c)
+export bool isGraphical(dchar c)
 {
     return graphicalTrie[c];
 }
@@ -9411,8 +9416,8 @@ unittest
 private:
 // load static data from pre-generated tables into usable datastructures
 
-
-@safe auto asSet(const (ubyte)[] compressed) pure
+/* Workaround */
+export @safe auto asSet(const (ubyte)[] compressed) pure
 {
     return CodepointSet.fromIntervals(decompressIntervals(compressed));
 }

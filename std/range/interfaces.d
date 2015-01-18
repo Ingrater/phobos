@@ -72,6 +72,8 @@ import std.range.primitives;
 import std.traits;
 import std.typetuple;
 
+export:
+
 /**These interfaces are intended to provide virtual function-based wrappers
  * around input ranges with element type E.  This is useful where a well-defined
  * binary interface is required, such as when a DLL function or virtual function

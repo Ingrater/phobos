@@ -57,6 +57,7 @@ import std.internal.cstring;
 
 
 @safe:
+export:
 
 version(Windows)
 {

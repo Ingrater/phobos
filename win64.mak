@@ -75,6 +75,13 @@ STDDOC = $(DOCSRC)/html.ddoc $(DOCSRC)/dlang.org.ddoc $(DOCSRC)/std.ddoc $(DOCSR
 DOC=..\..\html\d\phobos
 #DOC=..\doc\phobos
 
+## Location of druntime tree
+
+DRUNTIME=..\druntime
+DRUNTIME_BASE=druntime$(MODEL)
+DRUNTIMELIB=$(DRUNTIME)\lib\$(DRUNTIME_BASE).lib
+DRUNTIMESHARED=$(DRUNTIME)\lib\$(DRUNTIME_BASE)s.lib
+
 ## Zlib library
 
 ZLIB=etc\c\zlib\zlib$(MODEL).lib
@@ -92,8 +99,10 @@ ZLIB=etc\c\zlib\zlib$(MODEL).lib
 	$(CC) -c $*
 
 LIB=phobos$(MODEL).lib
+LIB_SHARED=phobos$(MODEL)s.lib
+DLL=phobos$(MODEL)s.dll
 
-targets : $(LIB)
+targets : $(LIB) $(LIB_SHARED)
 
 test : test.exe
 
@@ -429,6 +438,11 @@ $(LIB) : $(SRC_TO_COMPILE) \
 	$(ZLIB) $(DRUNTIMELIB) win32.mak win64.mak
 	$(DMD) -lib -of$(LIB) -Xfphobos.json $(DFLAGS) $(SRC_TO_COMPILE) \
 		$(ZLIB) $(DRUNTIMELIB)
+		
+$(LIB_SHARED) : $(SRC_TO_COMPILE) \
+	$(ZLIB) $(DRUNTIMESHARED) win32.mak win64.mak
+	$(DMD) -shared -of$(DLL) $(DFLAGS) $(SRC_TO_COMPILE) std\dllmain.d \
+		$(ZLIB) -defaultlib="$(DRUNTIMESHARED)" -L/IMPLIB:$(LIB_SHARED) -L/NODEFAULTLIB:libcmt
 
 UNITTEST_OBJS= \
 		unittest1.obj \

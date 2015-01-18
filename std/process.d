@@ -110,6 +110,8 @@ import std.stdio;
 import std.internal.processinit;
 import std.internal.cstring;
 
+export:
+
 
 // When the DMC runtime is used, we have to use some custom functions
 // to convert between Windows file handles and FILE*s.
@@ -160,6 +162,7 @@ version (Posix)
 
 } // private
 
+export:
 
 // =============================================================================
 // Functions and classes for process management.

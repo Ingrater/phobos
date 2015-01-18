@@ -10,6 +10,8 @@ import std.algorithm, std.conv, std.exception, std.range, std.typecons,
 
 import std.regex.internal.parser : Escapables; // characters that need escaping
 
+export:
+
 alias Sequence(int B, int E) = staticIota!(B, E);
 
 unittest

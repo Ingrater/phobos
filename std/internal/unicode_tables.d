@@ -10,6 +10,8 @@
 module std.internal.unicode_tables;
 @safe pure nothrow @nogc:
 
+export:
+
 
 struct SimpleCaseEntry
 {

@@ -19,6 +19,8 @@ Authors: Steven Schveighoffer, $(WEB erdani.com, Andrei Alexandrescu)
 */
 module std.container.util;
 
+export:
+
 /**
 Returns an initialized object. This function is mainly for eliminating
 construction differences between structs and classes. It allows code to not

@@ -21,6 +21,8 @@ module std.container.slist;
 
 public import std.container.util;
 
+export:
+
 /**
    Implements a simple and fast singly-linked list.
 

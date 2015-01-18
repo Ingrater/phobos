@@ -121,10 +121,12 @@ module std.uuid;
 import std.range.primitives;
 import std.traits;
 
+export:
+
 /**
  *
  */
-public struct UUID
+export struct UUID
 {
     import std.typetuple : allSatisfy;
     import std.traits : isIntegral;
@@ -1553,7 +1555,7 @@ unittest
  * This exception is thrown if an error occurs when parsing a UUID
  * from a string.
  */
-public class UUIDParsingException : Exception
+export class UUIDParsingException : Exception
 {
     /**
      * The reason why parsing the UUID string failed (if known)
@@ -1573,7 +1575,8 @@ public class UUIDParsingException : Exception
     ///The position in the input string where the error occurred.
     size_t position;
 
-    private this(string input, size_t pos, Reason why = Reason.unknown, string msg = "",
+    /* WORKAROUND */
+    protected this(string input, size_t pos, Reason why = Reason.unknown, string msg = "",
         Throwable next = null, string file = __FILE__, size_t line = __LINE__) pure @trusted
     {
         import std.array : replace;

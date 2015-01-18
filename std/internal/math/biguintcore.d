@@ -88,12 +88,13 @@ static immutable BigDigit[] TWO = [2];
 static immutable BigDigit[] TEN = [10];
 
 
-public:
+export:
 
 /// BigUint performs memory management and wraps the low-level calls.
 struct BigUint
 {
-private:
+/* WORKAROUND */
+protected:
     pure invariant()
     {
         assert( data.length >= 1 && (data.length == 1 || data[$-1] != 0 ));
@@ -1028,7 +1029,7 @@ pure unittest
 }
 
 
-private:
+/* Workaround */ export:
 void twosComplement(const(BigDigit) [] x, BigDigit[] result)
 pure nothrow @safe
 {

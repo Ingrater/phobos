@@ -27,6 +27,7 @@ import std.algorithm : move;
 
 public import std.container.util;
 
+export:
 private struct RangeT(A)
 {
     /* Workaround for Issue 13629 at https://issues.dlang.org/show_bug.cgi?id=13629

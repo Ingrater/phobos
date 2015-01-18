@@ -75,6 +75,8 @@ static import std.algorithm; // FIXME, remove with alias of splitter
 import std.range.primitives;
 public import std.range.primitives : save, empty, popFront, popBack, front, back;
 
+export:
+
 /**
  * Allocates an array and initializes it with copies of the elements
  * of range $(D r).
@@ -2819,7 +2821,8 @@ if (isDynamicArray!A)
     }
 
     // ensure we can add nelems elements, resizing as necessary
-    private void ensureAddable(size_t nelems) @trusted pure nothrow
+    /* Workaround */
+    protected void ensureAddable(size_t nelems) @trusted pure nothrow
     {
         if (!_data)
             _data = new Data;
@@ -2898,7 +2901,7 @@ if (isDynamicArray!A)
     /**
      * Appends one item to the managed array.
      */
-    void put(U)(U item) if (canPutItem!U)
+    export void put(U)(U item) if (canPutItem!U)
     {
         static if (isSomeChar!T && isSomeChar!U && T.sizeof < U.sizeof)
         {

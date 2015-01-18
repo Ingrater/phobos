@@ -46,6 +46,8 @@ version(unittest) {
     import std.typetuple;
 }
 
+export:
+
 /**
  * Creates a compile-time list of types from a tuple.
  * $(D TypeList)s are more general than tuples because

@@ -38,6 +38,7 @@ private import std.traits : isSomeChar;
 import core.exception : OutOfMemoryError;
 import std.exception : assumeUnique;
 
+export:
 /** This Exception is thrown if something goes wrong when encoding or
 decoding a URI.
 */

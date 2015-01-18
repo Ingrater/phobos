@@ -136,6 +136,8 @@ import std.encoding;
 
 enum cdata = "<![CDATA[";
 
+export:
+
 /**
  * Returns true if the character is a character according to the XML standard
  *

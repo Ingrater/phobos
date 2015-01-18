@@ -23,6 +23,7 @@ import core.stdc.stddef;// wchar_t
 import std.range.primitives;// empty, front, isBidirectionalRange
 import std.traits;// Unqual, isSomeChar, isSomeString
 
+export:
 
 /++
 If flag $(D KeepTerminator) is set to $(D KeepTerminator.yes), then the delimiter
@@ -3002,7 +3003,13 @@ alias isStreamingDevice = isFileHandle;
 /**
  * Property used by writeln/etc. so it can infer @safe since stdout is __gshared
  */
-private @property File trustedStdout() @trusted { return stdout; }
+ 
+struct _impl1
+{
+  package @property static File trustedStdout() @trusted { return stdout; }
+}
+ 
+alias trustedStdout = _impl1.trustedStdout;
 
 /***********************************
 For each argument $(D arg) in $(D args), format the argument (as per

@@ -465,7 +465,7 @@ T floorImpl(T)(const T x) @trusted pure nothrow @nogc
     return y.rv;
 }
 
-public:
+export:
 
 // Values obtained from Wolfram Alpha. 116 bits ought to be enough for anybody.
 // Wolfram Alpha LLC. 2011. Wolfram|Alpha. http://www.wolframalpha.com/input/?i=e+in+base+16 (access July 6, 2011).

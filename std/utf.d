@@ -29,6 +29,7 @@ import std.typecons : Flag;
 
 debug (utf) import core.stdc.stdio : printf;
 
+export:
 
 /++
     Exception thrown on errors in std.utf functions.
@@ -285,7 +286,8 @@ uint stride(S)(auto ref S str)
         return strideImpl(c, 0);
 }
 
-private uint strideImpl(char c, size_t index) @trusted pure
+/* Workaround */
+export uint strideImpl(char c, size_t index) @trusted pure
 in { assert(c & 0x80); }
 body
 {

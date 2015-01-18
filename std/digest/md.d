@@ -49,6 +49,8 @@ module std.digest.md;
 
 public import std.digest.digest;
 
+export:
+
 ///
 unittest
 {

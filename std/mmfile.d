@@ -48,6 +48,8 @@ else
     static assert(0);
 }
 
+export:
+
 /**
  * MmFile objects control the memory mapped file resource.
  */

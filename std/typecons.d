@@ -49,6 +49,8 @@ import std.typetuple; // : TypeTuple, allSatisfy;
 
 debug(Unique) import std.stdio;
 
+export:
+
 /**
 Encapsulates unique ownership of a resource.  Resource of type $(D T) is
 deleted at the end of the scope, unless it is transferred.  The
