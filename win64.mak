@@ -37,7 +37,8 @@ CFLAGS=/O2 /nologo /I"$(VCDIR)\INCLUDE" /I"$(SDKDIR)\Include"
 
 ## Flags for dmd D compiler
 
-DFLAGS=-m$(MODEL) -O -release -w
+DFLAGS=-m$(MODEL) -debug -gc -op
+#DFLAGS=-m$(MODEL) -O -release -w
 #DFLAGS=-m$(MODEL) -unittest -g
 #DFLAGS=-m$(MODEL) -unittest -cov -g
 
@@ -70,6 +71,7 @@ DOC=..\..\html\d\phobos
 
 DRUNTIME=..\druntime
 DRUNTIMELIB=$(DRUNTIME)\lib\druntime$(MODEL).lib
+DRUNTIMESHARED=$(DRUNTIME)\lib\druntime$(MODEL)s.lib
 
 ## Zlib library
 
@@ -88,8 +90,10 @@ ZLIB=etc\c\zlib\zlib$(MODEL).lib
 	$(CC) -c $*
 
 LIB=phobos$(MODEL).lib
+LIB_SHARED=phobos$(MODEL)s.lib
+DLL=phobos$(MODEL)s.dll
 
-targets : $(LIB)
+targets : $(LIB) $(LIB_SHARED)
 
 test : test.exe
 
@@ -399,6 +403,11 @@ $(LIB) : $(SRC_TO_COMPILE) \
 	$(ZLIB) $(DRUNTIMELIB) win32.mak win64.mak
 	$(DMD) -lib -of$(LIB) -Xfphobos.json $(DFLAGS) $(SRC_TO_COMPILE) \
 		$(ZLIB) $(DRUNTIMELIB)
+		
+$(LIB_SHARED) : $(SRC_TO_COMPILE) \
+	$(ZLIB) $(DRUNTIMESHARED) win32.mak win64.mak
+	$(DMD) -shared -of$(DLL) $(DFLAGS) $(SRC_TO_COMPILE) \
+		$(ZLIB) $(DRUNTIMESHARED) -L/IMPLIB:$(LIB_SHARED)
 
 UNITTEST_OBJS= unittest1.obj unittest2.obj unittest2a.obj \
 		unittestM.obj \
