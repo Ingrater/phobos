@@ -46,6 +46,8 @@ version (DigitalMarsC)
     }
 }
 
+export:
+
 /**********************************************************************
  * Signals a mismatch between a format and its corresponding argument.
  */

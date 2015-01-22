@@ -3105,6 +3105,7 @@ void write24(ubyte* ptr, uint val, size_t idx) pure nothrow @nogc
     else
         return safeWrite24(ptr, val, idx);
 }
+/* WORKAROUND */ export
 @trusted struct CowArray(SP=GcPolicy)
 {
     static auto reuse(uint[] arr)
@@ -6416,7 +6417,7 @@ template genericDecodeGrapheme(bool getValue)
 }
 
 @trusted:
-public: // Public API continues
+export: // Public API continues
 
 /++
     Returns the length of grapheme cluster starting at $(D index).

@@ -28,6 +28,7 @@ import std.typetuple;  // TypeTuple
 
 debug (utf) import core.stdc.stdio : printf;
 
+export:
 
 /++
     Exception thrown on errors in std.utf functions.

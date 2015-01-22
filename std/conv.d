@@ -27,6 +27,8 @@ import std.range.primitives;
 import std.traits;
 import std.typetuple;
 
+export:
+
 private string convFormat(Char, Args...)(in Char[] fmt, Args args)
 {
     import std.format : format;

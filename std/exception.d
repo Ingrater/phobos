@@ -49,6 +49,8 @@ import std.traits;
 import core.stdc.errno;
 import core.stdc.string;
 
+export:
+
 /++
     Asserts that the given expression does $(I not) throw the given type
     of $(D Throwable). If a $(D Throwable) of the given type is thrown,
