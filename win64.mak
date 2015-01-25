@@ -406,8 +406,8 @@ $(LIB) : $(SRC_TO_COMPILE) \
 		
 $(LIB_SHARED) : $(SRC_TO_COMPILE) \
 	$(ZLIB) $(DRUNTIMESHARED) win32.mak win64.mak
-	$(DMD) -shared -of$(DLL) $(DFLAGS) $(SRC_TO_COMPILE) \
-		$(ZLIB) -defaultlib="LIBCMT" $(DRUNTIMESHARED) -L/IMPLIB:$(LIB_SHARED)
+	$(DMD) -shared -of$(DLL) $(DFLAGS) $(SRC_TO_COMPILE) std\dllmain.d \
+		$(ZLIB) -defaultlib="LIBCMT" $(DRUNTIMESHARED) -L/IMPLIB:$(LIB_SHARED) -L/NODEFAULTLIB:libcmt
 
 UNITTEST_OBJS= unittest1.obj unittest2.obj unittest2a.obj \
 		unittestM.obj \

@@ -29,6 +29,8 @@ private import std.internal.math.biguintcore;
 private import std.format : FormatSpec, FormatException;
 private import std.traits;
 
+export:
+
 /** A struct representing an arbitrary precision integer
  *
  * All arithmetic operations are supported, except

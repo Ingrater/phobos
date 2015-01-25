@@ -88,7 +88,7 @@ enum immutable(BigDigit) [] TWO = [2];
 enum immutable(BigDigit) [] TEN = [10];
 
 
-public:
+export:
 
 /// BigUint performs memory management and wraps the low-level calls.
 struct BigUint
@@ -1002,7 +1002,7 @@ pure unittest
 }
 
 
-private:
+/* Workaround */ export:
 void twosComplement(const(BigDigit) [] x, BigDigit[] result)
 pure nothrow @safe
 {

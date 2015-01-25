@@ -3755,6 +3755,7 @@ Initialize with a message and an error code.
 
 extern(C) void std_stdio_static_this()
 {
+    printf("std_stdio_static_this\n");
     //Bind stdin, stdout, stderr
     __gshared File.Impl stdinImpl;
     stdinImpl.handle = core.stdc.stdio.stdin;
