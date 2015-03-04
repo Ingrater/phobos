@@ -37,8 +37,7 @@ CFLAGS=/O2 /nologo /I"$(VCDIR)\INCLUDE" /I"$(SDKDIR)\Include"
 
 ## Flags for dmd D compiler
 
-DFLAGS=-m$(MODEL) -debug -gc -op
-#DFLAGS=-m$(MODEL) -O -release -w
+DFLAGS=-m$(MODEL) -O -release -w
 #DFLAGS=-m$(MODEL) -unittest -g
 #DFLAGS=-m$(MODEL) -unittest -cov -g
 
@@ -70,8 +69,9 @@ DOC=..\..\html\d\phobos
 ## Location of druntime tree
 
 DRUNTIME=..\druntime
-DRUNTIMELIB=$(DRUNTIME)\lib\druntime$(MODEL).lib
-DRUNTIMESHARED=$(DRUNTIME)\lib\druntime$(MODEL)s.lib
+DRUNTIME_BASE=druntime$(MODEL)
+DRUNTIMELIB=$(DRUNTIME)\lib\$(DRUNTIME_BASE).lib
+DRUNTIMESHARED=$(DRUNTIME)\lib\$(DRUNTIME_BASE)s.lib
 
 ## Zlib library
 

@@ -8873,7 +8873,7 @@ unittest
 
 +/
 @safe pure nothrow @nogc
-bool isGraphical(dchar c)
+export bool isGraphical(dchar c)
 {
     return graphicalTrie[c];
 }

@@ -11,7 +11,7 @@ BOOL DllMain(HINSTANCE hInstance, ULONG ulReason, LPVOID pvReserved)
   {
     case DLL_PROCESS_ATTACH:
       printf("phobos loaded\n");
-      _d_dll_fixup();
+      _d_dll_fixup(hInstance);
       break;
     case DLL_PROCESS_DETACH:
       printf("phobos unloaded\n");
