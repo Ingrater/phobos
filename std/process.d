@@ -160,6 +160,7 @@ version (Posix)
 
 } // private
 
+export:
 
 // =============================================================================
 // Functions and classes for process management.

@@ -89,6 +89,7 @@ version (Windows)
 }
 // }}}
 
+export:
 
 /++
     Exception thrown for file I/O errors.
@@ -2664,7 +2665,7 @@ enum SpanMode
     breadth,
 }
 
-private struct DirIteratorImpl
+export struct DirIteratorImpl
 {
     import std.array : Appender, appender;
     SpanMode _mode;
