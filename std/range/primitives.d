@@ -115,6 +115,8 @@ module std.range.primitives;
 
 import std.traits;
 
+export:
+
 /**
 Returns $(D true) if $(D R) is an input range. An input range must
 define the primitives $(D empty), $(D popFront), and $(D front). The

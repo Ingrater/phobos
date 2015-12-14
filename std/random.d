@@ -67,6 +67,8 @@ version(unittest)
                                               Xorshift96, Xorshift128, Xorshift160, Xorshift192);
 }
 
+export:
+
 // Segments of the code in this file Copyright (c) 1997 by Rick Booth
 // From "Inner Loops" by Rick Booth, Addison-Wesley
 
