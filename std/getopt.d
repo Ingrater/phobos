@@ -34,6 +34,8 @@ module std.getopt;
 
 import std.traits;
 
+export:
+
 /**
  * Thrown on one of the following conditions:
  * - An unrecognized command-line argument is passed

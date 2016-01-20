@@ -29,6 +29,8 @@ version(unittest) import std.stdio;
 
 import std.algorithm;
 
+export:
+
 /**
  * A Stream wrapper for a C file of type FILE*.
  */

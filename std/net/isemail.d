@@ -28,6 +28,8 @@ module std.net.isemail;
 import std.range.primitives; // : ElementType;
 import std.traits;
 
+export:
+
 /**
  * Check that an email address conforms to RFCs 5321, 5322 and others.
  *

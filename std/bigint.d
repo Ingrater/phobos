@@ -540,8 +540,9 @@ private:
     {
         return data.toHash() + sign;
     }
-
-private:
+    
+/* WORKAROUND*/
+protected:
     void negate() @safe pure nothrow
     {
         if (!data.isZero())

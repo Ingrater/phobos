@@ -20,6 +20,8 @@ static import std.algorithm; // FIXME, remove with alias of splitter
 import std.range.primitives;
 public import std.range.primitives : save, empty, popFront, popBack, front, back;
 
+export:
+
 /**
 Returns a newly-allocated dynamic array consisting of a copy of the
 input range, static array, dynamic array, or class or struct with an

@@ -93,7 +93,8 @@ export:
 /// BigUint performs memory management and wraps the low-level calls.
 struct BigUint
 {
-private:
+/* WORKAROUND */
+protected:
     pure invariant()
     {
         assert( data.length >= 1 && (data.length == 1 || data[$-1] != 0 ));

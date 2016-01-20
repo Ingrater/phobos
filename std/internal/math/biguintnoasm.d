@@ -20,7 +20,7 @@ module std.internal.math.biguintnoasm;
 nothrow:
 @safe:
 
-public:
+export:
 alias BigDigit = uint; // A Bignum is an array of BigDigits.
 
     // Limits for when to switch between multiplication algorithms.

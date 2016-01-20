@@ -174,6 +174,8 @@ import std.internal.cstring;
 
 public import etc.c.curl : CurlOption;
 
+export:
+
 version(unittest)
 {
     // Run unit test with the PHOBOS_TEST_ALLOW_NET=1 set in order to
@@ -255,13 +257,15 @@ CALLBACK_PARAMS = $(TABLE ,
 struct AutoProtocol { }
 
 // Returns true if the url points to an FTP resource
-private bool isFTPUrl(const(char)[] url)
+/* Workaround */
+export bool isFTPUrl(const(char)[] url)
 {
     return startsWith(url.toLower(), "ftp://", "ftps://", "ftp.") != 0;
 }
 
 // Is true if the Conn type is a valid Curl Connection type.
-private template isCurlConn(Conn)
+/* Workaround */
+export template isCurlConn(Conn)
 {
     enum auto isCurlConn = is(Conn : HTTP) ||
         is(Conn : FTP) || is(Conn : AutoProtocol);
@@ -1611,7 +1615,6 @@ private void _asyncDuplicateConnection(Conn, PostData)
 */
 private mixin template Protocol()
 {
-
     /// Value to return from $(D onSend)/$(D onReceive) delegates in order to
     /// pause a request
     alias requestPause = CurlReadFunc.pause;
@@ -2081,7 +2084,8 @@ struct HTTP
 
     static private uint defaultMaxRedirects = 10;
 
-    private struct Impl
+    /* WORKAROUND */
+    protected struct Impl
     {
         ~this()
         {
@@ -2870,7 +2874,8 @@ struct FTP
 
     mixin Protocol;
 
-    private struct Impl
+    /* WORKAROUND */
+    protected struct Impl
     {
         ~this()
         {
@@ -3199,7 +3204,8 @@ struct SMTP
 {
     mixin Protocol;
 
-    private struct Impl
+    /* WORKAROUND */
+    protected struct Impl
     {
         ~this()
         {

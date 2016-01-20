@@ -5,6 +5,8 @@ import std.traits;
 
 public import std.container.util;
 
+export:
+
 /+
 A DList Node without payload. Used to handle the sentinel node (henceforth "sentinode").
 

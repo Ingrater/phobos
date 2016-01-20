@@ -60,13 +60,13 @@ Trie[CodepointSet] trieCache;
 }
 
 //property for \w character class
-@property CodepointSet wordCharacter()
+export @property CodepointSet wordCharacter()
 {
     return memoizeExpr!("unicode.Alphabetic | unicode.Mn | unicode.Mc
         | unicode.Me | unicode.Nd | unicode.Pc")();
 }
 
-@property Trie wordTrie()
+export @property Trie wordTrie()
 {
     return memoizeExpr!("makeTrie(wordCharacter)")();
 }
@@ -218,7 +218,7 @@ IR pairedIR(IR i)
 }
 
 //encoded IR instruction
-struct Bytecode
+export struct Bytecode
 {
     uint raw;
     //natural constraints
@@ -340,7 +340,7 @@ static assert(Bytecode.sizeof == 4);
 
 
 //index entry structure for name --> number of submatch
-struct NamedGroup
+export struct NamedGroup
 {
     string name;
     uint group;
@@ -739,7 +739,7 @@ int quickTestFwd(RegEx)(uint pc, dchar front, const ref RegEx re)
 }
 
 ///Exception object thrown in case of errors during regex compilation.
-public class RegexException : Exception
+export class RegexException : Exception
 {
     ///
     @trusted this(string msg, string file = __FILE__, size_t line = __LINE__)

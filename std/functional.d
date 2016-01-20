@@ -22,6 +22,8 @@ module std.functional;
 
 import std.traits, std.typetuple;
 
+export:
+
 
 private template needOpCallAlias(alias fun)
 {

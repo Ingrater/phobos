@@ -9,6 +9,8 @@ package(std.regex):
 import std.regex.internal.ir;
 import std.algorithm, std.range, std.utf;
 
+export:
+
 //utility for shiftOr, returns a minimum number of bytes to test in a Char
 uint effectiveSize(Char)()
 {

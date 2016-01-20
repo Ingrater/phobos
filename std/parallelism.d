@@ -91,6 +91,8 @@ import std.traits;
 import std.typecons;
 import std.typetuple;
 
+export:
+
 version(OSX)
 {
     version = useSysctlbyname;

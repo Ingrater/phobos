@@ -25,6 +25,8 @@ module std.zlib;
 
 import etc.c.zlib;
 
+export:
+
 // Values for 'mode'
 
 enum

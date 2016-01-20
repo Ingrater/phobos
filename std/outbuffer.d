@@ -26,6 +26,8 @@ private
     import std.string;
 }
 
+export:
+
 /*********************************************
  * OutBuffer provides a way to build up an array of bytes out
  * of raw data. It is useful for things like preparing an

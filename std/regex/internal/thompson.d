@@ -13,6 +13,8 @@ package(std.regex):
 import std.regex.internal.ir;
 import std.range;
 
+export:
+
 //State of VM thread
 struct Thread(DataIndex)
 {

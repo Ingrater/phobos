@@ -63,6 +63,7 @@ public import std.digest.digest;
 version(unittest)
     import std.exception;
 
+export:
 
 ///
 unittest

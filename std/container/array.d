@@ -5,6 +5,7 @@ import std.traits;
 
 public import std.container.util;
 
+export:
 
 /**
 Array type with deterministic control of memory. The memory allocated

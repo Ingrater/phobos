@@ -7,6 +7,8 @@ module std.regex.internal.parser;
 import std.regex.internal.ir;
 import std.algorithm, std.range, std.uni, std.typetuple,
     std.traits, std.typecons, std.exception;
+    
+export:
 
 // package relevant info from parser into a regex object
 auto makeRegex(S)(Parser!S p)

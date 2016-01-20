@@ -38,6 +38,8 @@ private import std.traits : isSomeChar;
 import core.exception : OutOfMemoryError;
 import std.exception : assumeUnique;
 
+export:
+
 class URIException : Exception
 {
     @safe pure nothrow this()

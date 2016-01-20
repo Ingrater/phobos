@@ -254,6 +254,8 @@ import std.regex.internal.ir;
 import std.regex.internal.thompson; //TODO: get rid of this dependency
 import std.exception, std.traits, std.range;
 
+export:
+
 /++
     $(D Regex) object holds regular expression pattern in compiled form.
 

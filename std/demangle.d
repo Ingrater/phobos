@@ -20,6 +20,8 @@
  */
 module std.demangle;
 
+export:
+
 /+
 private class MangleException : Exception
 {

@@ -32,6 +32,8 @@ module std.stream;
 
 import std.internal.cstring;
 
+export:
+
 /* Class structure:
  *  InputStream       interface for reading
  *  OutputStream      interface for writing

@@ -84,6 +84,8 @@ import std.conv;
 import std.range.primitives;
 import std.traits;
 
+export:
+
 /**
  * Exception containing the row and column for when an exception was thrown.
  *

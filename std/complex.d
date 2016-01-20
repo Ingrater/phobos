@@ -16,6 +16,8 @@ module std.complex;
 
 import std.traits;
 
+export:
+
 /** Helper function that returns a _complex number with the specified
     real and imaginary parts.
 

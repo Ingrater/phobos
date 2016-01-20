@@ -49,6 +49,8 @@
 */
 module std.path;
 
+export:
+
 
 // FIXME
 import std.file; //: getcwd;

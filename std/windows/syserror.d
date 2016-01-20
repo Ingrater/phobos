@@ -16,6 +16,8 @@
 module std.windows.syserror;
 import std.traits : isSomeString;
 
+export:
+
 version (StdDdoc)
 {
     private

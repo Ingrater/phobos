@@ -47,6 +47,7 @@ import std.exception;  // enforce
 import std.range.primitives;      // isInputRange, isOutputRange, isForwardRange, ElementType, hasLength
 import std.traits;     // isArray
 
+export:
 
 /**
  * The Base64

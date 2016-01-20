@@ -32,6 +32,8 @@
  */
 module std.zip;
 
+export:
+
 //debug=print;
 
 /** Thrown on error.

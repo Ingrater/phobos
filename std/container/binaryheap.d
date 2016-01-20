@@ -5,6 +5,8 @@ import std.traits;
 
 public import std.container.util;
 
+export:
+
 // BinaryHeap
 /**
 Implements a $(WEB en.wikipedia.org/wiki/Binary_heap, binary heap)

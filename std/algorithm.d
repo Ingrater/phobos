@@ -412,6 +412,8 @@ private template algoFormat()
     alias algoFormat = format;
 }
 
+export:
+
 /**
 $(D auto map(Range)(Range r) if (isInputRange!(Unqual!Range));)
 
