@@ -3882,13 +3882,15 @@ Furthermore, emplaceRef optionally takes a type paremeter, which specifies
 the type we want to build. This helps to build qualified objects on mutable
 buffer, without breaking the type system with unsafe casts.
 +/
-package ref UT emplaceRef(UT, Args...)(ref UT chunk, auto ref Args args)
+/* Workaround */
+export ref UT emplaceRef(UT, Args...)(ref UT chunk, auto ref Args args)
 if (is(UT == Unqual!UT))
 {
     return emplaceImpl!UT(chunk, args);
 }
 // ditto
-package ref UT emplaceRef(T, UT, Args...)(ref UT chunk, auto ref Args args)
+/* Workaround */
+export ref UT emplaceRef(T, UT, Args...)(ref UT chunk, auto ref Args args)
 if (is(UT == Unqual!T) && !is(T == UT))
 {
     return emplaceImpl!T(chunk, args);

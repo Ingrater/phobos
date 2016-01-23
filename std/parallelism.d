@@ -3365,7 +3365,8 @@ private template randLen(R)
     enum randLen = isRandomAccessRange!R && hasLength!R;
 }
 
-private void submitAndExecute(
+/* workaround */
+export void submitAndExecute(
     TaskPool pool,
     scope void delegate() doIt
 )
