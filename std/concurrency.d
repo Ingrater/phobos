@@ -100,7 +100,8 @@ private
         linkDead,
     }
 
-    struct Message
+    /* Workaround */
+    export struct Message
     {
         MsgType type;
         Variant data;

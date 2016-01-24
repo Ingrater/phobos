@@ -82,13 +82,12 @@ template maxBigDigits(T) if (isIntegral!T)
     enum maxBigDigits = (T.sizeof+BigDigit.sizeof-1)/BigDigit.sizeof;
 }
 
+export:
+
 static immutable BigDigit[] ZERO = [0];
 static immutable BigDigit[] ONE = [1];
 static immutable BigDigit[] TWO = [2];
 static immutable BigDigit[] TEN = [10];
-
-
-export:
 
 /// BigUint performs memory management and wraps the low-level calls.
 struct BigUint

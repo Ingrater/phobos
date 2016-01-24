@@ -572,7 +572,9 @@ struct JSONValue
         case JSON_TYPE.OBJECT:
             return store.object == rhs.store.object;
         case JSON_TYPE.ARRAY:
-            return store.array == rhs.store.array;
+            // TODO fix later
+            return false;
+            //return store.array == rhs.store.array;
         case JSON_TYPE.TRUE:
         case JSON_TYPE.FALSE:
         case JSON_TYPE.NULL:

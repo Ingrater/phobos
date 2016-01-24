@@ -295,7 +295,8 @@ version (Posix) private void[] readImpl(const(char)[] name, const(FSChar)* namez
 }
 
 
-version (Windows) private void[] readImpl(const(char)[] name, const(FSChar)* namez, size_t upTo = size_t.max) @safe
+/* Workaround */
+version (Windows) export void[] readImpl(const(char)[] name, const(FSChar)* namez, size_t upTo = size_t.max) @safe
 {
     import std.algorithm : min;
     import std.array : uninitializedArray;
@@ -1187,7 +1188,8 @@ bool exists(R)(R name)
     return existsImpl(name.tempCString!FSChar());
 }
 
-private bool existsImpl(const(FSChar)* namez) @trusted nothrow @nogc
+/* Workaround */
+export bool existsImpl(const(FSChar)* namez) @trusted nothrow @nogc
 {
     version(Windows)
     {

@@ -1537,6 +1537,7 @@ string genUnrolledSwitchSearch(size_t size)
     return code;
 }
 
+/* Workaround */ export
 bool isPowerOf2(size_t sz) @safe pure nothrow @nogc
 {
     return (sz & (sz-1)) == 0;
@@ -1575,6 +1576,7 @@ size_t switchUniformLowerBound(alias pred, Range, T)(Range range, T needle)
 }
 
 //
+/* Workaround */ export
 size_t floorPowerOf2(size_t arg) @safe pure nothrow @nogc
 {
     import core.bitop : bsr;
@@ -1582,6 +1584,7 @@ size_t floorPowerOf2(size_t arg) @safe pure nothrow @nogc
     return 1<<bsr(arg-1);
 }
 
+/* Workaround */ export
 size_t ceilPowerOf2(size_t arg) @safe pure nothrow @nogc
 {
     import core.bitop : bsr;
