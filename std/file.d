@@ -2820,7 +2820,8 @@ void copy(RF, RT)(RF from, RT to, PreserveAttributes preserve = preserveAttribut
     copyImpl(f, t, fromz, toz, preserve);
 }
 
-private void copyImpl(const(char)[] f, const(char)[] t, const(FSChar)* fromz, const(FSChar)* toz,
+/* Workaround */
+export void copyImpl(const(char)[] f, const(char)[] t, const(FSChar)* fromz, const(FSChar)* toz,
         PreserveAttributes preserve) @trusted
 {
     version(Windows)
