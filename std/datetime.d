@@ -32546,7 +32546,8 @@ unittest
         year  = The year to get the day for.
         month = The month of the Gregorian Calendar to get the day for.
  +/
-static ubyte maxDay(int year, int month) @safe pure nothrow
+ /* Workaround */
+export ubyte maxDay(int year, int month) @safe pure nothrow
 in
 {
     assert(valid!"months"(month));

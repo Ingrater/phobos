@@ -1017,7 +1017,7 @@ struct XorshiftEngine(UIntType, UIntType bits, UIntType a, UIntType b, UIntType 
 
             sanitizeSeeds(seeds);
 
-            assert(seeds == [1, 2, 3, 4]);
+            assert(seeds == [1u, 2u, 3u, 4u]);
         }
     }
 }
