@@ -3530,7 +3530,8 @@ pure unittest
 
 //------------------------------------------------------------------------------
 // Fix for issue 1591
-private int getNthInt(A...)(uint index, A args)
+/* Workaround */
+export int getNthInt(A...)(uint index, A args)
 {
     import std.conv : to;
     static if (A.length)

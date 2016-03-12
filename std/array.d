@@ -3095,7 +3095,8 @@ unittest
 //arg curLen: The current length
 //arg reqLen: The length as requested by the user
 //ret sugLen: A suggested growth.
-private size_t appenderNewCapacity(size_t TSizeOf)(size_t curLen, size_t reqLen) @safe pure nothrow
+/* Workaround */
+export size_t appenderNewCapacity(size_t TSizeOf)(size_t curLen, size_t reqLen) @safe pure nothrow
 {
     import core.bitop : bsr;
     import std.algorithm : max;

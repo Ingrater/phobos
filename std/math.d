@@ -1328,7 +1328,7 @@ creal coshisinh(real x) @safe pure nothrow @nogc
     assert(c.im == sinh(3.0L));
 }
 
-public:
+export:
 
 /***********************************
  * Calculates the inverse hyperbolic cosine of x.
@@ -6614,7 +6614,7 @@ body
            == 0.5*real.min_normal*(1-2*real.epsilon));
 }
 
-public:
+export:
 
 
 /***********************************

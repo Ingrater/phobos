@@ -9004,8 +9004,8 @@ public:
         assert(SysTime.max > SysTime.min);
     }
 
-
-private:
+/* Workaround */
+protected:
 
     /+
         Returns $(D stdTime) converted to $(LREF SysTime)'s time zone.
@@ -14388,8 +14388,8 @@ public:
         assert(TimeOfDay.max > TimeOfDay.min);
     }
 
-
-private:
+/* Workaround */
+protected:
 
     /+
         Add seconds to the time of day. Negative values will subtract. If the
@@ -17312,8 +17312,8 @@ public:
         assert(DateTime.max > DateTime.min);
     }
 
-
-private:
+/* Workaround */
+protected:
 
     /+
         Add seconds to the time of day. Negative values will subtract. If the
