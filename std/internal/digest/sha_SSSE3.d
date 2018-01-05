@@ -14,7 +14,6 @@
  *      $(LINK2 http://software.intel.com/en-us/articles/improving-the-performance-of-the-secure-hash-algorithm-1/, Fast implementation of SHA1)
  */
 module std.internal.digest.sha_SSSE3;
-pragma(sharedlibrary, "std");
 
 version(D_InlineAsm_X86)
 {

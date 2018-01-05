@@ -11,6 +11,5 @@ pragma(sharedlibrary, "std");fenv.h&gt;
  */
 deprecated("Import core.stdc.fenv instead")
 module std.c.fenv;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.fenv;

@@ -18,7 +18,6 @@ $(SCRIPT inhibitQuickIndex = 1;
 pragma(sharedlibrary, "std");)
 */
 module std.container.dlist;
-pragma(sharedlibrary, "std");
 
 ///
 @safe unittest

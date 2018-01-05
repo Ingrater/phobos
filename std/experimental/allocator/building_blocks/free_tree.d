@@ -1,6 +1,5 @@
 ///
 module std.experimental.allocator.building_blocks.free_tree;
-pragma(sharedlibrary, "std");
 
 import std.experimental.allocator.common;
 

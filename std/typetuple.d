@@ -11,7 +11,6 @@
 pragma(sharedlibrary, "std");)
  */
 module std.typetuple;
-pragma(sharedlibrary, "std");
 
 public import std.meta;
 

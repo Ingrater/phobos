@@ -11,7 +11,6 @@
   +/
 deprecated("Import the appropriate core.sys.posix.* instead")
 module std.c.osx.socket;
-pragma(sharedlibrary, "std");
 
 version (OSX):
 import core.stdc.stdint;

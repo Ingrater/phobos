@@ -11,6 +11,5 @@ pragma(sharedlibrary, "std");wchar.h&gt;
  */
 deprecated("Import core.stdc.wchar_ instead")
 module std.c.wcharh;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.wchar_;

@@ -1,6 +1,5 @@
 ///
 module std.experimental.logger.filelogger;
-pragma(sharedlibrary, "std");
 
 import std.experimental.logger.core;
 import std.stdio;

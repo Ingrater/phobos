@@ -1,6 +1,5 @@
 ///
 module std.experimental.allocator.building_blocks.bitmapped_block;
-pragma(sharedlibrary, "std");
 
 import std.experimental.allocator.building_blocks.null_allocator;
 import std.experimental.allocator.common;

@@ -57,7 +57,6 @@ pragma(sharedlibrary, "std"); however, it can be used to create customized Base6
  *      LREF2=<a href="#$1">$(D $2)</a>
  */
 module std.base64;
-pragma(sharedlibrary, "std");
 
 import std.exception;  // enforce
 import std.range.primitives;      // isInputRange, isOutputRange, isForwardRange, ElementType, hasLength
@@ -67,7 +66,6 @@ import std.traits;     // isArray
 @safe unittest
 {
     ubyte[] data = [0x14, 0xfb, 0x9c, 0x03, 0xd9, 0x7e];
-pragma(sharedlibrary, "std");
 
     const(char)[] encoded = Base64.encode(data);
     assert(encoded == "FPucA9l+");
@@ -138,7 +136,6 @@ alias Base64URLNoPadding = Base64Impl!('-', '_', Base64.NoPadding);
  * -----
  * // Non-standard Base64 format for embedding in regular expressions.
  * alias Base64Re = Base64Impl!('!', '=', Base64.NoPadding);
-pragma(sharedlibrary, "std");
  * -----
  *
  * NOTE:

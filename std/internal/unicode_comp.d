@@ -1,5 +1,4 @@
 module std.internal.unicode_comp;
-pragma(sharedlibrary, "std");
 import std.internal.unicode_tables;
 
 @safe pure nothrow @nogc package(std):

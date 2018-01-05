@@ -23,7 +23,6 @@
  *  SV  = $(TR $(TD $1) $(TD $2))
  */
 module std.internal.math.errorfunction;
-pragma(sharedlibrary, "std");
 import std.math;
 
 pure:

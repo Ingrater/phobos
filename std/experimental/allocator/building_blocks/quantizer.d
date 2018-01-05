@@ -1,6 +1,5 @@
 ///
 module std.experimental.allocator.building_blocks.quantizer;
-pragma(sharedlibrary, "std");
 
 import std.experimental.allocator.common;
 

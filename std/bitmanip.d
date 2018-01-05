@@ -51,7 +51,6 @@ Distributed under the Boost Software License, Version 1.0.
          http://www.boost.org/LICENSE_1_0.txt)
 */
 module std.bitmanip;
-pragma(sharedlibrary, "std");
 
 //debug = bitarray;                // uncomment to turn on debugging printf's
 

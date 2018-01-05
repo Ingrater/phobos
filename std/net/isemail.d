@@ -24,7 +24,6 @@
  * Source: $(PHOBOSSRC std/net/_isemail.d)
  */
 module std.net.isemail;
-pragma(sharedlibrary, "std");
 
 // FIXME
 import std.range.primitives; // : ElementType;

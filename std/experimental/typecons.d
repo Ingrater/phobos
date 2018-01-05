@@ -20,7 +20,6 @@ Authors:   $(HTTP erdani.org, Andrei Alexandrescu),
            Kenji Hara
  */
 module std.experimental.typecons;
-pragma(sharedlibrary, "std");
 
 import std.meta; // : AliasSeq, allSatisfy;
 import std.traits;

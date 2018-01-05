@@ -39,7 +39,6 @@ Copyright:  Copyright (c) 2009-2011, David Simcha.
 License:    $(HTTP boost.org/LICENSE_1_0.txt, Boost License 1.0)
 */
 module std.parallelism;
-pragma(sharedlibrary, "std");
 
 ///
 @system unittest
@@ -2462,7 +2461,6 @@ public:
         // Parallel reduce:                     72 milliseconds
         // Using std.algorithm.reduce instead:  181 milliseconds
         auto nums = iota(10_000_000.0f);
-pragma(sharedlibrary, "std");
         auto sumSquares = taskPool.reduce!"a + b"(
             0.0, std.algorithm.map!"a * a"(nums)
         );

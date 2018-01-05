@@ -33,7 +33,6 @@ Authors:   $(HTTP erdani.org, Andrei Alexandrescu)
 Source:    $(PHOBOSSRC std/_variant.d)
 */
 module std.variant;
-pragma(sharedlibrary, "std");
 
 import std.meta, std.traits, std.typecons;
 

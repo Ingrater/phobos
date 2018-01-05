@@ -11,6 +11,5 @@ pragma(sharedlibrary, "std");time.h&gt;
  */
 deprecated("Import core.stdc.time instead")
 module std.c.time;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.time;

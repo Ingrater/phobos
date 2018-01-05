@@ -12,6 +12,5 @@ pragma(sharedlibrary, "std");locale.h&gt;
  */
 deprecated("Import core.stdc.locale instead")
 module std.c.locale;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.locale;

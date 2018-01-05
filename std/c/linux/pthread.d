@@ -12,7 +12,6 @@
   +/
 deprecated("Import core.sys.posix.pthread or the appropriate core.sys.posix.* modules instead")
 module std.c.linux.pthread;
-pragma(sharedlibrary, "std");
 
 version (linux):
 public import core.sys.posix.pthread;

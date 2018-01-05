@@ -9,7 +9,6 @@
  * Source:    $(PHOBOSSRC std/internal/windows/_advapi32.d)
  */
 module std.internal.windows.advapi32;
-pragma(sharedlibrary, "std");
 
 version(Windows):
 

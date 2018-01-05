@@ -16,7 +16,6 @@
  */
 
 module std.internal.math.biguintnoasm;
-pragma(sharedlibrary, "std");
 
 nothrow:
 @safe:

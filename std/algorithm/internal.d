@@ -2,7 +2,6 @@
 
 /// Helper functions for std.algorithm package.
 module std.algorithm.internal;
-pragma(sharedlibrary, "std");
 
 
 // Same as std.string.format, but "self-importing".

@@ -11,7 +11,6 @@
   +/
 deprecated("Import the appropriate core.sys.posix.* modules instead")
 module std.c.linux.socket;
-pragma(sharedlibrary, "std");
 
 version (linux):
 import core.stdc.stdint;

@@ -12,7 +12,6 @@ alias Allocator = StatsCollector!(GCAllocator, Options.bytesUsed);
 ----
 */
 module std.experimental.allocator.building_blocks.stats_collector;
-pragma(sharedlibrary, "std");
 
 import std.experimental.allocator.common;
 

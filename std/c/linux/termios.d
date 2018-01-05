@@ -7,7 +7,6 @@
   +/
 deprecated("Import core.sys.posix.termios instead")
 module std.c.linux.termios;
-pragma(sharedlibrary, "std");
 
 version (linux):
 public import core.sys.posix.termios;

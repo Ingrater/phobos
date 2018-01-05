@@ -11,6 +11,5 @@ pragma(sharedlibrary, "std");stdio.h&gt; for the D programming language
  */
 deprecated("Import core.stdc.stdio instead")
 module std.c.stdio;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.stdio;

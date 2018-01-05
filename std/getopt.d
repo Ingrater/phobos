@@ -27,7 +27,6 @@ Distributed under the Boost Software License, Version 1.0.
          http://www.boost.org/LICENSE_1_0.txt)
 */
 module std.getopt;
-pragma(sharedlibrary, "std");
 
 import std.exception;  // basicExceptionCtors
 import std.traits;

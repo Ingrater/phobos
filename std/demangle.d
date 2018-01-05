@@ -17,7 +17,6 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.demangle;
-pragma(sharedlibrary, "std");
 
 /+
 private class MangleException : Exception

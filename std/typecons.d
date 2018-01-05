@@ -68,7 +68,6 @@ Authors:   $(HTTP erdani.org, Andrei Alexandrescu),
            Kenji Hara
  */
 module std.typecons;
-pragma(sharedlibrary, "std");
 
 import core.stdc.stdint : uintptr_t;
 import std.meta; // : AliasSeq, allSatisfy;

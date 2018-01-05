@@ -46,7 +46,6 @@ Source:    $(PHOBOSSRC std/_conv.d)
 
 */
 module std.conv;
-pragma(sharedlibrary, "std");
 
 public import std.ascii : LetterCase;
 

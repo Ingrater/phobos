@@ -58,7 +58,6 @@ $(TR $(TD Enums) $(TD
     Source:    $(PHOBOSSRC std/_ascii.d)
   +/
 module std.ascii;
-pragma(sharedlibrary, "std");
 
 version (unittest)
 {

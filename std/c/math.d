@@ -11,6 +11,5 @@ pragma(sharedlibrary, "std");math.h&gt;
  */
 deprecated("Import core.stdc.math instead")
 module std.c.math;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.math;

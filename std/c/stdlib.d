@@ -12,7 +12,6 @@ pragma(sharedlibrary, "std");stdlib.h&gt;
  */
 deprecated("Import core.stdc.stdlib or core.sys.posix.stdlib instead")
 module std.c.stdlib;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.stdlib;
 version(Posix) public import core.sys.posix.stdlib : setenv, unsetenv;

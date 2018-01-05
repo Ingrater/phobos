@@ -16,7 +16,6 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.mmfile;
-pragma(sharedlibrary, "std");
 
 import core.stdc.errno;
 import core.stdc.stdio;

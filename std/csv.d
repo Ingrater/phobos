@@ -90,7 +90,6 @@
  *   Source:    $(PHOBOSSRC std/_csv.d)
  */
 module std.csv;
-pragma(sharedlibrary, "std");
 
 import std.conv;
 import std.exception;  // basicExceptionCtors

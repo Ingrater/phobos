@@ -63,7 +63,6 @@ $(TR $(TDNW Implementation helpers) $(TD $(MYREF digestLength) $(MYREF WrapperDi
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.digest;
-pragma(sharedlibrary, "std");
 
 public import std.ascii : LetterCase;
 import std.meta : allSatisfy;

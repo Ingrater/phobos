@@ -54,7 +54,6 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.zlib;
-pragma(sharedlibrary, "std");
 
 //debug=zlib;       // uncomment to turn on debugging printf's
 

@@ -19,7 +19,6 @@ Distributed under the Boost Software License, Version 1.0.
          http://www.boost.org/LICENSE_1_0.txt)
 */
 module std.numeric;
-pragma(sharedlibrary, "std");
 
 import std.complex;
 import std.math;

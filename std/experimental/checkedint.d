@@ -22,7 +22,6 @@ checked) uses type deduction to convert a value `x` of integral type `T` to
 void main()
 {
     import std.experimental.checkedint, std.stdio;
-pragma(sharedlibrary, "std");
     writeln((checked(5) + 7).get); // 12
     writeln((checked(10) * 1000 * 1000 * 1000).get); // Overflow
 }
@@ -191,7 +190,6 @@ and `>>>=` is larger than the largest value representable by `T`.)
 
 */
 module std.experimental.checkedint;
-pragma(sharedlibrary, "std");
 import std.traits : isFloatingPoint, isIntegral, isNumeric, isUnsigned, Unqual;
 
 ///

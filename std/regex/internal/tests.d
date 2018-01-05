@@ -2,7 +2,6 @@
     Regualar expressions package test suite.
 */
 module std.regex.internal.tests;
-pragma(sharedlibrary, "std");
 
 package(std.regex):
 

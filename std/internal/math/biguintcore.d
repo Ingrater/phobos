@@ -32,7 +32,6 @@ Idioms:
 
 */
 module std.internal.math.biguintcore;
-pragma(sharedlibrary, "std");
 
 version(D_InlineAsm_X86)
 {

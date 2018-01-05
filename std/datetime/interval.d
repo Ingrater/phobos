@@ -6,7 +6,6 @@
     Source:    $(PHOBOSSRC std/datetime/_interval.d)
 +/
 module std.datetime.interval;
-pragma(sharedlibrary, "std");
 
 import core.time : Duration, dur;
 import std.datetime.date : AllowDayOverflow, DateTimeException, daysToDayOfWeek,
@@ -1377,7 +1376,6 @@ public:
         Example:
         --------------------
         auto interval = Interval!Date(Date(2010, 9, 1), Date(2010, 9, 9));
-pragma(sharedlibrary, "std");
         auto func = delegate (in Date date) // For iterating over even-numbered days.
                     {
                         if ((date.day & 1) == 0)
@@ -1472,7 +1470,6 @@ pragma(sharedlibrary, "std");
         Example:
         --------------------
         auto interval = Interval!Date(Date(2010, 9, 1), Date(2010, 9, 9));
-pragma(sharedlibrary, "std");
         auto func = delegate (in Date date) // For iterating over even-numbered days.
                     {
                         if ((date.day & 1) == 0)
@@ -4073,7 +4070,6 @@ assert(interval2 == PosInfInterval!Date(Date(1998, 1, 2)));
         Example:
 --------------------
 auto interval = PosInfInterval!Date(Date(2010, 9, 1));
-pragma(sharedlibrary, "std");
 auto func = delegate (in Date date) //For iterating over even-numbered days.
             {
                 if ((date.day & 1) == 0)
@@ -6297,7 +6293,6 @@ assert(interval2 == NegInfInterval!Date(Date(2010, 3, 1)));
         Example:
 --------------------
 auto interval = NegInfInterval!Date(Date(2010, 9, 9));
-pragma(sharedlibrary, "std");
 auto func = delegate (in Date date) //For iterating over even-numbered days.
             {
                 if ((date.day & 1) == 0)

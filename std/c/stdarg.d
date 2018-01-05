@@ -11,6 +11,5 @@ pragma(sharedlibrary, "std");stdarg.h&gt;
  */
 deprecated("Import core.stdc.stdarg instead")
 module std.c.stdarg;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.stdarg;

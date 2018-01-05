@@ -1,5 +1,4 @@
 module std.digest.digest;
-pragma(sharedlibrary, "std");
 
 import _newDigest = std.digest;
 

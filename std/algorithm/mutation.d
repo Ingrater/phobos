@@ -77,7 +77,6 @@ Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
 module std.algorithm.mutation;
-pragma(sharedlibrary, "std");
 
 import std.range.primitives;
 import std.traits : isArray, isBlitAssignable, isNarrowString, Unqual, isSomeChar;
@@ -1675,7 +1674,6 @@ enum SwapStrategy
 @safe unittest
 {
     import std.stdio;
-pragma(sharedlibrary, "std");
     import std.algorithm.sorting : partition;
     int[] a = [0, 1, 2, 3];
     assert(remove!(SwapStrategy.stable)(a, 1) == [0, 2, 3]);

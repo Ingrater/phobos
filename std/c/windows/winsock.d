@@ -11,7 +11,6 @@
   +/
 deprecated("Import core.sys.windows.winsock2 instead")
 module std.c.windows.winsock;
-pragma(sharedlibrary, "std");
 
 version (Windows):
 public import core.sys.windows.winsock2;

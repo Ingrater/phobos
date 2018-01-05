@@ -6,7 +6,6 @@
     and backend components - generators, matchers and other "filters".
 */
 module std.regex.internal.ir;
-pragma(sharedlibrary, "std");
 
 package(std.regex):
 

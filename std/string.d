@@ -142,7 +142,6 @@ Source:    $(PHOBOSSRC std/_string.d)
 
 */
 module std.string;
-pragma(sharedlibrary, "std");
 
 version (unittest)
 {

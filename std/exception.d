@@ -71,7 +71,6 @@ $(TR $(TD Other) $(TD
 
  +/
 module std.exception;
-pragma(sharedlibrary, "std");
 
 import std.range.primitives;
 import std.traits;

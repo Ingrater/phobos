@@ -84,7 +84,6 @@ Macros:
     LREF=$(D $(LINK2 #.$0,$0))
 */
 module std.process;
-pragma(sharedlibrary, "std");
 
 version (Posix)
 {
@@ -3208,7 +3207,6 @@ version(unittest_burnin)
     // rdmd --main -unittest -version=unittest_burnin process.d
 
     auto helper = absolutePath("std_process_unittest_helper");
-pragma(sharedlibrary, "std");
     assert(executeShell(helper ~ " hello").output.split("\0")[1..$] == ["hello"], "Helper malfunction");
 
     void test(string[] s, string fn)

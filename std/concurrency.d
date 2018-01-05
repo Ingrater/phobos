@@ -30,7 +30,6 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.concurrency;
-pragma(sharedlibrary, "std");
 
 public import std.variant;
 
@@ -1118,7 +1117,6 @@ struct ThreadInfo
  * Example:
  * ---
  * import std.concurrency;
-pragma(sharedlibrary, "std");
  * import std.stdio;
  *
  * void main()

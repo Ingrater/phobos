@@ -127,7 +127,6 @@ void fun(size_t n)
 {
     // Use the current allocator
     int[] a1 = theAllocator.makeArray!int(n);
-pragma(sharedlibrary, "std");
     scope(exit) theAllocator.dispose(a1);
     ...
 }
@@ -224,7 +223,6 @@ Source: $(PHOBOSSRC std/experimental/_allocator)
 */
 
 module std.experimental.allocator;
-pragma(sharedlibrary, "std");
 
 public import std.experimental.allocator.common,
     std.experimental.allocator.typed;

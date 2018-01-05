@@ -1,6 +1,5 @@
 ///
 module std.experimental.allocator.building_blocks.segregator;
-pragma(sharedlibrary, "std");
 
 import std.experimental.allocator.common;
 
@@ -38,7 +37,6 @@ struct Segregator(size_t threshold, SmallAllocator, LargeAllocator)
         implementation in this module applies.)
         */
         static size_t goodAllocSize(size_t s);
-pragma(sharedlibrary, "std");
         /**
         The memory is obtained from $(D SmallAllocator) if $(D s <= threshold),
         or $(D LargeAllocator) otherwise.

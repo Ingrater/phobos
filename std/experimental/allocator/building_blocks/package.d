@@ -296,7 +296,6 @@ POST = $(BR)$(SMALL $(I Post:) $(BLUE $(D $0)))
 */
 
 module std.experimental.allocator.building_blocks;
-pragma(sharedlibrary, "std");
 
 public import
     std.experimental.allocator.building_blocks.affix_allocator,

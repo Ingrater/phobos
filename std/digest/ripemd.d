@@ -45,7 +45,6 @@ $(TR $(TDNW Helpers) $(TD $(MYREF ripemd160Of))
  */
 
 module std.digest.ripemd;
-pragma(sharedlibrary, "std");
 
 public import std.digest;
 

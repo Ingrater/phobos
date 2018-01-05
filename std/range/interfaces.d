@@ -71,7 +71,6 @@ and Jonathan M Davis. Credit for some of the ideas in building this module goes
 to $(HTTP fantascienza.net/leonardo/so/, Leonardo Maffi).
 */
 module std.range.interfaces;
-pragma(sharedlibrary, "std");
 
 import std.meta;
 import std.range.primitives;

@@ -96,7 +96,6 @@ $(TR $(TDNW UUID namespaces)
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.uuid;
-pragma(sharedlibrary, "std");
 
 ///
 @safe unittest

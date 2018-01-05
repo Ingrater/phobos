@@ -16,7 +16,6 @@ Distributed under the Boost Software License, Version 1.0.
          http://www.boost.org/LICENSE_1_0.txt)
 */
 module std.json;
-pragma(sharedlibrary, "std");
 
 import std.array;
 import std.conv;

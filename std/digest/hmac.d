@@ -15,7 +15,6 @@ Source: $(PHOBOSSRC std/digest/_hmac.d)
  */
 
 module std.digest.hmac;
-pragma(sharedlibrary, "std");
 
 import std.digest : isDigest, hasBlockSize, isDigestibleRange, DigestType;
 import std.meta : allSatisfy;

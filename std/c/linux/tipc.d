@@ -13,6 +13,5 @@
 
 deprecated("Import core.sys.linux.tipc instead")
 module std.c.linux.tipc;
-pragma(sharedlibrary, "std");
 
 public import core.sys.linux.tipc;

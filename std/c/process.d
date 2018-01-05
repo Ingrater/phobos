@@ -12,7 +12,6 @@ pragma(sharedlibrary, "std");process.h&gt;
  */
 deprecated("Import core.stdc.stdlib or the appropriate core.sys.posix.* modules instead")
 module std.c.process;
-pragma(sharedlibrary, "std");
 
 import core.stdc.stddef;
 public import core.stdc.stdlib : exit, abort, system;

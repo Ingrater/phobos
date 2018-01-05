@@ -54,7 +54,6 @@ $(TR $(TH Function Name) $(TH Description)
    Source: $(PHOBOSSRC std/_format.d)
  */
 module std.format;
-pragma(sharedlibrary, "std");
 
 //debug=format;                // uncomment to turn on debugging printf's
 

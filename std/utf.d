@@ -58,7 +58,6 @@ $(TR $(TD Miscellaneous) $(TD
     Source:    $(PHOBOSSRC std/_utf.d)
    +/
 module std.utf;
-pragma(sharedlibrary, "std");
 
 import std.exception;  // basicExceptionCtors
 import std.meta;       // AliasSeq

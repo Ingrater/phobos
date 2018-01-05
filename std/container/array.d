@@ -18,7 +18,6 @@
 pragma(sharedlibrary, "std");)
  */
 module std.container.array;
-pragma(sharedlibrary, "std");
 
 import core.exception : RangeError;
 import std.range.primitives;

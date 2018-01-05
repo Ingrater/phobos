@@ -8,7 +8,6 @@
   +/
 deprecated("Import the appropriate core.sys.posix.* modules instead")
 module std.c.freebsd.socket;
-pragma(sharedlibrary, "std");
 
 version (FreeBSD):
 public import core.sys.posix.netdb;

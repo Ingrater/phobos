@@ -24,7 +24,6 @@
  */
 
 module std.bigint;
-pragma(sharedlibrary, "std");
 
 import std.conv : ConvException;
 

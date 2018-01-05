@@ -3,7 +3,6 @@ For testing only.
 Used with the dummy ranges for testing higher order ranges.
 */
 module std.internal.test.dummyrange;
-pragma(sharedlibrary, "std");
 
 import std.meta;
 import std.range.primitives;

@@ -1,6 +1,5 @@
 ///
 module std.experimental.allocator.building_blocks.free_list;
-pragma(sharedlibrary, "std");
 
 import std.experimental.allocator.common;
 import std.typecons : Flag, Yes, No;

@@ -12,7 +12,6 @@ Authors:   $(HTTP digitalmars.com, Walter Bright),
            Alex Rønne Petersen
  */
 module std.stdio;
-pragma(sharedlibrary, "std");
 
 import core.stdc.stddef; // wchar_t
 public import core.stdc.stdio;

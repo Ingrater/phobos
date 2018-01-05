@@ -6,7 +6,6 @@
  */
 
 module std.internal.scopebuffer;
-pragma(sharedlibrary, "std");
 
 
 //debug=ScopeBuffer;

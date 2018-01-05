@@ -12,7 +12,6 @@ See_Also: $(LINK2 https://docs.microsoft.com/en-us/sql/odbc/reference/syntax/odb
           ODBC API Reference on MSN Online)
 */
 module etc.c.odbc.sqltypes;
-pragma(sharedlibrary, "std");
 
 extern (Windows):
 

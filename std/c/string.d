@@ -11,6 +11,5 @@ pragma(sharedlibrary, "std");string.h&gt;
  */
 deprecated("Import core.stdc.string instead")
 module std.c.string;
-pragma(sharedlibrary, "std");
 
 public import core.stdc.string;

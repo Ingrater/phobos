@@ -70,7 +70,6 @@ void main()
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.zip;
-pragma(sharedlibrary, "std");
 
 //debug=print;
 

@@ -36,7 +36,6 @@
  *
  * ////////////////////////////////////////////////////////////////////////// */
 module std.windows.registry;
-pragma(sharedlibrary, "std");
 version (Windows):
 
 import core.sys.windows.windows;

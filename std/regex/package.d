@@ -295,7 +295,6 @@ Macros:
     S_LINK = <a href="#$1">$+</a>
  +/
 module std.regex;
-pragma(sharedlibrary, "std");
 
 import std.range.primitives, std.traits;
 import std.regex.internal.ir;

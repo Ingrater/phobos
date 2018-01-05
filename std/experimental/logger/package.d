@@ -178,7 +178,6 @@ will never log a message and will never throw on a log call with $(D LogLevel)
 $(D error).
 */
 module std.experimental.logger;
-pragma(sharedlibrary, "std");
 
 public import std.experimental.logger.core;
 public import std.experimental.logger.filelogger;

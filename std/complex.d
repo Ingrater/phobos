@@ -14,7 +14,6 @@
     Source:     $(PHOBOSSRC std/_complex.d)
 */
 module std.complex;
-pragma(sharedlibrary, "std");
 
 import std.traits;
 

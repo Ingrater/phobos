@@ -185,7 +185,6 @@ $(TR $(TD Building blocks) $(TD
     $(SECTION Synopsis)
     ---
     import std.uni;
-pragma(sharedlibrary, "std");
     void main()
     {
         // initialize code point sets using script/block or property name
@@ -301,7 +300,6 @@ pragma(sharedlibrary, "std");
         an assigned abstract character (a symbolic meaning).
     )
     $(P $(DEF Code point) Any value in the Unicode codespace;
-pragma(sharedlibrary, "std");
         that is, the range of integers from 0 to 10FFFF (hex).
         Not all code points are assigned to encoded characters.
     )
@@ -467,7 +465,6 @@ pragma(sharedlibrary, "std");
     )
     ---
     auto elemsPerPage = (2 ^^ bits_per_page) / Value.sizeOfInBits;
-pragma(sharedlibrary, "std");
     pages[index[n >> bits_per_page]][n & (elemsPerPage - 1)];
     ---
     $(P Where if $(D elemsPerPage) is a power of 2 the whole process is
@@ -710,7 +707,6 @@ CHARACTERS = $(S_LINK Character, characters)
 CLUSTER = $(S_LINK Grapheme cluster, grapheme cluster)
 +/
 module std.uni;
-pragma(sharedlibrary, "std");
 
 import std.meta; // AliasSeq
 import std.range.primitives; // back, ElementEncodingType, ElementType, empty,
@@ -7550,7 +7546,6 @@ public:
     @property bool valid()() /*const*/
     {
         auto r = this[];
-pragma(sharedlibrary, "std");
         genericDecodeGrapheme!false(r);
         return r.length == 0;
     }

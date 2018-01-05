@@ -17,7 +17,6 @@ $(SCRIPT inhibitQuickIndex = 1;
 pragma(sharedlibrary, "std");)
 */
 module std.container.util;
-pragma(sharedlibrary, "std");
 
 /**
 Returns an initialized object. This function is mainly for eliminating

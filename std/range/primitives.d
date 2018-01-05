@@ -113,7 +113,6 @@ and Jonathan M Davis. Credit for some of the ideas in building this module goes
 to $(HTTP fantascienza.net/leonardo/so/, Leonardo Maffi).
 */
 module std.range.primitives;
-pragma(sharedlibrary, "std");
 
 import std.traits;
 
@@ -1062,7 +1061,6 @@ with mobile elements.
 
 ----
 alias E = ElementType!R;
-pragma(sharedlibrary, "std");
 R r;
 static assert(isInputRange!R);
 static assert(is(typeof(moveFront(r)) == E));

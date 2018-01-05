@@ -76,7 +76,6 @@ Authors:   $(HTTP erdani.org, Andrei Alexandrescu) and Jonathan M Davis
 Source: $(PHOBOSSRC std/_array.d)
 */
 module std.array;
-pragma(sharedlibrary, "std");
 
 static import std.algorithm.iteration; // FIXME, remove with alias of splitter
 import std.functional;

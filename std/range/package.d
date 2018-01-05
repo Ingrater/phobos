@@ -229,7 +229,6 @@ and Jack Stouffer. Credit for some of the ideas in building this module goes
 to $(HTTP fantascienza.net/leonardo/so/, Leonardo Maffi).
  */
 module std.range;
-pragma(sharedlibrary, "std");
 
 public import std.array;
 public import std.range.interfaces;

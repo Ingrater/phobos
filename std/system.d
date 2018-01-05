@@ -9,7 +9,6 @@
  *  Source:    $(PHOBOSSRC std/_system.d)
  */
 module std.system;
-pragma(sharedlibrary, "std");
 
 immutable
 {

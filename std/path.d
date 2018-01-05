@@ -96,7 +96,6 @@ $(TR $(TD Other) $(TD
         $(PHOBOSSRC std/_path.d)
 */
 module std.path;
-pragma(sharedlibrary, "std");
 
 
 // FIXME

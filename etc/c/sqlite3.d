@@ -1,5 +1,4 @@
 module etc.c.sqlite3;
-pragma(sharedlibrary, "std");
 /*
 ** 2001 September 15
 **

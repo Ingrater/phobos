@@ -58,7 +58,6 @@ Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
 module std.algorithm.comparison;
-pragma(sharedlibrary, "std");
 
 // FIXME
 import std.functional; // : unaryFun, binaryFun;

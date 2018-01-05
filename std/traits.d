@@ -164,7 +164,6 @@
  *          http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.traits;
-pragma(sharedlibrary, "std");
 
 import std.meta : AliasSeq, allSatisfy;
 import std.functional : unaryFun;

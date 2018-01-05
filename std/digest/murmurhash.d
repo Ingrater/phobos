@@ -37,7 +37,6 @@ $(BR) $(LINK2 https://en.wikipedia.org/wiki/MurmurHash, Wikipedia)
  * (See LICENSE_1_0.txt or copy at http://www.boost.org/LICENSE_1_0.txt)
  */
 module std.digest.murmurhash;
-pragma(sharedlibrary, "std");
 
 ///
 @safe unittest

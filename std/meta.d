@@ -73,7 +73,6 @@ pragma(sharedlibrary, "std");)
  */
 
 module std.meta;
-pragma(sharedlibrary, "std");
 
 /**
  * Creates a sequence of zero or more aliases. This is most commonly

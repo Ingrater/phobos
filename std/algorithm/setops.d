@@ -47,7 +47,6 @@ Macros:
 T2=$(TR $(TDNW $(LREF $1)) $(TD $+))
  */
 module std.algorithm.setops;
-pragma(sharedlibrary, "std");
 
 import std.range.primitives;
 

@@ -78,7 +78,6 @@ Authors:   $(HTTP digitalmars.com, Walter Bright),
 Source:    $(PHOBOSSRC std/_file.d)
  */
 module std.file;
-pragma(sharedlibrary, "std");
 
 import core.stdc.errno, core.stdc.stdlib, core.stdc.string;
 import core.time : abs, dur, hnsecs, seconds;

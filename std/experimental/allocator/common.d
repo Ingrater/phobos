@@ -6,7 +6,6 @@ appropriate parts of `std`.
 Authors: $(HTTP erdani.com, Andrei Alexandrescu), Timon Gehr (`Ternary`)
 */
 module std.experimental.allocator.common;
-pragma(sharedlibrary, "std");
 import std.algorithm.comparison, std.traits;
 
 /**

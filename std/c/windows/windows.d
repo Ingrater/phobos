@@ -10,7 +10,6 @@ States and other countries. */
   +/
 deprecated("Import core.sys.windows.windows instead")
 module std.c.windows.windows;
-pragma(sharedlibrary, "std");
 
 version (Windows):
 public import core.sys.windows.windows;

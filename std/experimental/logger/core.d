@@ -1,6 +1,5 @@
 ///
 module std.experimental.logger.core;
-pragma(sharedlibrary, "std");
 
 import core.sync.mutex : Mutex;
 import std.datetime.date : DateTime;

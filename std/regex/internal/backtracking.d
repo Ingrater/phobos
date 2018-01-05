@@ -3,7 +3,6 @@
     Contains both compile-time and run-time versions.
 */
 module std.regex.internal.backtracking;
-pragma(sharedlibrary, "std");
 
 package(std.regex):
 

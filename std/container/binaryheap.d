@@ -15,7 +15,6 @@ boost.org/LICENSE_1_0.txt)).
 Authors: $(HTTP erdani.com, Andrei Alexandrescu)
 */
 module std.container.binaryheap;
-pragma(sharedlibrary, "std");
 
 import std.range.primitives;
 import std.traits;
