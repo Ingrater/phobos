@@ -4,8 +4,7 @@
  * $(RED Deprecated. Use $(D core.stdc.stddef) instead. This module will be
  *       removed in June 2017.)
  *
- * C's &lt;
-pragma(sharedlibrary, "std");stddef.h&gt;
+ * C's &lt;stddef.h&gt;
  * Authors: Walter Bright, Digital Mars, http://www.digitalmars.com
  * License: Public Domain
  */

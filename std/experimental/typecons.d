@@ -4,8 +4,7 @@
 This module implements experimental additions/modifications to $(MREF std, _typecons).
 
 Use this module to test out new functionality for $(REF wrap, std, _typecons)
-which allows for a struct to be wrapped against an interface;
-pragma(sharedlibrary, "std"); the
+which allows for a struct to be wrapped against an interface; the
 implementation in $(MREF std, _typecons) only allows for classes to use the wrap
 functionality.
 

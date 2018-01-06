@@ -6,8 +6,7 @@ in this module handle files as a unit, e.g., read or write one _file
 at a time. For opening files and manipulating them via handles refer
 to module $(MREF std, stdio).
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD General) $(TD
@@ -1532,7 +1531,6 @@ if (isConvertibleToString!R)
     return exists!(StringTypeOf!R)(name);
 }
 
-/* Workaround */
 private export bool existsImpl(const(FSChar)* namez) @trusted nothrow @nogc
 {
     version(Windows)

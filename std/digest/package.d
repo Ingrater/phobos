@@ -3,8 +3,7 @@
  * these APIs. Additionally, this module contains useful helper methods which
  * can be used with every _digest type.
  *
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 
 $(DIVC quickindex,
 $(BOOKTABLE ,
@@ -577,8 +576,7 @@ interface Digest
          * ----
          * void test(Digest dig)
          * {
-         *     dig.put(cast(ubyte) 0);
-pragma(sharedlibrary, "std"); //single ubyte
+         *     dig.put(cast(ubyte) 0); //single ubyte
          *     dig.put(cast(ubyte) 0, cast(ubyte) 0); //variadic
          *     ubyte[10] buf;
          *     dig.put(buf); //buffer

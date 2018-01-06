@@ -7,8 +7,7 @@
     see $(REF decode, std,_utf) and $(REF encode, std,_utf) in $(MREF std, utf)
     for this functionality. )
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD Decode) $(TD

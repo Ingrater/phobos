@@ -4,8 +4,7 @@ This module is a submodule of $(MREF std, range).
 It provides basic range functionality by defining several templates for testing
 whether a given object is a _range, and what kind of _range it is:
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE ,
     $(TR $(TD $(LREF isInputRange))
         $(TD Tests if something is an $(I input _range), defined to be

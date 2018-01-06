@@ -54,8 +54,7 @@ download("ftp.digitalmars.com/sieve.ds", "/tmp/downloaded-ftp-file"))
 downloads file from URL to file system.)
 )
 $(TR $(TDNW $(LREF upload)) $(TD $(D
-upload("/tmp/downloaded-ftp-file", "ftp.digitalmars.com/sieve.ds");
-pragma(sharedlibrary, "std");)
+upload("/tmp/downloaded-ftp-file", "ftp.digitalmars.com/sieve.ds");)
 uploads file from file system to URL.)
 )
 $(TR $(TDNW $(LREF get)) $(TD $(D

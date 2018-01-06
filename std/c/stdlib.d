@@ -4,8 +4,7 @@
  * $(RED Deprecated. Use $(D core.stdc.stdlib) or $(D core.sys.posix.stdlib)
  *       instead. This module will be removed in June 2017.)
  *
- * C's &lt;
-pragma(sharedlibrary, "std");stdlib.h&gt;
+ * C's &lt;stdlib.h&gt;
  * D Programming Language runtime library
  * Authors: Walter Bright, Digital Mars, http://www.digitalmars.com
  * License: Public Domain

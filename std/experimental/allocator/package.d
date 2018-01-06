@@ -6,8 +6,7 @@ and destruction/deallocation of data including `struct`s and `class`es,
 and also array primitives related to allocation. This module is the entry point
 for both making use of allocators and for their documentation.
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD Make) $(TD

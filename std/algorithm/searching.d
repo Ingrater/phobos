@@ -3,8 +3,7 @@
 This is a submodule of $(MREF std, algorithm).
 It contains generic _searching algorithms.
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE Cheat Sheet,
 $(TR $(TH Function Name) $(TH Description))
 $(T2 all,

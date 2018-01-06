@@ -11,8 +11,7 @@ All algorithms are generalized to accept as input not only sets but also
 $(HTTP https://en.wikipedia.org/wiki/Multiset, multisets). Each algorithm
 documents behaviour in the presence of duplicated inputs.
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE Cheat Sheet,
 $(TR $(TH Function Name) $(TH Description))
 $(T2 cartesianProduct,

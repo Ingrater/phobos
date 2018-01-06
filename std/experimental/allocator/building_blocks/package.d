@@ -48,8 +48,7 @@ be allocated upon a request for $(D n) bytes. This module defines a default
 implementation that returns $(D n) rounded up to a multiple of the allocator's
 alignment.))
 
-$(TR $(TDC void[] allocate(size_t s);
-pragma(sharedlibrary, "std");, $(POST $(RES) is null || $(RES).length ==
+$(TR $(TDC void[] allocate(size_t s);, $(POST $(RES) is null || $(RES).length ==
 s)) $(TD If $(D s == 0), the call may return any empty slice (including $(D
 null)). Otherwise, the call allocates $(D s) bytes of memory and returns the
 allocated block, or $(D null) if the request could not be satisfied.))
@@ -88,8 +87,7 @@ implement $(D reallocate) if it can derive some advantage from doing so;
 otherwise, this module defines a $(D reallocate) free function implemented in
 terms of $(D expand), $(D allocate), and $(D deallocate).))
 
-$(TR $(TDC bool alignedReallocate(ref void[] b,$(BR) size_t s, uint a);
-pragma(sharedlibrary, "std");, $(POST
+$(TR $(TDC bool alignedReallocate(ref void[] b,$(BR) size_t s, uint a);, $(POST
 !$(RES) || b.length == s)) $(TD Similar to $(D reallocate), but guarantees the
 reallocated memory is aligned at $(D a) bytes. The buffer must have been
 originated with a call to $(D alignedAllocate). $(D a) must be a power of 2
@@ -98,8 +96,7 @@ alignedReallocate) if it can derive some advantage from doing so; otherwise,
 this module defines a $(D alignedReallocate) free function implemented in terms
 of $(D expand), $(D alignedAllocate), and $(D deallocate).))
 
-$(TR $(TDC Ternary owns(void[] b);
-pragma(sharedlibrary, "std");) $(TD Returns `Ternary.yes` if `b` has been
+$(TR $(TDC Ternary owns(void[] b);) $(TD Returns `Ternary.yes` if `b` has been
 allocated with this allocator. An allocator should define this method only if it
 can decide on ownership precisely and fast (in constant time, logarithmic time,
 or linear time with a low multiplication factor). Traditional allocators such as

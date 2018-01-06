@@ -12,8 +12,7 @@
  * take a single argument and evaluate to a boolean constant. Such templates
  * are referred to as $(I template predicates).
  *
- * $(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+ * $(SCRIPT inhibitQuickIndex = 1;)
  * $(DIVC quickindex,
  * $(BOOKTABLE ,
  * $(TR $(TH Category) $(TH Templates))

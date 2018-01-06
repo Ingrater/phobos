@@ -4,8 +4,7 @@ Functions and types that manipulate built-in arrays and associative arrays.
 
 This module provides all kinds of functions to create, manipulate or convert arrays:
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE ,
 $(TR $(TH Function Name) $(TH Description)
 )

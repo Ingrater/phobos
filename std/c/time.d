@@ -4,8 +4,7 @@
  * $(RED Deprecated. Use $(D core.stdc.time) instead. This module will be
  *       removed in June 2017.)
  *
- * C's &lt;
-pragma(sharedlibrary, "std");time.h&gt;
+ * C's &lt;time.h&gt;
  * Authors: Walter Bright, Digital Mars, www.digitalmars.com
  * License: Public Domain
  */

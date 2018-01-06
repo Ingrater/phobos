@@ -4,8 +4,7 @@
  * $(RED Deprecated. Use $(D core.stdc.locale) instead. This module will be
  *       removed in June 2017.)
  *
- * C's &lt;
-pragma(sharedlibrary, "std");locale.h&gt;
+ * C's &lt;locale.h&gt;
  * License: Public Domain
  * Standards:
  *      ISO/IEC 9899:1999 7.11

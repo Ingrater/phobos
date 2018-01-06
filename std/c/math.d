@@ -4,8 +4,7 @@
  * $(RED Deprecated. Use $(D core.stdc.math) instead. This module will be
  *       removed in June 2017.)
  *
- * C's &lt;
-pragma(sharedlibrary, "std");math.h&gt;
+ * C's &lt;math.h&gt;
  * Authors: Walter Bright, Digital Mars, www.digitalmars.com
  * License: Public Domain
  */

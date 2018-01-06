@@ -5,8 +5,7 @@
  *       core.sys.posix.* modules instead. This module will be removed in June
  *       2017.)
  *
- * C's &lt;
-pragma(sharedlibrary, "std");process.h&gt;
+ * C's &lt;process.h&gt;
  * Authors: Walter Bright, Digital Mars, www.digitalmars.com
  * License: Public Domain
  */

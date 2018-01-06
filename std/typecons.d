@@ -4,8 +4,7 @@
 This module implements a variety of type constructors, i.e., templates
 that allow construction of new, useful general-purpose types.
 
-$(SCRIPT inhibitQuickIndex = 1;
-pragma(sharedlibrary, "std");)
+$(SCRIPT inhibitQuickIndex = 1;)
 $(BOOKTABLE,
 $(TR $(TH Category) $(TH Functions))
 $(TR $(TD Tuple) $(TD

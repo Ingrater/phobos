@@ -10,8 +10,7 @@
  *
  * Both variants are implemented as instantiations of the template
  * $(LREF Base64Impl). Most users will not need to use this template
- * directly;
-pragma(sharedlibrary, "std"); however, it can be used to create customized Base64 encodings,
+ * directly; however, it can be used to create customized Base64 encodings,
  * such as one that omits padding characters, or one that is safe to embed
  * inside a regular expression.
  *

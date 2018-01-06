@@ -106,8 +106,7 @@ intervene.
     $(TR $(TD
 defines an `int`-like
 type that supports a NaN value. For values that are not NaN, comparison works
-properly. Again the composition order is important;
-pragma(sharedlibrary, "std"); $(D Checked!(Checked!(int,
+properly. Again the composition order is important; $(D Checked!(Checked!(int,
 WithNaN), ProperCompare)) does not have good semantics because `ProperCompare`
 intercepts comparisons before the numbers involved are tested for NaN.
     ))
