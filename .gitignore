@@ -1,6 +1,7 @@
 /etc/c/zlib/*.obj
 *.lib
 /phobos.json
+/phobos.d
 
 generated
 GNUmakefile

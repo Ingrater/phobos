@@ -364,7 +364,7 @@ private:
     $(D SysTime)'s range is from approximately 29,000 B.C. to approximately
     29,000 A.D.
   +/
-struct SysTime
+export struct SysTime
 {
     import core.stdc.time : tm;
     version(Posix) import core.sys.posix.sys.time : timeval;

@@ -421,6 +421,10 @@ SRC_ZLIB= \
 	etc\c\zlib\win64.mak \
 	etc\c\zlib\linux.mak \
 	etc\c\zlib\osx.mak
+	
+phobos.d : win64.mak
+	echo module phobos; > $@
+	powershell -nologo "'$(SRC_TO_COMPILE)' -split ' ' | Where {$$_.length -gt 0} | foreach{'public import ' + $$_ -replace '.d$$',';' -replace '\\','.' -replace '.package',''} | Add-Content $@"
 
 $(LIB) : $(SRC_TO_COMPILE) \
 	$(ZLIB) $(DRUNTIMELIB) win32.mak win64.mak
@@ -429,7 +433,7 @@ $(LIB) : $(SRC_TO_COMPILE) \
 
 $(LIB_SHARED) : $(SRC_TO_COMPILE) \
 	$(ZLIB) $(DRUNTIME_SHARED_OBJ) $(DRUNTIME_SHARED_C_LIB) $(DRUNTIME_SHARED_DLLINIT) win32.mak win64.mak
-	$(DMD) -shared -useshared -of$(DLL) $(DFLAGS) $(SRC_TO_COMPILE) \
+	$(DMD) -shared -of$(DLL) $(DFLAGS) $(SRC_TO_COMPILE) \
 		$(ZLIB) -L/IMPLIB:imp_$(LIB_SHARED) -L/IGNORE:4049 \
 		-L/IGNORE:4217 $(DRUNTIME_SHARED_OBJ) $(DRUNTIME_SHARED_C_LIB) $(DRUNTIME_SHARED_DLLINIT)
 	$(AR) /OUT:$(LIB_SHARED) imp_$(LIB_SHARED) $(DRUNTIME_SHARED_DLLINIT)
